@@ -8090,7 +8090,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">mat_view_df1</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select * from `travel_demo.ammount_by_day` where date &gt; current_date()-7 order by date"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
@@ -8663,6 +8663,316 @@ Directly copying and creating another replica results in a partitioned table.</p
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
+<h2 id="Access-Control-Policy">Access Control Policy<a class="anchor-link" href="#Access-Control-Policy">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c751577a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Column-Level-Security:-Policy-Tags">Column-Level Security: Policy Tags<a class="anchor-link" href="#Column-Level-Security:-Policy-Tags">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2677a0c7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<ol>
+<li>Create Taxonomies and Policy Tags</li>
+</ol>
+</blockquote>
+<p>Activate "enforce access control"</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3046a34f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a href="https://console.cloud.google.com/bigquery/policy-tags">Policy tag taxonomies</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=60338576">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<ol start="2">
+<li>Edit table schema in BigQuery</li>
+</ol>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7fc7637e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<ol start="3">
+<li>Configure IAM permissions.</li>
+</ol>
+</blockquote>
+<p>Roles: Fine-Grained Reader / Masked Reader</p>
+<p><a href="https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1stw-rd-data-angus-tu!2stravel_demo!3smember_json">Demo</a></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=49281241">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">cls_df1</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select MID, date from `tw-rd-data-angus-tu.travel_demo.member_json` limit 1"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">cls_df1</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>+-----------+------------+
+| MID       | date       |
++===========+============+
+| M57660524 | 2025-01-01 |
++-----------+------------+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e09594d7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [74]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">cls_df2</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select MID, phone from `tw-rd-data-angus-tu.travel_demo.member_json` limit 1"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">cls_df2</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">Forbidden</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[74]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> cls_df2 = <span class="ansi-yellow-bg">BQ</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">query</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">select MID, phone from `tw-rd-data-angus-tu.travel_demo.member_json` limit 1</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">to_dataframe</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">      2</span> <span style="color: rgb(0,135,0)">print</span>(tabulate(cls_df2, headers=<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">keys</span><span class="ansi-yellow-fg">'</span>, tablefmt=<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">grid</span><span class="ansi-yellow-fg">'</span>, showindex=<span class="ansi-bold" style="color: rgb(0,135,0)">False</span>))
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py:2092</span>, in <span class="ansi-cyan-fg">QueryJob.to_dataframe</span><span class="ansi-blue-fg">(self, bqstorage_client, dtypes, progress_bar_type, create_bqstorage_client, max_results, geography_as_object, bool_dtype, int_dtype, float_dtype, string_dtype, date_dtype, datetime_dtype, time_dtype, timestamp_dtype, range_date_dtype, range_datetime_dtype, range_timestamp_dtype)</span>
+<span class="ansi-green-fg">   1862</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-fg">to_dataframe</span>(
+<span class="ansi-green-fg">   1863</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-fg">   1864</span>     bqstorage_client: Optional[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">bigquery_storage.BigQueryReadClient</span><span class="ansi-yellow-fg">"</span>] = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   1884</span>     ] = DefaultPandasDTypes.RANGE_TIMESTAMP_DTYPE,
+<span class="ansi-green-fg">   1885</span> ) -&gt; <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">pandas.DataFrame</span><span class="ansi-yellow-fg">"</span>:
+<span class="ansi-green-fg">   1886</span> <span style="color: rgb(188,188,188)">    </span><span class="ansi-yellow-fg">"""Return a pandas DataFrame from a QueryJob</span>
+<span class="ansi-green-fg">   1887</span> 
+<span class="ansi-green-fg">   1888</span> <span class="ansi-yellow-fg">    Args:</span>
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   2090</span> <span class="ansi-yellow-fg">            :mod:`shapely` library cannot be imported.</span>
+<span class="ansi-green-fg">   2091</span> <span class="ansi-yellow-fg">    """</span>
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">2092</span>     query_result = <span class="ansi-yellow-bg">wait_for_query</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">progress_bar_type</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">max_results</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">max_results</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2093</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> query_result.to_dataframe(
+<span class="ansi-green-fg">   2094</span>         bqstorage_client=bqstorage_client,
+<span class="ansi-green-fg">   2095</span>         dtypes=dtypes,
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   2109</span>         range_timestamp_dtype=range_timestamp_dtype,
+<span class="ansi-green-fg">   2110</span>     )
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/cloud/bigquery/_tqdm_helpers.py:107</span>, in <span class="ansi-cyan-fg">wait_for_query</span><span class="ansi-blue-fg">(query_job, progress_bar_type, max_results)</span>
+<span class="ansi-green-fg">    103</span> progress_bar = get_progress_bar(
+<span class="ansi-green-fg">    104</span>     progress_bar_type, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Query is running</span><span class="ansi-yellow-fg">"</span>, default_total, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">query</span><span class="ansi-yellow-fg">"</span>
+<span class="ansi-green-fg">    105</span> )
+<span class="ansi-green-fg">    106</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> progress_bar <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">107</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">query_job</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">result</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">max_results</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">max_results</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    109</span> i = <span class="ansi-green-fg">0</span>
+<span class="ansi-green-fg">    110</span> <span class="ansi-bold" style="color: rgb(0,135,0)">while</span> <span class="ansi-bold" style="color: rgb(0,135,0)">True</span>:
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py:1706</span>, in <span class="ansi-cyan-fg">QueryJob.result</span><span class="ansi-blue-fg">(self, page_size, max_results, retry, timeout, start_index, job_retry)</span>
+<span class="ansi-green-fg">   1701</span>     remaining_timeout = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-fg">   1703</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> remaining_timeout <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">   1704</span>     <span style="color: rgb(95,135,135)"># Since is_job_done() calls jobs.getQueryResults, which is a</span>
+<span class="ansi-green-fg">   1705</span>     <span style="color: rgb(95,135,135)"># long-running API, don't delay the next request at all.</span>
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1706</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">while</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span class="ansi-yellow-bg">is_job_done</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>:
+<span class="ansi-green-fg">   1707</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">pass</span>
+<span class="ansi-green-fg">   1708</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">   1709</span>     <span style="color: rgb(95,135,135)"># Use a monotonic clock since we don't actually care about</span>
+<span class="ansi-green-fg">   1710</span>     <span style="color: rgb(95,135,135)"># daylight savings or similar, just the elapsed time.</span>
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py:294</span>, in <span class="ansi-cyan-fg">Retry.__call__.&lt;locals&gt;.retry_wrapped_func</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-fg">    290</span> target = functools.partial(func, *args, **kwargs)
+<span class="ansi-green-fg">    291</span> sleep_generator = exponential_sleep_generator(
+<span class="ansi-green-fg">    292</span>     <span style="color: rgb(0,135,0)">self</span>._initial, <span style="color: rgb(0,135,0)">self</span>._maximum, multiplier=<span style="color: rgb(0,135,0)">self</span>._multiplier
+<span class="ansi-green-fg">    293</span> )
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">294</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">retry_target</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg">    295</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">target</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    296</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_predicate</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    297</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">sleep_generator</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    298</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">timeout</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_timeout</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    299</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">on_error</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">on_error</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    300</span> <span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py:156</span>, in <span class="ansi-cyan-fg">retry_target</span><span class="ansi-blue-fg">(target, predicate, sleep_generator, timeout, on_error, exception_factory, **kwargs)</span>
+<span class="ansi-green-fg">    152</span> <span style="color: rgb(95,135,135)"># pylint: disable=broad-except</span>
+<span class="ansi-green-fg">    153</span> <span style="color: rgb(95,135,135)"># This function explicitly must deal with broad exceptions.</span>
+<span class="ansi-green-fg">    154</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> <span class="ansi-bold" style="color: rgb(215,95,95)">Exception</span> <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> exc:
+<span class="ansi-green-fg">    155</span>     <span style="color: rgb(95,135,135)"># defer to shared logic for handling errors</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">156</span>     next_sleep = <span class="ansi-yellow-bg">_retry_error_helper</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg">    157</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">exc</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    158</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">deadline</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    159</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">sleep_iter</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    160</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">error_list</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    161</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">predicate</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    162</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">on_error</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    163</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">exception_factory</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    164</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">timeout</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    165</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    166</span>     <span style="color: rgb(95,135,135)"># if exception not raised, sleep before next attempt</span>
+<span class="ansi-green-fg">    167</span>     time.sleep(next_sleep)
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py:214</span>, in <span class="ansi-cyan-fg">_retry_error_helper</span><span class="ansi-blue-fg">(exc, deadline, sleep_iterator, error_list, predicate_fn, on_error_fn, exc_factory_fn, original_timeout)</span>
+<span class="ansi-green-fg">    208</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> predicate_fn(exc):
+<span class="ansi-green-fg">    209</span>     final_exc, source_exc = exc_factory_fn(
+<span class="ansi-green-fg">    210</span>         error_list,
+<span class="ansi-green-fg">    211</span>         RetryFailureReason.NON_RETRYABLE_ERROR,
+<span class="ansi-green-fg">    212</span>         original_timeout,
+<span class="ansi-green-fg">    213</span>     )
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">214</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> final_exc <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">source_exc</span>
+<span class="ansi-green-fg">    215</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> on_error_fn <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">    216</span>     on_error_fn(exc)
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py:147</span>, in <span class="ansi-cyan-fg">retry_target</span><span class="ansi-blue-fg">(target, predicate, sleep_generator, timeout, on_error, exception_factory, **kwargs)</span>
+<span class="ansi-green-fg">    145</span> <span class="ansi-bold" style="color: rgb(0,135,0)">while</span> <span class="ansi-bold" style="color: rgb(0,135,0)">True</span>:
+<span class="ansi-green-fg">    146</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">147</span>         result = <span class="ansi-yellow-bg">target</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    148</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> inspect.isawaitable(result):
+<span class="ansi-green-fg">    149</span>             warnings.warn(_ASYNC_RETRY_WARNING)
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/file/venv/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py:1655</span>, in <span class="ansi-cyan-fg">QueryJob.result.&lt;locals&gt;.is_job_done</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">   1632</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> job_failed_exception <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">   1633</span>     <span style="color: rgb(95,135,135)"># Only try to restart the query job if the job failed for</span>
+<span class="ansi-green-fg">   1634</span>     <span style="color: rgb(95,135,135)"># a retriable reason. For example, don't restart the query</span>
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   1652</span>     <span style="color: rgb(95,135,135)"># into an exception that can be processed by the</span>
+<span class="ansi-green-fg">   1653</span>     <span style="color: rgb(95,135,135)"># `job_retry` predicate.</span>
+<span class="ansi-green-fg">   1654</span>     restart_query_job = <span class="ansi-bold" style="color: rgb(0,135,0)">True</span>
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1655</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> job_failed_exception
+<span class="ansi-green-fg">   1656</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">   1657</span>     <span style="color: rgb(95,135,135)"># Make sure that the _query_results are cached so we</span>
+<span class="ansi-green-fg">   1658</span>     <span style="color: rgb(95,135,135)"># can return a complete RowIterator.</span>
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   1664</span>     <span style="color: rgb(95,135,135)"># making any extra API calls if the previous loop</span>
+<span class="ansi-green-fg">   1665</span>     <span style="color: rgb(95,135,135)"># iteration fetched the finished job.</span>
+<span class="ansi-green-fg">   1666</span>     <span style="color: rgb(0,135,0)">self</span>._reload_query_results(
+<span class="ansi-green-fg">   1667</span>         retry=retry, **reload_query_results_kwargs
+<span class="ansi-green-fg">   1668</span>     )
+
+<span class="ansi-red-fg">Forbidden</span>: 403 Access Denied: BigQuery BigQuery: User has neither fine-grained reader nor masked get permission to get data protected by policy tag "member_info1 : member_phone" on column tw-rd-data-angus-tu.travel_demo.member_json.phone.; reason: accessDenied, location: projects/992669508000/locations/asia-east1/taxonomies/4743175369527186269/policyTags/7276780737985233571, message: Access Denied: BigQuery BigQuery: User has neither fine-grained reader nor masked get permission to get data protected by policy tag "member_info1 : member_phone" on column tw-rd-data-angus-tu.travel_demo.member_json.phone.
+
+Location: asia-east1
+Job ID: 18e4aae7-e585-4261-bddb-23fa972f250b
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d0477449">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Row-Level-Security">Row-Level Security<a class="anchor-link" href="#Row-Level-Security">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=235f86e8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">CREATE</span> <span class="n">OR</span> <span class="n">REPLACE</span> <span class="n">ROW</span> <span class="n">ACCESS</span> <span class="n">POLICY</span> <span class="n">member_rap</span>
+<span class="n">ON</span> <span class="err">`</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">travel_demo</span><span class="o">.</span><span class="n">member_json</span><span class="err">`</span>
+<span class="n">GRANT</span> <span class="n">TO</span> <span class="p">(</span><span class="s1">'serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com'</span><span class="p">)</span>
+<span class="n">FILTER</span> <span class="n">USING</span> <span class="p">(</span><span class="n">date</span> <span class="o">&gt;=</span> <span class="s1">'2025-1-1'</span><span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">ROW</span> <span class="n">ACCESS</span> <span class="n">POLICY</span> <span class="n">all_access_policy</span>
+<span class="n">ON</span> <span class="err">`</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">travel_demo</span><span class="o">.</span><span class="n">member_json</span><span class="err">`</span>
+<span class="n">GRANT</span> <span class="n">TO</span> <span class="p">(</span><span class="s1">'user:angus.tu@mile.cloud'</span><span class="p">)</span>
+<span class="n">FILTER</span> <span class="n">USING</span> <span class="p">(</span><span class="n">TRUE</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=417b93a9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [68]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select min(date) min_date from `tw-rd-data-angus-tu.travel_demo.member_json`"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>+------------+
+| min_date   |
++============+
+| 2025-01-01 |
++------------+
+</pre>
+</div>
 </div>
 </div>
 </div>
