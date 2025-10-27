@@ -7611,7 +7611,19 @@ In this setup, the project is configured with two environments: <code>dev</code>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span>    <span class="n">prod</span><span class="p">:</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">dbt_demo</span><span class="p">:</span>
+  <span class="n">outputs</span><span class="p">:</span>
+    <span class="n">dev</span><span class="p">:</span>
+      <span class="n">dataset</span><span class="p">:</span> <span class="n">dbt_dev</span>
+      <span class="n">job_execution_timeout_seconds</span><span class="p">:</span> <span class="mi">300</span>
+      <span class="n">job_retries</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="n">location</span><span class="p">:</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span>
+      <span class="n">method</span><span class="p">:</span> <span class="n">oauth</span>
+      <span class="n">priority</span><span class="p">:</span> <span class="n">interactive</span>
+      <span class="n">project</span><span class="p">:</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span>
+      <span class="n">threads</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">bigquery</span>
+    <span class="n">prod</span><span class="p">:</span>
       <span class="n">dataset</span><span class="p">:</span> <span class="n">dbt_prod</span>
       <span class="n">job_execution_timeout_seconds</span><span class="p">:</span> <span class="mi">300</span>
       <span class="n">job_retries</span><span class="p">:</span> <span class="mi">1</span>
@@ -7622,6 +7634,7 @@ In this setup, the project is configured with two environments: <code>dev</code>
       <span class="n">threads</span><span class="p">:</span> <span class="mi">1</span>
       <span class="nb">type</span><span class="p">:</span> <span class="n">bigquery</span>
       <span class="n">keyfile</span><span class="p">:</span> <span class="s2">"{{ env_var('DBT_KEYFILE') }}"</span>
+  <span class="n">target</span><span class="p">:</span> <span class="n">dev</span>
 </pre></div>
 </div>
 </div>
@@ -8058,7 +8071,7 @@ The configuration at the SQL level will take precedence over the higher-level pr
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="" src="./dbt/dbt_image1.png"/></p>
+<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/dbt_image1.png" width="800"/></p>
 </div>
 </div>
 </div>
@@ -8080,7 +8093,7 @@ The configuration at the SQL level will take precedence over the higher-level pr
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="" src="./dbt/dbt_image2.png"/></p>
+<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/dbt_image2.png" width="800"/></p>
 </div>
 </div>
 </div>
@@ -8236,7 +8249,7 @@ The configuration at the SQL level will take precedence over the higher-level pr
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="A1.-dbt-Cloud">A1. dbt Cloud<a class="anchor-link" href="#A1.-dbt-Cloud">¶</a></h1>
+<h1 id="Topics-for-future-learning">Topics for future learning<a class="anchor-link" href="#Topics-for-future-learning">¶</a></h1><h2 id="1.-dbt-Cloud">1. dbt Cloud<a class="anchor-link" href="#1.-dbt-Cloud">¶</a></h2>
 </div>
 </div>
 </div>
@@ -8247,7 +8260,7 @@ The configuration at the SQL level will take precedence over the higher-level pr
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="" src="./dbt/dbt_image3.png"/></p>
+<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/dbt_image3.png" width="800"/></p>
 </div>
 </div>
 </div>
@@ -8258,7 +8271,7 @@ The configuration at the SQL level will take precedence over the higher-level pr
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="A2.-Deploy-dbt-Build-via-Cloud-Build">A2. Deploy dbt Build via Cloud Build<a class="anchor-link" href="#A2.-Deploy-dbt-Build-via-Cloud-Build">¶</a></h1>
+<h2 id="2.-Deploy-dbt-Build-via-Cloud-Build">2. Deploy dbt Build via Cloud Build<a class="anchor-link" href="#2.-Deploy-dbt-Build-via-Cloud-Build">¶</a></h2>
 </div>
 </div>
 </div>
