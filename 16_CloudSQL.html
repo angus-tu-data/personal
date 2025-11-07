@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OB2_GCS</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>16_CloudSQL</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7517,139 +7517,58 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Data Engineer OnBoard - Week 2</p>
-<h1 id="GCS-and-BigQuery">GCS and BigQuery<a class="anchor-link" href="#GCS-and-BigQuery">¶</a></h1><p>Angus Tu
-2025.09.17</p>
+<p>Data Engineer OnBoard - Week 9</p>
+<h1 id="Cloud-SQL">Cloud SQL<a class="anchor-link" href="#Cloud-SQL">¶</a></h1><p>Angus Tu
+2025.11.5</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c9a60ef">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>As a data engineer, now I have received a digital transformation request from a travel company, and need to assist them in migrating their data to Google Cloud step by step.</p>
-<p>First, I received a file related to travel products, and I need to upload the data to Google Cloud Storage.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67ff5d0b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=965de75c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="GCS:-Google-Cloud-Storage">GCS: Google Cloud Storage<a class="anchor-link" href="#GCS:-Google-Cloud-Storage">¶</a></h1>
+<h1 id="Cloud-SQL">Cloud SQL<a class="anchor-link" href="#Cloud-SQL">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f178131a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a689bf96">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Set-Permission">Set Permission<a class="anchor-link" href="#Set-Permission">¶</a></h2><p>You need the <u>Storage Object User</u> role and the permissions <u>storage.buckets.create</u> and <u>storage.buckets.list</u>.</p>
+<p>Cloud SQL is a <strong>fully managed relational database service</strong> provided by Google Cloud, supporting <strong>MySQL</strong>, <strong>PostgreSQL</strong>, and <strong>SQL Server</strong>. It automatically handles backups, patching, and high availability, while offering secure connection options such as Public IP, Private IP, and the Cloud SQL Auth Proxy. It is suitable for web/mobile applications, data analysis, and ETL workflows, and can integrate seamlessly with other GCP services like Cloud Run and BigQuery.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=add9f1a3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3ea7a6fc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>As an admin</p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a9d8fe63">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-</pre></div>
+<h1 id="1.-Build-MySQL-Database-in-Cloud-SQL">1. Build MySQL Database in Cloud SQL<a class="anchor-link" href="#1.-Build-MySQL-Database-in-Cloud-SQL">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=86f32c21">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">iam</span> <span class="n">roles</span> <span class="n">create</span> <span class="n">bucketCreator</span> \
-    <span class="o">--</span><span class="n">project</span><span class="o">=</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
-    <span class="o">--</span><span class="n">title</span><span class="o">=</span><span class="s2">"Storage Bucket Creator PoLP"</span> \
-    <span class="o">--</span><span class="n">description</span><span class="o">=</span><span class="s2">"Can only create and list buckets"</span> \
-    <span class="o">--</span><span class="n">permissions</span><span class="o">=</span><span class="n">storage</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="n">create</span><span class="p">,</span><span class="n">storage</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="n">list</span> \
-    <span class="o">--</span><span class="n">stage</span><span class="o">=</span><span class="n">GA</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5d148fa2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">projects</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
-    <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="s2">"serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com"</span> \
-    <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">"projects/tw-rd-data-angus-tu/roles/bucketCreator"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4d7525b6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">projects</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
-    <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="s2">"serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com"</span> \
-    <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">"roles/storage.objectUser"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a94beb2b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b650b573">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>As a service account</p>
-</blockquote>
+<h2 id="1-1.-Create-Cloud-SQL-Instances">1-1. Create Cloud SQL Instances<a class="anchor-link" href="#1-1.-Create-Cloud-SQL-Instances">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=33a93a09">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c6eb7adb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7657,25 +7576,36 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">PROJECT_ID</span><span class="o">=</span><span class="s2">"tw-rd-data-angus-tu"</span>
+<span class="n">REGION</span><span class="o">=</span><span class="s2">"asia-east1"</span>
+<span class="n">INSTANCE_NAME</span><span class="o">=</span><span class="s2">"mysql-demo"</span>
+<span class="n">DB_VERSION</span><span class="o">=</span><span class="s2">"MYSQL_8_0"</span>
+<span class="n">TIER</span><span class="o">=</span><span class="s2">"db-f1-micro"</span> 
+<span class="n">ROOT_PASSWORD</span><span class="o">=</span><span class="s2">"root_password"</span>
+
+<span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">create</span> <span class="err">$</span><span class="n">INSTANCE_NAME</span> \
+    <span class="o">--</span><span class="n">project</span><span class="o">=</span><span class="err">$</span><span class="n">PROJECT_ID</span> \
+    <span class="o">--</span><span class="n">database</span><span class="o">-</span><span class="n">version</span><span class="o">=</span><span class="err">$</span><span class="n">DB_VERSION</span> \
+    <span class="o">--</span><span class="n">tier</span><span class="o">=</span><span class="err">$</span><span class="n">TIER</span> \
+    <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="err">$</span><span class="n">REGION</span> \
+    <span class="o">--</span><span class="n">root</span><span class="o">-</span><span class="n">password</span><span class="o">=</span><span class="err">$</span><span class="n">ROOT_PASSWORD</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eeb9aff8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=db0329f6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Create-Buckets">Create Buckets<a class="anchor-link" href="#Create-Buckets">¶</a></h2><p>You can use either the <code>gcloud</code> CLI or the <code>gsutil</code> command to create buckets.</p>
-<p><em>P.S. Using the GUI interface is more intuitive and convenient, but for documentation purposes, I record the steps with code.</em></p>
+<h2 id="1-2.-Create-Database-&amp;-User">1-2. Create Database &amp; User<a class="anchor-link" href="#1-2.-Create-Database-&amp;-User">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=da948670">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2379bae0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7683,15 +7613,15 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">storage</span> <span class="n">buckets</span> <span class="n">create</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">travel</span><span class="o">-</span><span class="n">demo1</span> \
-    <span class="o">--</span><span class="n">location</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
-    <span class="o">--</span><span class="n">project</span><span class="o">=</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">DB_NAME</span><span class="o">=</span><span class="s2">"demo_db"</span>
+
+<span class="n">gcloud</span> <span class="n">sql</span> <span class="n">databases</span> <span class="n">create</span> <span class="err">$</span><span class="n">DB_NAME</span> <span class="o">--</span><span class="n">instance</span><span class="o">=</span><span class="err">$</span><span class="n">INSTANCE_NAME</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c98e2d4e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4470a989">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7699,149 +7629,171 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gsutil</span> <span class="n">mb</span> <span class="o">-</span><span class="n">p</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span>  <span class="o">-</span><span class="n">c</span> <span class="n">STANDARD</span> <span class="o">-</span><span class="n">l</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">travel</span><span class="o">-</span><span class="n">demo2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">DB_USER</span><span class="o">=</span><span class="s2">"demo_user"</span>
+<span class="n">DB_PASS</span><span class="o">=</span><span class="s2">"demo_pass"</span>
+
+<span class="n">gcloud</span> <span class="n">sql</span> <span class="n">users</span> <span class="n">create</span> <span class="err">$</span><span class="n">DB_USER</span> \
+    <span class="o">--</span><span class="n">instance</span><span class="o">=</span><span class="err">$</span><span class="n">INSTANCE_NAME</span> \
+    <span class="o">--</span><span class="n">password</span><span class="o">=</span><span class="err">$</span><span class="n">DB_PASS</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=781d8e72">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fe53a478">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="1-3-Connection">1-3 Connection<a class="anchor-link" href="#1-3-Connection">¶</a></h2><h3 id="1-3-1.-Connect-via-Cloud-Shell">1-3-1. Connect via Cloud Shell<a class="anchor-link" href="#1-3-1.-Connect-via-Cloud-Shell">¶</a></h3><p>gcloud sql connect mysql-demo --user=demo_user</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bdf82c28">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">connect</span> <span class="n">mysql</span><span class="o">-</span><span class="n">demo</span> <span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">demo_user</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=394bbf2a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Enter the password to connect to MySQL.</p>
+<h3 id="1-3-2.-Connect-in-Local-Environment">1-3-2. Connect in Local Environment<a class="anchor-link" href="#1-3-2.-Connect-in-Local-Environment">¶</a></h3><ul>
+<li>Local IP Address: <code>1.2.3.4</code></li>
+<li>Public IP address: <code>5.6.7.8</code></li>
+</ul>
+<h4 id="Allow-external-connections-(optional)">Allow external connections (optional)<a class="anchor-link" href="#Allow-external-connections-(optional)">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=645de98f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">patch</span> <span class="err">$</span><span class="n">INSTANCE_NAME</span> \
+    <span class="o">--</span><span class="n">authorized</span><span class="o">-</span><span class="n">networks</span><span class="o">=</span><span class="s2">"1.2.3.4/32"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=53254a8f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Connect-to-Cloud-SQL-Public-IP">Connect to Cloud SQL Public IP<a class="anchor-link" href="#Connect-to-Cloud-SQL-Public-IP">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83296e9d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">demo_user</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">h</span> <span class="mf">5.6.7.8</span> <span class="n">demo_db</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=edbe4754">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Enter the password to connect to MySQL.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a5e5792">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="1-4.-Execute-SQL-queries-on-MySQL-in-Cloud-SQL">1-4. Execute SQL queries on MySQL in Cloud SQL<a class="anchor-link" href="#1-4.-Execute-SQL-queries-on-MySQL-in-Cloud-SQL">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=70c81439">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">USE</span> <span class="n">demo_db</span><span class="p">;</span>
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">demo_table</span> <span class="p">(</span>
+    <span class="nb">id</span> <span class="n">INT</span> <span class="n">AUTO_INCREMENT</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
+    <span class="n">name</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">created_at</span> <span class="n">TIMESTAMP</span> <span class="n">DEFAULT</span> <span class="n">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+<span class="n">INSERT</span> <span class="n">INTO</span> <span class="n">demo_table</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="n">VALUES</span> <span class="p">(</span><span class="s1">'Alice'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'Bob'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'Charlie'</span><span class="p">);</span>
+<span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">demo_table</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=66a36e26">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h2 id="Use-Python-to-Access-GCS">Use Python to Access GCS<a class="anchor-link" href="#Use-Python-to-Access-GCS">¶</a></h2>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1611bef4">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6bd06812">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Environment">Environment<a class="anchor-link" href="#Environment">¶</a></h3>
+<h1 id="2.-Load-Cloud-SQL-to-BQ">2. Load Cloud SQL to BQ<a class="anchor-link" href="#2.-Load-Cloud-SQL-to-BQ">¶</a></h1><h2 id="2-1.-Batch-Load">2-1. Batch Load<a class="anchor-link" href="#2-1.-Batch-Load">¶</a></h2><h3 id="Flow">Flow<a class="anchor-link" href="#Flow">¶</a></h3><p><strong>Cloud SQL Export → Cloud Storage → BigQuery</strong></p>
+<h3 id="2-1-1.-Permission-Setup">2-1-1. Permission Setup<a class="anchor-link" href="#2-1-1.-Permission-Setup">¶</a></h3><ul>
+<li>Service account used in CloudSQL: <code>p992669508000-rlna2g@gcp-sa-cloud-sql.iam.gserviceaccount.com</code><ul>
+<li>Cloud SQL &gt; Instances &gt; Service account</li>
+</ul>
+</li>
+<li>Google Cloud Storage bucket: <code>gs://angus-cloudmile</code></li>
+</ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0b0d2072">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">storage</span>
-<span class="n">GCS</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=32cc8274">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Bucket">Bucket<a class="anchor-link" href="#Bucket">¶</a></h3><blockquote>
-<p>Create a bucket</p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f70762d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">bucket_name</span> <span class="o">=</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo3"</span>
-<span class="n">bucket</span> <span class="o">=</span> <span class="n">GCS</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
-<span class="n">new_bucket</span> <span class="o">=</span> <span class="n">GCS</span><span class="o">.</span><span class="n">create_bucket</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">"asia-east1"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bucket </span><span class="si">{</span><span class="n">new_bucket</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> created in </span><span class="si">{</span><span class="n">new_bucket</span><span class="o">.</span><span class="n">location</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Bucket tw-rd-data-angus-tu-travel-demo3 created in ASIA-EAST1
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=00dee9bd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>List buckets</p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7ca6ff43">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">buckets</span> <span class="o">=</span> <span class="n">GCS</span><span class="o">.</span><span class="n">list_buckets</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">bucket</span> <span class="ow">in</span> <span class="n">buckets</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">bucket</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>tw-rd-data-angus-tu-travel-demo1
-tw-rd-data-angus-tu-travel-demo2
-tw-rd-data-angus-tu-travel-demo3
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e445a94">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Folder">Folder<a class="anchor-link" href="#Folder">¶</a></h3><p>Create a (empty) folder</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8569f4ad">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=88790bc1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7849,60 +7801,24 @@ tw-rd-data-angus-tu-travel-demo3
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">bucket</span> <span class="o">=</span> <span class="n">GCS</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">)</span>
-<span class="n">blob</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">blob</span><span class="p">(</span><span class="s2">"data/"</span><span class="p">)</span>
-<span class="n">blob</span><span class="o">.</span><span class="n">upload_from_string</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gsutil</span> <span class="n">iam</span> <span class="n">ch</span> <span class="n">serviceAccount</span><span class="p">:</span><span class="n">p992669508000</span><span class="o">-</span><span class="n">rlna2g</span><span class="nd">@gcp</span><span class="o">-</span><span class="n">sa</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">sql</span><span class="o">.</span><span class="n">iam</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">roles</span><span class="o">/</span><span class="n">storage</span><span class="o">.</span><span class="n">objectAdmin</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">angus</span><span class="o">-</span><span class="n">cloudmile</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f53c1fc3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ca5ebc9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Object/File">Object/File<a class="anchor-link" href="#Object/File">¶</a></h3><h4 id="1.-Listing-files">1. Listing files<a class="anchor-link" href="#1.-Listing-files">¶</a></h4><p>Develop a function that lists files in a given GCS bucket. Enhance the function to allow filtering of files based on a specified prefix and suffix.</p>
+<h3 id="2-1-2.-Export-Cloud-SQL-Data">2-1-2. Export Cloud SQL Data<a class="anchor-link" href="#2-1-2.-Export-Cloud-SQL-Data">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1d832e11">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">list_file</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">""</span><span class="p">):</span>
-
-    <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">folder</span><span class="p">:</span>
-        <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">folder</span> <span class="o">=</span> <span class="s2">""</span>
-    <span class="n">search_prefix</span> <span class="o">=</span> <span class="n">folder</span> <span class="o">+</span> <span class="n">prefix</span>
-    <span class="n">blobs</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">search_prefix</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"/"</span><span class="p">)</span>
-
-    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-    
-    <span class="k">for</span> <span class="n">blob</span> <span class="ow">in</span> <span class="n">blobs</span><span class="p">:</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">folder</span><span class="p">:</span> <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">folder</span> <span class="ow">and</span> <span class="s2">"/"</span> <span class="ow">in</span> <span class="n">name</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">folder</span><span class="p">):]:</span> <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">suffix</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">):</span> <span class="k">continue</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">results</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ec9c3eeb">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=66ed55d8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7910,125 +7826,27 @@ tw-rd-data-angus-tu-travel-demo3
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">list_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span><span class="s2">"data"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">export</span> <span class="n">csv</span> <span class="n">mysql</span><span class="o">-</span><span class="n">demo</span> \
+    <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">angus</span><span class="o">-</span><span class="n">cloudmile</span><span class="o">/</span><span class="n">demo_table</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">--</span><span class="n">database</span><span class="o">=</span><span class="n">demo_db</span> \
+    <span class="o">--</span><span class="n">query</span><span class="o">=</span><span class="s2">"SELECT * FROM demo_table"</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['data/.empty', 'data/null']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a32001e8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c97dff61">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="2.-Upload-files">2. Upload files<a class="anchor-link" href="#2.-Upload-files">¶</a></h4><p>Implement a function to upload a file from a local machine to a specified GCS bucket.</p>
+<h3 id="2-1-3.-Load-to-BigQuery">2-1-3. Load to BigQuery<a class="anchor-link" href="#2-1-3.-Load-to-BigQuery">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d8bac463">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">upload_file</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">source_file_name</span><span class="p">,</span> <span class="n">sink_file_name</span><span class="p">,</span> <span class="n">sink_dir</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
-
-    <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">sink_dir</span><span class="p">:</span> 
-        <span class="n">sink_dir</span> <span class="o">=</span> <span class="n">sink_dir</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span>
-    <span class="n">blob_name</span> <span class="o">=</span> <span class="n">sink_dir</span> <span class="o">+</span> <span class="n">sink_file_name</span>
-    <span class="n">blob</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">blob</span><span class="p">(</span><span class="n">blob_name</span><span class="p">)</span>
-    <span class="n">blob</span><span class="o">.</span><span class="n">upload_from_filename</span><span class="p">(</span><span class="n">source_file_name</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">"gs://</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">blob_name</span><span class="si">}</span><span class="s2">"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e2838d1c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">upload_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span> <span class="s2">"test1.csv"</span><span class="p">,</span> <span class="s2">"test1.csv"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[44]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'gs://tw-rd-data-angus-tu-travel-demo1/test1.csv'</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2983c721">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">list_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['test1.csv']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2c70b894">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>Upload all files in a folder using <code>gsutil</code></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7221b60d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b02b7084">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8036,300 +7854,49 @@ tw-rd-data-angus-tu-travel-demo3
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gsutil</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">angus</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">file</span><span class="o">/</span><span class="n">folder1</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">travel</span><span class="o">-</span><span class="n">demo1</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">folder1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">bq</span> <span class="n">load</span> <span class="o">--</span><span class="n">source_format</span><span class="o">=</span><span class="n">CSV</span> \
+    <span class="n">test</span><span class="o">.</span><span class="n">demo_table</span> \
+    <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">angus</span><span class="o">-</span><span class="n">cloudmile</span><span class="o">/</span><span class="n">demo_table</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="nb">id</span><span class="p">:</span><span class="n">INT64</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="n">STRING</span><span class="p">,</span><span class="n">created_at</span><span class="p">:</span><span class="n">TIMESTAMP</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'gs://tw-rd-data-angus-tu-travel-demo1/test1.csv'</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=59f5d2c4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">list_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span><span class="s2">"data/folder1"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['data/folder1/test11.csv',
- 'data/folder1/test12.csv',
- 'data/folder1/test13.csv']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=04406431">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=05319a51">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="3.-Download-a-file">3. Download a file<a class="anchor-link" href="#3.-Download-a-file">¶</a></h4><p>Implement a function to download a file from a specified GCS bucket to a local machine.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8c093a07">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">download_file</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">source_file_name</span><span class="p">,</span> <span class="n">sink_file_name</span><span class="p">):</span>
-    <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
-    <span class="n">blob</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">blob</span><span class="p">(</span><span class="n">source_file_name</span><span class="p">)</span>
-    <span class="n">blob</span><span class="o">.</span><span class="n">download_to_filename</span><span class="p">(</span><span class="n">sink_file_name</span><span class="p">)</span>
-    <span class="k">return</span> 
-</pre></div>
+<h2 id="2-2.-Streaming-ETL">2-2. Streaming ETL<a class="anchor-link" href="#2-2.-Streaming-ETL">¶</a></h2><p>Using Dataflow or Datastream for Streaming ETL from Cloud SQL to BigQuery</p>
+<h3 id="2-2-1.-Dataflow">2-2-1. Dataflow<a class="anchor-link" href="#2-2-1.-Dataflow">¶</a></h3><p>Google provides Dataflow SQL or Apache Beam pipelines to read data from Cloud SQL and write it to BigQuery.</p>
+<ul>
+<li>Suitable for cases where you need continuous synchronization, data transformation, or custom processing logic.</li>
+<li>Offers more flexibility in controlling the ETL/ELT process.</li>
+<li>Can operate in batch or streaming mode, depending on your requirements.</li>
+<li>For true CDC (Change Data Capture) from Cloud SQL, Dataflow needs to be used together with Datastream to capture database changes.</li>
+</ul>
+<h3 id="2-2-2.-Datastream">2-2-2. Datastream<a class="anchor-link" href="#2-2-2.-Datastream">¶</a></h3><p><em>The detailed demo can be found in the <a href="">DataStream</a> document.</em></p>
+<p>Datastream performs Change Data Capture (CDC) on Cloud SQLand synchronizes changes to Cloud Storage or BigQuery.</p>
+<ul>
+<li>Advantage: Near real-time data updates with no need for manual export/import.</li>
+<li>Ideal for production environments or BI data pipelines where low latency replication is important.</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=57c6bd39">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [54]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">download_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span> <span class="s2">"data/folder1/test11.csv"</span><span class="p">,</span> <span class="s2">"test11_new.csv"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fcba1f82">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67fa0560">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="4.-Delete-a-file">4. Delete a file<a class="anchor-link" href="#4.-Delete-a-file">¶</a></h4><p>Implement a function to delete a file from a specified GCS bucket.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4c82e137">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [55]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">delete_file</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
-    <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
-    <span class="n">blob</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">blob</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-    <span class="n">blob</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-    <span class="k">return</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=59448191">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [56]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">delete_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span> <span class="s2">"data/folder1/test13.csv"</span><span class="p">)</span>
-<span class="n">list_file</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span><span class="s2">"data/folder1"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[56]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['data/folder1/test11.csv', 'data/folder1/test12.csv']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fa9ae8bb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>Delete specific files</p>
-</blockquote>
-<p>Implement a function to delete multiple files from a specified GCS bucket based on a combination of parameters such as source_dir, prefix, and suffix.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=319414ac">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [58]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">delete_files</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">source_dir</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">suffix</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
-    <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">source_dir</span><span class="p">:</span>
-        <span class="n">source_dir</span> <span class="o">=</span> <span class="n">source_dir</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span>
-
-    <span class="n">search_prefix</span> <span class="o">=</span> <span class="n">source_dir</span> <span class="o">+</span> <span class="n">prefix</span>
-    <span class="n">blobs</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">search_prefix</span><span class="p">)</span>
-
-    <span class="n">deleted_files</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">blob</span> <span class="ow">in</span> <span class="n">blobs</span><span class="p">:</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"/"</span><span class="p">):</span> <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">suffix</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">):</span> <span class="k">continue</span>
-        <span class="n">blob</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-        <span class="n">deleted_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">deleted_files</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8870fb31">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [59]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">delete_files</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span> <span class="n">suffix</span> <span class="o">=</span> <span class="s2">"2.csv"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[59]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['data/folder1/test12.csv']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5155d938">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="5.-Copy-files">5. Copy files<a class="anchor-link" href="#5.-Copy-files">¶</a></h4><p>Implement a function to copy files from a source GCS bucket to a destination (sink) GCS bucket based on specific parameters, with an option to delete the source files after copying.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae625864">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">storage</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">copy_files</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">source_bucket_name</span><span class="p">,</span> <span class="n">sink_bucket_name</span><span class="p">,</span> <span class="n">delete_source</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">source_dir</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">sink_dir</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">suffix</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
-
-    <span class="n">source_bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">source_bucket_name</span><span class="p">)</span>
-    <span class="n">sink_bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">sink_bucket_name</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">source_dir</span><span class="p">:</span>
-        <span class="n">source_dir</span> <span class="o">=</span> <span class="n">source_dir</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span>
-    <span class="k">if</span> <span class="n">sink_dir</span><span class="p">:</span>
-        <span class="n">sink_dir</span> <span class="o">=</span> <span class="n">sink_dir</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span>
-
-    <span class="n">search_prefix</span> <span class="o">=</span> <span class="n">source_dir</span> <span class="o">+</span> <span class="n">prefix</span>
-    <span class="n">blobs</span> <span class="o">=</span> <span class="n">source_bucket</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">(</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">search_prefix</span><span class="p">)</span>
-
-    <span class="n">copied_files</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">blob</span> <span class="ow">in</span> <span class="n">blobs</span><span class="p">:</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"/"</span><span class="p">):</span> <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">suffix</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">):</span> <span class="k">continue</span>
-        <span class="n">relative_name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">source_dir</span><span class="p">):]</span> <span class="k">if</span> <span class="n">source_dir</span> <span class="k">else</span> <span class="n">name</span>
-        <span class="n">sink_name</span> <span class="o">=</span> <span class="n">sink_dir</span> <span class="o">+</span> <span class="n">relative_name</span>
-        <span class="n">source_bucket</span><span class="o">.</span><span class="n">copy_blob</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span> <span class="n">sink_bucket</span><span class="p">,</span> <span class="n">new_name</span> <span class="o">=</span> <span class="n">sink_name</span><span class="p">)</span>
-        <span class="n">copied_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sink_name</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">delete_source</span><span class="p">:</span>
-            <span class="n">blob</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-
-    <span class="k">return</span> <span class="n">copied_files</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4f1fee2e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [61]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">copy_files</span><span class="p">(</span><span class="n">GCS</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span><span class="p">,</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo2"</span><span class="p">,</span> <span class="n">source_dir</span> <span class="o">=</span> <span class="s2">"data/folder1/"</span><span class="p">,</span> <span class="n">sink_dir</span> <span class="o">=</span> <span class="s2">"data/folder2/"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[61]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>['data/folder2/test11.csv']</pre>
-</div>
+<hr/>
+<h1 id="3.-Cloud-SQL-Studio">3. Cloud SQL Studio<a class="anchor-link" href="#3.-Cloud-SQL-Studio">¶</a></h1><p>You can use Cloud SQL Studio within the Cloud SQL interface to connect to the database and perform queries and other operations.</p>
+<p><img alt="" src="https://angus-tu-data.github.io/personal/cloudsql_img1.png"/></p>
 </div>
 </div>
 </div>

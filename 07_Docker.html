@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OB4_PubSub</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>07_Docker</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7518,8 +7518,68 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Data Engineer OnBoard - Week 4</p>
-<h1 id="Pub/Sub-and-Kafka">Pub/Sub and Kafka<a class="anchor-link" href="#Pub/Sub-and-Kafka">¶</a></h1><p>Angus Tu
+<h1 id="Docker">Docker<a class="anchor-link" href="#Docker">¶</a></h1><p>Angus Tu
 2025.10.01</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ebcde15c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Docker lets you package your application with all its dependencies into a lightweight, portable container, ensuring it runs consistently across different environments, simplifies deployment, and isolates it from other applications.</p>
+<p>The objective of this demo is to build a Docker container for Cloud Run, which can be triggered in the cloud.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e7d0eb16">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=75e93121">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Prerequisites.-Install-the-gcloud-CLI-and-Docker,-and-enable-the-required-APIs.">Prerequisites. Install the gcloud CLI and Docker, and enable the required APIs.<a class="anchor-link" href="#Prerequisites.-Install-the-gcloud-CLI-and-Docker,-and-enable-the-required-APIs.">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0768e9b8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">services</span> <span class="n">enable</span> <span class="n">run</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span> <span class="n">artifactregistry</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span> <span class="n">cloudbuild</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=63306caa">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h3 id="Step-1.-Create-local-files">Step 1. Create local files<a class="anchor-link" href="#Step-1.-Create-local-files">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7530,60 +7590,27 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Pub/Sub is a fully managed, real-time messaging service that allows applications to exchange messages reliably and asynchronously. It enables event-driven architectures by decoupling services, so <strong>publishers</strong> can send messages without needing to know who the <strong>subscribers</strong> are, and <strong>subscribers</strong> can receive messages without needing to know who the <strong>publishers</strong> are.<br/>
-Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message delivery, can handle high throughput, and integrates seamlessly with other Google Cloud services such as BigQuery, Cloud Functions, and Dataflow.</p>
+<pre><code>docker_test/
+├── app.py
+├── requirements.txt
+├── Dockerfile
+└── .dockerimage
+</code></pre>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=965de75c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7116ad42">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h1 id="Pub/Sub">Pub/Sub<a class="anchor-link" href="#Pub/Sub">¶</a></h1><p><img alt="" src="https://angus-tu-data.github.io/personal/pubsub_framwork.png"/></p>
+<p><code>app.py</code></p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3945ad7">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ol>
-<li><p>Create Pub/Sub <code>Topic 1</code> and <code>Topic 2</code></p>
-</li>
-<li><p>Create a BigQuery Scheduled Query <code>BQ_for_PubSub</code>, which publishes a message to <code>Topic 1</code> when query successed</p>
-</li>
-<li><p>Deploy a Cloud Run Function <code>pubsub-bq-gcs</code> that subscribes to <code>Topic 1</code> and writes data into GCS</p>
-</li>
-<li><p>When GCS changes, publish Pub/Sub <code>Topic 2</code></p>
-</li>
-<li><p>When <code>Topic 2</code> receives results, insert a new row into BigQuery via Cloud Run Function <code>pubsub-gcs-bq</code></p>
-</li>
-<li><p>Create a pull subscriber and deploy a Cloud Run service to pull messages</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b11eb4e7">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="1.-Create-Pub/Sub-Topic-1-and-Topic-2-(Setup-with-higher-IAM-account)">1. Create Pub/Sub <code>Topic 1</code> and <code>Topic 2</code> <em>(Setup with higher IAM account)</em><a class="anchor-link" href="#1.-Create-Pub/Sub-Topic-1-and-Topic-2-(Setup-with-higher-IAM-account)">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7f5dff18">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7bfa7cf4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7591,276 +7618,25 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-<span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">topic_1</span>
-<span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">topic_2</span>
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c4354c83">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="2.-Create-a-BigQuery-Scheduled-Query-BQ_for_PubSub-,-which-publishes-a-message-to-Topic-1-when-query-successed">2. Create a BigQuery Scheduled Query <code>BQ_for_PubSub</code> , which publishes a message to <code>Topic 1</code> when query successed<a class="anchor-link" href="#2.-Create-a-BigQuery-Scheduled-Query-BQ_for_PubSub-,-which-publishes-a-message-to-Topic-1-when-query-successed">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dbd4551c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-1.-IAM-setting">2-1. IAM setting<a class="anchor-link" href="#2-1.-IAM-setting">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ceaee2ef">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-<span class="n">gcloud</span> <span class="n">projects</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
-    <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="s2">"serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com"</span> \
-    <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">"roles/iam.serviceAccountUser"</span>
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=262fd57d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-2.-Create-a-BigQuery-Scheduled-Query-BQ_for_PubSub">2-2. Create a BigQuery Scheduled Query <code>BQ_for_PubSub</code><a class="anchor-link" href="#2-2.-Create-a-BigQuery-Scheduled-Query-BQ_for_PubSub">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3834c757">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">bq</span> <span class="n">mk</span> \
-<span class="o">--</span><span class="n">transfer_config</span> \
-<span class="o">--</span><span class="n">target_dataset</span><span class="o">=</span><span class="n">pubsub_demo</span> \
-<span class="o">--</span><span class="n">display_name</span><span class="o">=</span><span class="s1">'BQ_for_PubSub'</span> \
-<span class="o">--</span><span class="n">params</span><span class="o">=</span><span class="s1">'{"query":"select datetime_trunc(current_datetime(</span><span class="se">\"</span><span class="s1">Asia/Taipei</span><span class="se">\"</span><span class="s1">), second) as now","destination_table_name_template":"record","write_disposition":"WRITE_APPEND"}'</span> \
-<span class="o">--</span><span class="n">data_source</span><span class="o">=</span><span class="n">scheduled_query</span> \
-<span class="o">--</span><span class="n">schedule</span><span class="o">=</span><span class="s1">'on-demand'</span> \
-<span class="o">--</span><span class="n">service_account_name</span><span class="o">=</span><span class="n">angus</span><span class="o">-</span><span class="n">personal</span><span class="nd">@tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">iam</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1d4aeb35">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-3.-Set-Notification-of-BigQuery-Scheduled-Query">2-3. Set Notification of BigQuery Scheduled Query<a class="anchor-link" href="#2-3.-Set-Notification-of-BigQuery-Scheduled-Query">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=877167d8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">Schedule</span> <span class="n">options</span> <span class="o">/</span> <span class="n">Repeat</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">On</span><span class="o">-</span><span class="n">demand</span>
-<span class="n">Notification</span> <span class="n">options</span> <span class="o">/</span> <span class="n">Cloud</span> <span class="n">Pub</span><span class="o">/</span><span class="n">Sub</span> <span class="n">topic</span><span class="p">:</span> <span class="n">projects</span><span class="o">/</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">topic_1</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a709357">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-4.-Test">2-4. Test<a class="anchor-link" href="#2-4.-Test">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bc67475a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Press "Run transfer now"</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e6a69d7d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="n">BQ</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-<span class="n">df1</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select data from `tw-rd-data-angus-tu.pubsub_demo.test`"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| data                                                                                                                                                   |
-+========================================================================================================================================================+
-| {                                                                                                                                                      |
-|   "dataSourceId": "scheduled_query",                                                                                                                   |
-|   "destinationDatasetId": "pubsub_demo",                                                                                                               |
-|   "emailPreferences": {                                                                                                                                |
-|                                                                                                                                                        |
-|   },                                                                                                                                                   |
-|   "endTime": "2025-09-26T03:24:12.113514Z",                                                                                                            |
-|   "errorStatus": {                                                                                                                                     |
-|                                                                                                                                                        |
-|   },                                                                                                                                                   |
-|   "name": "projects/992669508000/locations/asia-east1/transferConfigs/68d62afb-0000-20f5-8a9f-14c14ef7a858/runs/68d59040-0000-26ad-a381-d43a2cc772a7", |
-|   "notificationPubsubTopic": "projects/tw-rd-data-angus-tu/topics/topic_1",                                                                            |
-|   "params": {                                                                                                                                          |
-|     "destination_table_name_template": "record",                                                                                                       |
-|     "query": "select datetime_trunc(current_datetime(\"Asia/Taipei\"), second) as now",                                                                |
-|     "write_disposition": "WRITE_APPEND"                                                                                                                |
-|   },                                                                                                                                                   |
-|   "runTime": "2025-09-26T03:22:56.673Z",                                                                                                               |
-|   "scheduleTime": "2025-09-26T03:22:56.932872Z",                                                                                                       |
-|   "startTime": "2025-09-26T03:22:57.130327Z",                                                                                                          |
-|   "state": "SUCCEEDED",                                                                                                                                |
-|   "updateTime": "2025-09-26T03:24:12.11358Z",                                                                                                          |
-|   "userId": "3243216428403853534"                                                                                                                      |
-| }                                                                                                                                                      |
-+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6a0decbd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="3.-Deploy-a-Cloud-Run-Function-pubsub-bq-gcs-that-subscribes-to-Topic-1-and-writes-data-into-GCS">3. Deploy a Cloud Run Function <code>pubsub-bq-gcs</code> that subscribes to <code>Topic 1</code> and writes data into GCS<a class="anchor-link" href="#3.-Deploy-a-Cloud-Run-Function-pubsub-bq-gcs-that-subscribes-to-Topic-1-and-writes-data-into-GCS">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e27ed3d5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="3-1.-Create-local-file">3-1. Create local file<a class="anchor-link" href="#3-1.-Create-local-file">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d1a1257e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pubsub_cf</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span>
-<span class="err">└──</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">"Hello from Cloud Run via Docker!"</span>
+
+<span class="c1"># Use the PORT when running locally (Cloud Run injects the PORT environment variable)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="c1">#import os</span>
+    <span class="c1">#port = int(os.environ.get("PORT", 8080))</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">"0.0.0.0"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2fba37fc">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>main.py</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f552a1d8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">functions_framework</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
-
-<span class="nd">@functions_framework</span><span class="o">.</span><span class="n">http</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello_http</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-
-    <span class="n">BQ</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-    <span class="n">table_id</span> <span class="o">=</span> <span class="s2">"tw-rd-data-angus-tu.pubsub_demo.record"</span>
-    <span class="n">destination_uri</span> <span class="o">=</span> <span class="s2">"gs://tw-rd-data-angus-tu-travel-demo1/pubsub_demo/demo.csv"</span>
-    <span class="n">job</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">extract_table</span><span class="p">(</span><span class="n">table_id</span><span class="p">,</span><span class="n">destination_uri</span><span class="p">)</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-
-    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request_json</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f455778e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=71390932">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7870,7 +7646,7 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fa676b72">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0a503c18">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7878,25 +7654,25 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">functions</span><span class="o">-</span><span class="n">framework</span><span class="o">==</span><span class="mf">3.</span><span class="o">*</span>
-<span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">bigquery</span><span class="o">==</span><span class="mf">3.9.0</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">flask</span><span class="o">==</span><span class="mf">3.0.3</span>
+<span class="n">gunicorn</span><span class="o">==</span><span class="mf">22.0.0</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e136883d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=290586bf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="3-2.-Push-to-Cloud-Run">3-2. Push to Cloud Run<a class="anchor-link" href="#3-2.-Push-to-Cloud-Run">¶</a></h3>
+<p><code>Dockerfile</code></p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=938fc803">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4daaec32">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7904,30 +7680,48 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">functions</span> <span class="n">deploy</span> <span class="n">pubsub</span><span class="o">-</span><span class="n">bq</span><span class="o">-</span><span class="n">gcs</span> \
-    <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
-    <span class="o">--</span><span class="n">gen2</span> \
-    <span class="o">--</span><span class="n">runtime</span><span class="o">=</span><span class="n">python312</span> \
-    <span class="o">--</span><span class="n">source</span><span class="o">=./</span><span class="n">pubsub_cf</span> \
-    <span class="o">--</span><span class="n">entry</span><span class="o">-</span><span class="n">point</span><span class="o">=</span><span class="n">hello_http</span> \
-    <span class="o">--</span><span class="n">trigger</span><span class="o">-</span><span class="n">http</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 指定基底 Image 為輕量 Python 基底</span>
+<span class="n">FROM</span> <span class="n">python</span><span class="p">:</span><span class="mf">3.11</span><span class="o">-</span><span class="n">slim</span>
+
+<span class="c1"># 安裝建議的系統套件（可選）</span>
+<span class="n">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">recommends</span> \
+    <span class="o">&amp;&amp;</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">lists</span><span class="o">/*</span>
+
+<span class="c1"># 設定預設工作資料夾</span>
+<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">app</span>
+
+<span class="c1"># 複製依賴清單，先安裝依賴以加快快取</span>
+<span class="n">COPY</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span> <span class="o">.</span>
+<span class="n">RUN</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="nb">dir</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="c1"># 複製程式碼</span>
+<span class="n">COPY</span> <span class="o">.</span> <span class="o">.</span>
+
+<span class="c1"># 讓日誌即時輸出</span>
+<span class="n">ENV</span> <span class="n">PYTHONUNBUFFERED</span><span class="o">=</span><span class="mi">1</span>
+<span class="c1"># 預設 8080，Cloud Run 會覆蓋成動態 PORT</span>
+<span class="n">ENV</span> <span class="n">PORT</span><span class="o">=</span><span class="mi">8080</span>
+<span class="n">EXPOSE</span> <span class="mi">8080</span>
+
+<span class="c1"># 使用 gunicorn 監聽 $PORT</span>
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">"sh"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="s2">"exec gunicorn -b :$PORT app:app"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5d245fd8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=503ece14">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="3-3.-Setup-IAM-and-Pub/Sub-subscription">3-3. Setup IAM and Pub/Sub subscription<a class="anchor-link" href="#3-3.-Setup-IAM-and-Pub/Sub-subscription">¶</a></h3>
+<p><code>.dockerignore</code></p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bd0d3910">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7c355f47">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7935,19 +7729,27 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-
-<span class="n">gcloud</span> <span class="n">projects</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
-    <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="s2">"serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com"</span> \
-    <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">"roles/pubsub.subscriber"</span>
-
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">__pycache__</span><span class="o">/</span>
+<span class="o">*.</span><span class="n">pyc</span>
+<span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ed703e91">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c10b851b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h3 id="Step-2.-Build-&amp;-Run-Locally">Step 2. Build &amp; Run Locally<a class="anchor-link" href="#Step-2.-Build-&amp;-Run-Locally">¶</a></h3><p><strong>(Optional, to verify functionality before deployment)</strong></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=71d6ac7f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7955,516 +7757,180 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Build the image (local tag)</span>
+<span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">hello</span><span class="o">-</span><span class="n">local</span><span class="p">:</span><span class="mf">1.0</span> <span class="o">.</span>
 
-<span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">create</span> <span class="n">bq</span><span class="o">-</span><span class="n">subscriptions</span> \
-  <span class="o">--</span><span class="n">topic</span><span class="o">=</span><span class="n">projects</span><span class="o">/</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">topic_1</span> \
-  <span class="o">--</span><span class="n">push</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span><span class="o">-</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">cloudfunctions</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">pubsub</span><span class="o">-</span><span class="n">bq</span><span class="o">-</span><span class="n">gcs</span> \
-  <span class="o">--</span><span class="n">ack</span><span class="o">-</span><span class="n">deadline</span><span class="o">=</span><span class="mi">30</span> \
-  <span class="o">--</span><span class="n">push</span><span class="o">-</span><span class="n">auth</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">account</span><span class="o">=</span><span class="n">angus</span><span class="o">-</span><span class="n">personal</span><span class="nd">@tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">iam</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span>
+<span class="c1"># Run locally</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">rm</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8080</span><span class="p">:</span><span class="mi">8080</span> <span class="n">hello</span><span class="o">-</span><span class="n">local</span><span class="p">:</span><span class="mf">1.0</span>
+<span class="c1"># Open http://localhost:8080 in your browser, you should see the message: "Hello from Cloud Run via Docker!"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6602180d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h3 id="Step-3.-Configure-an-Artifact-Registry-Repository">Step 3. Configure an Artifact Registry Repository<a class="anchor-link" href="#Step-3.-Configure-an-Artifact-Registry-Repository">¶</a></h3><blockquote>
+<p>Create the repository only once, specifying the Docker format</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4ffa8e12">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">REGION</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span>
+<span class="n">REPO</span><span class="o">=</span><span class="n">hello</span><span class="o">-</span><span class="n">repo</span> 
+<span class="n">PROJECT_ID</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">get</span><span class="o">-</span><span class="n">value</span> <span class="n">project</span><span class="p">)</span>
 
-<span class="n">gcloud</span> <span class="n">run</span> <span class="n">services</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">pubsub</span><span class="o">-</span><span class="n">bq</span><span class="o">-</span><span class="n">gcs</span> \
+<span class="n">gcloud</span> <span class="n">artifacts</span> <span class="n">repositories</span> <span class="n">create</span> <span class="err">$</span><span class="n">REPO</span> \
+  <span class="o">--</span><span class="n">repository</span><span class="o">-</span><span class="nb">format</span><span class="o">=</span><span class="n">docker</span> \
+  <span class="o">--</span><span class="n">location</span><span class="o">=</span><span class="err">$</span><span class="n">REGION</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=565a8ffc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Enable Docker to push images to Artifact Registry</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e97609ef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">auth</span> <span class="n">configure</span><span class="o">-</span><span class="n">docker</span> <span class="err">$</span><span class="p">{</span><span class="n">REGION</span><span class="p">}</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c0be201">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h3 id="Step-4.-Push-the-Image-to-Artifact-Registry">Step 4. Push the Image to Artifact Registry<a class="anchor-link" href="#Step-4.-Push-the-Image-to-Artifact-Registry">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a4af7dce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">IMAGE</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">REGION</span><span class="p">}</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">dev</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">PROJECT_ID</span><span class="p">}</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">REPO</span><span class="p">}</span><span class="o">/</span><span class="n">hello</span><span class="p">:</span><span class="mf">1.0</span>
+<span class="n">docker</span> <span class="n">tag</span> <span class="n">hello</span><span class="o">-</span><span class="n">local</span><span class="p">:</span><span class="mf">1.0</span> <span class="err">$</span><span class="n">IMAGE</span>
+<span class="n">docker</span> <span class="n">push</span> <span class="err">$</span><span class="n">IMAGE</span>
+
+<span class="c1"># Alternative Option:</span>
+<span class="c1"># IMAGE=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO}/hello:1.0</span>
+<span class="c1"># gcloud builds submit --tag $IMAGE</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=62d4631b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h3 id="Step-5.-Deploy-to-Cloud-Run">Step 5. Deploy to Cloud Run<a class="anchor-link" href="#Step-5.-Deploy-to-Cloud-Run">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b6c5b377">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">SERVICE</span><span class="o">=</span><span class="n">hello</span><span class="o">-</span><span class="n">svc</span>
+
+<span class="n">gcloud</span> <span class="n">run</span> <span class="n">deploy</span> <span class="err">$</span><span class="n">SERVICE</span> \
+  <span class="o">--</span><span class="n">image</span> <span class="err">$</span><span class="n">IMAGE</span> \
+  <span class="o">--</span><span class="n">region</span> <span class="err">$</span><span class="n">REGION</span> \
+  <span class="o">--</span><span class="n">port</span> <span class="mi">8080</span> \
+  <span class="o">--</span><span class="n">cpu</span> <span class="mi">1</span> \
+  <span class="o">--</span><span class="n">memory</span> <span class="mi">512</span><span class="n">Mi</span> \
+  <span class="o">--</span><span class="n">concurrency</span> <span class="mi">80</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=27eee47d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Test on cloud</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9036ad52">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">run</span> <span class="n">services</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">hello</span><span class="o">-</span><span class="n">svc</span> \
   <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="s2">"serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com"</span> \
   <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">"roles/run.invoker"</span> \
-  <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
-  <span class="o">--</span><span class="n">platform</span><span class="o">=</span><span class="n">managed</span>
-
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
+  <span class="o">--</span><span class="n">region</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b44ed2eb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="4.-When-GCS-changes,-publish-Pub/Sub-Topic-2">4. When GCS changes, publish Pub/Sub <code>Topic 2</code><a class="anchor-link" href="#4.-When-GCS-changes,-publish-Pub/Sub-Topic-2">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0259f614">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4150e305">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-<span class="n">gsutil</span> <span class="n">notification</span> <span class="n">create</span> <span class="o">-</span><span class="n">t</span> <span class="n">topic_2</span> <span class="o">-</span><span class="n">f</span> <span class="n">json</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">travel</span><span class="o">-</span><span class="n">demo1</span>
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=63de1946">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="5.-When-Topic-2-receives-results,-insert-a-new-row-into-BigQuery-via-Cloud-Run-Function-pubsub-gcs-bq">5. When <code>Topic 2</code> receives results, insert a new row into BigQuery via Cloud Run Function <code>pubsub-gcs-bq</code><a class="anchor-link" href="#5.-When-Topic-2-receives-results,-insert-a-new-row-into-BigQuery-via-Cloud-Run-Function-pubsub-gcs-bq">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd0955f1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="5-1.-Create-local-file">5-1. Create local file<a class="anchor-link" href="#5-1.-Create-local-file">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b445e671">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pubsub_cf2</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span>
-<span class="err">└──</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4df62e6b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>main.py</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a8384332">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">functions_framework</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
-
-<span class="nd">@functions_framework</span><span class="o">.</span><span class="n">http</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello_http</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-
-    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="n">request_json</span><span class="p">[</span><span class="s1">'message'</span><span class="p">][</span><span class="s1">'attributes'</span><span class="p">]</span>
-
-    <span class="n">BQ</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-
-    <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">        insert into `tw-rd-data-angus-tu.pubsub_demo.gcs` values</span>
-<span class="s2">        ('</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s2">"bucketId"</span><span class="p">]</span><span class="si">}</span><span class="s2">','</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s2">"objectId"</span><span class="p">]</span><span class="si">}</span><span class="s2">',datetime_trunc(current_datetime('Asia/Taipei'), second))</span>
-<span class="s2">    """</span>
-
-    <span class="n">job</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> 
-    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request_json</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8feb1944">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>requirements.txt</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=73ad1505">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">functions</span><span class="o">-</span><span class="n">framework</span><span class="o">==</span><span class="mf">3.</span><span class="o">*</span>
-<span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">bigquery</span><span class="o">==</span><span class="mf">3.9.0</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e7db5d80">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="5-2.-Push-to-Cloud-Run">5-2. Push to Cloud Run<a class="anchor-link" href="#5-2.-Push-to-Cloud-Run">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=def2ccc2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">functions</span> <span class="n">deploy</span> <span class="n">pubsub</span><span class="o">-</span><span class="n">gcs</span><span class="o">-</span><span class="n">bq</span> \
-    <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
-    <span class="o">--</span><span class="n">gen2</span> \
-    <span class="o">--</span><span class="n">runtime</span><span class="o">=</span><span class="n">python312</span> \
-    <span class="o">--</span><span class="n">source</span><span class="o">=./</span><span class="n">pubsub_cf2</span> \
-    <span class="o">--</span><span class="n">entry</span><span class="o">-</span><span class="n">point</span><span class="o">=</span><span class="n">hello_http</span> \
-    <span class="o">--</span><span class="n">trigger</span><span class="o">-</span><span class="n">http</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5e2bc057">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="5-3.-Setup-IAM-and-Pub/Sub-subscription">5-3. Setup IAM and Pub/Sub subscription<a class="anchor-link" href="#5-3.-Setup-IAM-and-Pub/Sub-subscription">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bb548775">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-
-<span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">create</span> <span class="n">bq</span><span class="o">-</span><span class="n">subscriptions2</span> \
-  <span class="o">--</span><span class="n">topic</span><span class="o">=</span><span class="n">projects</span><span class="o">/</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">topic_2</span> \
-  <span class="o">--</span><span class="n">push</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span><span class="o">-</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">cloudfunctions</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">pubsub</span><span class="o">-</span><span class="n">gcs</span><span class="o">-</span><span class="n">bq</span> \
-  <span class="o">--</span><span class="n">ack</span><span class="o">-</span><span class="n">deadline</span><span class="o">=</span><span class="mi">30</span> \
-  <span class="o">--</span><span class="n">push</span><span class="o">-</span><span class="n">auth</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">account</span><span class="o">=</span><span class="n">angus</span><span class="o">-</span><span class="n">personal</span><span class="nd">@tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">iam</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span>
-
-<span class="n">gcloud</span> <span class="n">run</span> <span class="n">services</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">pubsub</span><span class="o">-</span><span class="n">gcs</span><span class="o">-</span><span class="n">bq</span> \
-  <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="s2">"serviceAccount:angus-personal@tw-rd-data-angus-tu.iam.gserviceaccount.com"</span> \
-  <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">"roles/run.invoker"</span> \
-  <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
-  <span class="o">--</span><span class="n">platform</span><span class="o">=</span><span class="n">managed</span>
-
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9d545b3a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="6.-Create-a-pull-subscriber-and-deploy-a-Cloud-Run-service-to-pull-messages">6. Create a pull subscriber and deploy a Cloud Run service to pull messages<a class="anchor-link" href="#6.-Create-a-pull-subscriber-and-deploy-a-Cloud-Run-service-to-pull-messages">¶</a></h2><h3 id="6-1.-Create-a-pull-subscriber">6-1. Create a pull subscriber<a class="anchor-link" href="#6-1.-Create-a-pull-subscriber">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=183c496f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-
-<span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">create</span> <span class="n">pull</span><span class="o">-</span><span class="n">subscription</span> \
-  <span class="o">--</span><span class="n">topic</span><span class="o">=</span><span class="n">projects</span><span class="o">/</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">topic_2</span>
-
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ac6884e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="6-2.-Create-local-file">6-2. Create local file<a class="anchor-link" href="#6-2.-Create-local-file">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bc35d736">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pubsub_cf3</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span>
-<span class="err">└──</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=edd4e27e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>main.py</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5173517d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">functions_framework</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">pubsub_v1</span>
-
-<span class="nd">@functions_framework</span><span class="o">.</span><span class="n">http</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello_http</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">project_id</span> <span class="o">=</span> <span class="s2">"tw-rd-data-angus-tu"</span>
-    <span class="n">subscription_id</span> <span class="o">=</span> <span class="s2">"pull-subscription"</span>
-
-    <span class="n">subscriber</span> <span class="o">=</span> <span class="n">pubsub_v1</span><span class="o">.</span><span class="n">SubscriberClient</span><span class="p">()</span>
-    <span class="n">subscription_path</span> <span class="o">=</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">subscription_path</span><span class="p">(</span><span class="n">project_id</span><span class="p">,</span> <span class="n">subscription_id</span><span class="p">)</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span>
-        <span class="n">request</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">"subscription"</span><span class="p">:</span> <span class="n">subscription_path</span><span class="p">,</span>
-            <span class="s2">"max_messages"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">received_messages</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"No messages available."</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">received_messages</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">subscriber</span><span class="o">.</span><span class="n">acknowledge</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s2">"subscription"</span><span class="p">:</span> <span class="n">subscription_path</span><span class="p">,</span> <span class="s2">"ack_ids"</span><span class="p">:</span> <span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">ack_id</span><span class="p">]})</span>
-
-    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=385ed8c5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>requirements.txt</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=48188a5a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">functions</span><span class="o">-</span><span class="n">framework</span><span class="o">==</span><span class="mf">3.</span><span class="o">*</span>
-<span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">pubsub</span><span class="o">==</span><span class="mf">2.31.1</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=94fb7e95">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="6-3.-Push-to-Cloud-Run">6-3. Push to Cloud Run<a class="anchor-link" href="#6-3.-Push-to-Cloud-Run">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f2b46d60">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">default</span>
-
-<span class="n">gcloud</span> <span class="n">functions</span> <span class="n">deploy</span> <span class="n">pubsub</span><span class="o">-</span><span class="n">pull</span> \
-    <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
-    <span class="o">--</span><span class="n">gen2</span> \
-    <span class="o">--</span><span class="n">runtime</span><span class="o">=</span><span class="n">python312</span> \
-    <span class="o">--</span><span class="n">source</span><span class="o">=./</span><span class="n">pubsub_cf3</span> \
-    <span class="o">--</span><span class="n">entry</span><span class="o">-</span><span class="n">point</span><span class="o">=</span><span class="n">hello_http</span> \
-    <span class="o">--</span><span class="n">trigger</span><span class="o">-</span><span class="n">http</span>
-
-<span class="n">gcloud</span> <span class="n">config</span> <span class="n">configurations</span> <span class="n">activate</span> <span class="n">sa</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7d0dbe3b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55e1d047">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Pub/Sub-Demo">Pub/Sub Demo<a class="anchor-link" href="#Pub/Sub-Demo">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=755589f6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Trigger-BigQuery-Transfer">Trigger BigQuery Transfer<a class="anchor-link" href="#Trigger-BigQuery-Transfer">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5b98919f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">bq</span> <span class="n">mk</span> <span class="o">--</span><span class="n">transfer_run</span> \
-  <span class="o">--</span><span class="n">run_time</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">date</span> <span class="o">-</span><span class="n">u</span> <span class="o">+</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ"</span><span class="p">)</span> \
-  <span class="n">projects</span><span class="o">/</span><span class="mi">992669508000</span><span class="o">/</span><span class="n">locations</span><span class="o">/</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span><span class="o">/</span><span class="n">transferConfigs</span><span class="o">/</span><span class="mi">68</span><span class="n">d62afb</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">20</span><span class="n">f5</span><span class="o">-</span><span class="mi">8</span><span class="n">a9f</span><span class="o">-</span><span class="mi">14</span><span class="n">c14ef7a858</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=900af79f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Push-Result">Push Result<a class="anchor-link" href="#Push-Result">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9545756f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select * from `pubsub_demo.gcs` where eventTime &gt; datetime_sub(current_datetime('Asia/Taipei'), INTERVAL 5 minute)"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+----------------------------------+----------------------+---------------------+
-| bucketId                         | objectId             | eventTime           |
-+==================================+======================+=====================+
-| tw-rd-data-angus-tu-travel-demo1 | pubsub_demo/demo.csv | 2025-09-26 17:33:01 |
-+----------------------------------+----------------------+---------------------+
-| tw-rd-data-angus-tu-travel-demo1 | pubsub_demo/demo.csv | 2025-09-26 17:33:02 |
-+----------------------------------+----------------------+---------------------+
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8f3fe60f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Pull-Result">Pull Result<a class="anchor-link" href="#Pull-Result">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=948d5fcd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.oauth2</span><span class="w"> </span><span class="kn">import</span> <span class="n">service_account</span>
@@ -8473,20 +7939,18 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
 <span class="n">key_path</span> <span class="o">=</span> <span class="s2">"../key/angus-personal.json"</span>
-<span class="n">CloudRunURL</span> <span class="o">=</span> <span class="s2">"https://asia-east1-tw-rd-data-angus-tu.cloudfunctions.net/pubsub-pull"</span>
+<span class="n">CloudRunURL</span> <span class="o">=</span> <span class="s2">"https://hello-svc2-992669508000.asia-east1.run.app"</span>
 
 <span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">IDTokenCredentials</span><span class="o">.</span><span class="n">from_service_account_file</span><span class="p">(</span><span class="n">key_path</span><span class="p">,</span> <span class="n">target_audience</span> <span class="o">=</span> <span class="n">CloudRunURL</span><span class="p">)</span>
 
 <span class="n">credentials</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">Request</span><span class="p">())</span>
 <span class="n">id_token_cred</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">token</span>
 
-<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-<span class="p">}</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"Authorization"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"Bearer </span><span class="si">{</span><span class="n">id_token_cred</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
     <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json"</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">CloudRunURL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CloudRunURL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Status code:"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Response body:"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
@@ -8502,47 +7966,106 @@ Pub/Sub supports both <strong>push</strong> and <strong>pull</strong> message de
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Status code: 200
-Response body: {
-  "kind": "storage#object",
-  "id": "tw-rd-data-angus-tu-travel-demo1/pubsub_demo/demo.csv/1758877042858790",
-  "selfLink": "https://www.googleapis.com/storage/v1/b/tw-rd-data-angus-tu-travel-demo1/o/pubsub_demo%2Fdemo.csv",
-  "name": "pubsub_demo/demo.csv",
-  "bucket": "tw-rd-data-angus-tu-travel-demo1",
-  "generation": "1758877042858790",
-  "metageneration": "1",
-  "contentType": "application/octet-stream",
-  "timeCreated": "2025-09-26T08:57:22.891Z",
-  "updated": "2025-09-26T08:57:22.891Z",
-  "storageClass": "STANDARD",
-  "timeStorageClassUpdated": "2025-09-26T08:57:22.891Z",
-  "size": "344",
-  "md5Hash": "u8pEqMpO5CYn3RVPVL8EHA==",
-  "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/tw-rd-data-angus-tu-travel-demo1/o/pubsub_demo%2Fdemo.csv?generation=1758877042858790&amp;alt=media",
-  "crc32c": "xuUQSQ==",
-  "etag": "CKa238qH9o8DEAE="
-}
-{
-  "kind": "storage#object",
-  "id": "tw-rd-data-angus-tu-travel-demo1/pubsub_demo/demo.csv/1758876293932667",
-  "selfLink": "https://www.googleapis.com/storage/v1/b/tw-rd-data-angus-tu-travel-demo1/o/pubsub_demo%2Fdemo.csv",
-  "name": "pubsub_demo/demo.csv",
-  "bucket": "tw-rd-data-angus-tu-travel-demo1",
-  "generation": "1758876293932667",
-  "metageneration": "1",
-  "contentType": "application/octet-stream",
-  "timeCreated": "2025-09-26T08:44:53.943Z",
-  "updated": "2025-09-26T08:44:53.943Z",
-  "storageClass": "STANDARD",
-  "timeStorageClassUpdated": "2025-09-26T08:44:53.943Z",
-  "size": "324",
-  "md5Hash": "D2x3GyMvOzr/PeZthyP7ng==",
-  "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/tw-rd-data-angus-tu-travel-demo1/o/pubsub_demo%2Fdemo.csv?generation=1758876293932667&amp;alt=media",
-  "crc32c": "+U5hTw==",
-  "etag": "CPvM0OWE9o8DEAE="
-}
-
+Response body: Hello from Cloud Run via Docker!
 </pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=31410f57">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h4 id="Assume-modified-the-code-and-upgraded-to-version-1.1">Assume modified the code and upgraded to version 1.1<a class="anchor-link" href="#Assume-modified-the-code-and-upgraded-to-version-1.1">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f74ef41d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">hello</span><span class="o">-</span><span class="n">local</span><span class="p">:</span><span class="mf">1.1</span> <span class="o">.</span>
+<span class="n">IMAGE</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">REGION</span><span class="p">}</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">dev</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">PROJECT_ID</span><span class="p">}</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">REPO</span><span class="p">}</span><span class="o">/</span><span class="n">hello</span><span class="p">:</span><span class="mf">1.1</span>
+<span class="n">docker</span> <span class="n">tag</span> <span class="n">hello</span><span class="o">-</span><span class="n">local</span><span class="p">:</span><span class="mf">1.1</span> <span class="err">$</span><span class="n">IMAGE</span>
+<span class="n">docker</span> <span class="n">push</span> <span class="err">$</span><span class="n">IMAGE</span>
+
+<span class="c1"># Alternative Option</span>
+<span class="c1"># IMAGE=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO}/hello:1.1</span>
+<span class="c1"># gcloud builds submit --tag $IMAGE</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=38b760c7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">run</span> <span class="n">deploy</span> <span class="err">$</span><span class="n">SERVICE</span> <span class="o">--</span><span class="n">image</span> <span class="err">$</span><span class="n">IMAGE</span> <span class="o">--</span><span class="n">region</span> <span class="err">$</span><span class="n">REGION</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=27bc7ef5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h4 id="Supplement.-Concepts-You-Should-Know">Supplement. Concepts You Should Know<a class="anchor-link" href="#Supplement.-Concepts-You-Should-Know">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0d0b162c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li><strong>Dockerfile / Image / Container</strong><br/><ul>
+<li>Dockerfile: A recipe that defines how to build your image (base OS, dependencies, commands).<br/></li>
+<li>Image: A read-only snapshot built from a Dockerfile; contains everything your app needs to run.<br/></li>
+<li>Container: A running instance of an image; isolated environment where your app executes.<br/></li>
+</ul>
+</li>
+<li><strong>Layer Cache</strong><br/><ul>
+<li>Each Dockerfile instruction (RUN, COPY, etc.) creates a layer. Docker caches unchanged layers to speed up rebuilds.<br/></li>
+<li>Modifying a layer invalidates its cache and all layers above it, but unchanged layers can be reused.<br/></li>
+<li>Local Docker uses persistent cache; Cloud Build rebuilds layers unless remote caching is enabled.<br/></li>
+</ul>
+</li>
+<li><strong>Local Run</strong> <br/><ul>
+<li>Build image: <code>docker build -t my-app:1.0 .</code> <br/></li>
+<li>Run container locally: <code>docker run -p 5000:8080 my-app:1.0</code> <br/></li>
+<li>Only modified layers are rebuilt locally thanks to layer cache. <br/></li>
+<li>Environment variables (<code>-e VAR=VALUE</code>) can be passed to the container. <br/></li>
+</ul>
+</li>
+<li><strong>PORT</strong> <br/><ul>
+<li>Port: Network “door” where a service listens for requests. <br/></li>
+<li>Docker: -p host_port:container_port maps container port to local host port. <br/></li>
+<li>Cloud Run: Uses environment variable PORT to tell your app which port to listen on. <br/></li>
+<li>Always read the port from os.environ (or equivalent) for cloud portability. <br/></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>

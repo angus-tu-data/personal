@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OB9_CloudSQL</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>15_Terraform</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7518,8 +7518,38 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Data Engineer OnBoard - Week 9</p>
-<h1 id="Cloud-SQL">Cloud SQL<a class="anchor-link" href="#Cloud-SQL">¶</a></h1><p>Angus Tu
+<h1 id="Terraform">Terraform<a class="anchor-link" href="#Terraform">¶</a></h1><p>Angus Tu
 2025.11.5</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c9a60ef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Requirement">Requirement<a class="anchor-link" href="#Requirement">¶</a></h3><blockquote>
+<p><strong>Cloud Build(CI/CD)</strong></p>
+</blockquote>
+<ol>
+<li><p>Cloud Build Trigger</p>
+</li>
+<li><p>Composer CI/CD best practice</p>
+</li>
+<li><p>Cloud Functions CI/CD best practice</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Terraform</strong></p>
+</blockquote>
+<ol>
+<li><p>Use Terraform to create a BigQuery dataset and table</p>
+</li>
+<li><p>Integrate with GitHub and Cloud Build</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -7531,7 +7561,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="Cloud-SQL">Cloud SQL<a class="anchor-link" href="#Cloud-SQL">¶</a></h1>
+<h1 id="Terraform">Terraform<a class="anchor-link" href="#Terraform">¶</a></h1>
 </div>
 </div>
 </div>
@@ -7542,146 +7572,40 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Cloud SQL is a <strong>fully managed relational database service</strong> provided by Google Cloud, supporting <strong>MySQL</strong>, <strong>PostgreSQL</strong>, and <strong>SQL Server</strong>. It automatically handles backups, patching, and high availability, while offering secure connection options such as Public IP, Private IP, and the Cloud SQL Auth Proxy. It is suitable for web/mobile applications, data analysis, and ETL workflows, and can integrate seamlessly with other GCP services like Cloud Run and BigQuery.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3ea7a6fc">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="1.-Build-MySQL-Database-in-Cloud-SQL">1. Build MySQL Database in Cloud SQL<a class="anchor-link" href="#1.-Build-MySQL-Database-in-Cloud-SQL">¶</a></h1>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b650b573">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1-1.-Create-Cloud-SQL-Instances">1-1. Create Cloud SQL Instances<a class="anchor-link" href="#1-1.-Create-Cloud-SQL-Instances">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c6eb7adb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">PROJECT_ID</span><span class="o">=</span><span class="s2">"tw-rd-data-angus-tu"</span>
-<span class="n">REGION</span><span class="o">=</span><span class="s2">"asia-east1"</span>
-<span class="n">INSTANCE_NAME</span><span class="o">=</span><span class="s2">"mysql-demo"</span>
-<span class="n">DB_VERSION</span><span class="o">=</span><span class="s2">"MYSQL_8_0"</span>
-<span class="n">TIER</span><span class="o">=</span><span class="s2">"db-f1-micro"</span> 
-<span class="n">ROOT_PASSWORD</span><span class="o">=</span><span class="s2">"root_password"</span>
-
-<span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">create</span> <span class="err">$</span><span class="n">INSTANCE_NAME</span> \
-    <span class="o">--</span><span class="n">project</span><span class="o">=</span><span class="err">$</span><span class="n">PROJECT_ID</span> \
-    <span class="o">--</span><span class="n">database</span><span class="o">-</span><span class="n">version</span><span class="o">=</span><span class="err">$</span><span class="n">DB_VERSION</span> \
-    <span class="o">--</span><span class="n">tier</span><span class="o">=</span><span class="err">$</span><span class="n">TIER</span> \
-    <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="err">$</span><span class="n">REGION</span> \
-    <span class="o">--</span><span class="n">root</span><span class="o">-</span><span class="n">password</span><span class="o">=</span><span class="err">$</span><span class="n">ROOT_PASSWORD</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=db0329f6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1-2.-Create-Database-&amp;-User">1-2. Create Database &amp; User<a class="anchor-link" href="#1-2.-Create-Database-&amp;-User">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2379bae0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">DB_NAME</span><span class="o">=</span><span class="s2">"demo_db"</span>
-
-<span class="n">gcloud</span> <span class="n">sql</span> <span class="n">databases</span> <span class="n">create</span> <span class="err">$</span><span class="n">DB_NAME</span> <span class="o">--</span><span class="n">instance</span><span class="o">=</span><span class="err">$</span><span class="n">INSTANCE_NAME</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4470a989">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">DB_USER</span><span class="o">=</span><span class="s2">"demo_user"</span>
-<span class="n">DB_PASS</span><span class="o">=</span><span class="s2">"demo_pass"</span>
-
-<span class="n">gcloud</span> <span class="n">sql</span> <span class="n">users</span> <span class="n">create</span> <span class="err">$</span><span class="n">DB_USER</span> \
-    <span class="o">--</span><span class="n">instance</span><span class="o">=</span><span class="err">$</span><span class="n">INSTANCE_NAME</span> \
-    <span class="o">--</span><span class="n">password</span><span class="o">=</span><span class="err">$</span><span class="n">DB_PASS</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fe53a478">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1-3-Connection">1-3 Connection<a class="anchor-link" href="#1-3-Connection">¶</a></h2><h3 id="1-3-1.-Connect-via-Cloud-Shell">1-3-1. Connect via Cloud Shell<a class="anchor-link" href="#1-3-1.-Connect-via-Cloud-Shell">¶</a></h3><p>gcloud sql connect mysql-demo --user=demo_user</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bdf82c28">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">connect</span> <span class="n">mysql</span><span class="o">-</span><span class="n">demo</span> <span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">demo_user</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=394bbf2a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Enter the password to connect to MySQL.</p>
-<h3 id="1-3-2.-Connect-in-Local-Environment">1-3-2. Connect in Local Environment<a class="anchor-link" href="#1-3-2.-Connect-in-Local-Environment">¶</a></h3><ul>
-<li>Local IP Address: <code>1.2.3.4</code></li>
-<li>Public IP address: <code>5.6.7.8</code></li>
+<p>Terraform is an <strong>Infrastructure as Code (IaC)</strong> tool that allows you to manage cloud resources programmatically. Its benefits include repeatable resource deployment, version tracking, and support for multiple cloud platforms.</p>
+<p>Core Concepts:</p>
+<ul>
+<li><strong>Provider:</strong> Specifies the cloud platform Terraform will manage, e.g., GCP, AWS, Azure.</li>
+<li><strong>Resource:</strong> The cloud resource to create or manage, e.g., BigQuery dataset, VM.</li>
+<li><strong>Variable:</strong> Configurable parameters to make configurations more flexible and reusable.</li>
+<li><strong>State:</strong> A file that records the current status of resources, default is <code>terraform.tfstate</code>.</li>
 </ul>
-<h4 id="Allow-external-connections-(optional)">Allow external connections (optional)<a class="anchor-link" href="#Allow-external-connections-(optional)">¶</a></h4>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=645de98f">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f22590f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Install-Terraform">Install Terraform<a class="anchor-link" href="#Install-Terraform">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f2269ca">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a href="https://developer.hashicorp.com/terraform/install">Download Terraform</a></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=36c89cc9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7689,214 +7613,437 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">patch</span> <span class="err">$</span><span class="n">INSTANCE_NAME</span> \
-    <span class="o">--</span><span class="n">authorized</span><span class="o">-</span><span class="n">networks</span><span class="o">=</span><span class="s2">"1.2.3.4/32"</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">brew</span> <span class="n">tap</span> <span class="n">hashicorp</span><span class="o">/</span><span class="n">tap</span>
+<span class="n">brew</span> <span class="n">install</span> <span class="n">hashicorp</span><span class="o">/</span><span class="n">tap</span><span class="o">/</span><span class="n">terraform</span>
+<span class="n">terraform</span> <span class="n">version</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=53254a8f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5705ab70">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Connect-to-Cloud-SQL-Public-IP">Connect to Cloud SQL Public IP<a class="anchor-link" href="#Connect-to-Cloud-SQL-Public-IP">¶</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83296e9d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">demo_user</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">h</span> <span class="mf">5.6.7.8</span> <span class="n">demo_db</span>
-</pre></div>
+<p><code>Terraform v1.13.4</code></p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=edbe4754">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Enter the password to connect to MySQL.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a5e5792">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1-4.-Execute-SQL-queries-on-MySQL-in-Cloud-SQL">1-4. Execute SQL queries on MySQL in Cloud SQL<a class="anchor-link" href="#1-4.-Execute-SQL-queries-on-MySQL-in-Cloud-SQL">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=70c81439">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">USE</span> <span class="n">demo_db</span><span class="p">;</span>
-<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">demo_table</span> <span class="p">(</span>
-    <span class="nb">id</span> <span class="n">INT</span> <span class="n">AUTO_INCREMENT</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
-    <span class="n">name</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-    <span class="n">created_at</span> <span class="n">TIMESTAMP</span> <span class="n">DEFAULT</span> <span class="n">CURRENT_TIMESTAMP</span>
-<span class="p">);</span>
-<span class="n">INSERT</span> <span class="n">INTO</span> <span class="n">demo_table</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="n">VALUES</span> <span class="p">(</span><span class="s1">'Alice'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'Bob'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'Charlie'</span><span class="p">);</span>
-<span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">demo_table</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=66a36e26">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7039f836">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
+<h1 id="1.-Use-Terraform-to-create-a-BigQuery-dataset-and-table">1. Use Terraform to create a BigQuery dataset and table<a class="anchor-link" href="#1.-Use-Terraform-to-create-a-BigQuery-dataset-and-table">¶</a></h1><p>Goal: Create BigQuery dataset <code>terraform_demo</code> and table <code>terraform_table</code>.</p>
+<h2 id="1-1.-Local-Files">1-1. Local Files<a class="anchor-link" href="#1-1.-Local-Files">¶</a></h2>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6bd06812">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0212e3e7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="2.-Load-Cloud-SQL-to-BQ">2. Load Cloud SQL to BQ<a class="anchor-link" href="#2.-Load-Cloud-SQL-to-BQ">¶</a></h1><h2 id="2-1.-Batch-Load">2-1. Batch Load<a class="anchor-link" href="#2-1.-Batch-Load">¶</a></h2><h3 id="Flow">Flow<a class="anchor-link" href="#Flow">¶</a></h3><p><strong>Cloud SQL Export → Cloud Storage → BigQuery</strong></p>
-<h3 id="2-1-1.-Permission-Setup">2-1-1. Permission Setup<a class="anchor-link" href="#2-1-1.-Permission-Setup">¶</a></h3><ul>
-<li>Service account used in CloudSQL: <code>p992669508000-rlna2g@gcp-sa-cloud-sql.iam.gserviceaccount.com</code><ul>
-<li>Cloud SQL &gt; Instances &gt; Service account</li>
+<pre><code>terraform_demo
+├── main.tf
+├── variables.tf
+├── terraform.tfvars
+└── outputs.tf
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f838dd5a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-1-1.-Main-Configuration">1-1-1. Main Configuration<a class="anchor-link" href="#1-1-1.-Main-Configuration">¶</a></h3><h4 id="main.tf"><code>main.tf</code><a class="anchor-link" href="#main.tf">¶</a></h4><p>The main Terraform configuration file, used to define providers, resources, modules, and other core components.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ac4306b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">terraform</span> <span class="p">{</span>
+  <span class="n">required_providers</span> <span class="p">{</span>
+    <span class="n">google</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="n">source</span>  <span class="o">=</span> <span class="s2">"hashicorp/google"</span>
+      <span class="n">version</span> <span class="o">=</span> <span class="s2">"~&gt; 5.0"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">provider</span> <span class="s2">"google"</span> <span class="p">{</span>
+  <span class="n">project</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">project_id</span>
+  <span class="n">region</span>  <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">region</span>
+<span class="p">}</span>
+
+<span class="n">resource</span> <span class="s2">"google_bigquery_dataset"</span> <span class="s2">"demo_dataset"</span> <span class="p">{</span>
+  <span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"terraform_demo"</span>
+  <span class="n">location</span>   <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">region</span>
+<span class="p">}</span>
+
+<span class="n">resource</span> <span class="s2">"google_bigquery_table"</span> <span class="s2">"demo_table"</span> <span class="p">{</span>
+  <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">google_bigquery_dataset</span><span class="o">.</span><span class="n">demo_dataset</span><span class="o">.</span><span class="n">dataset_id</span>
+  <span class="n">table_id</span>   <span class="o">=</span> <span class="s2">"terraform_table"</span>
+  <span class="n">deletion_protection</span> <span class="o">=</span> <span class="n">false</span>
+  <span class="n">schema</span>     <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">EOF</span>
+<span class="p">[</span>
+  <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"id"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"STRING"</span><span class="p">,</span> <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"REQUIRED"</span><span class="p">},</span>
+  <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"value"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"STRING"</span><span class="p">,</span> <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"NULLABLE"</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">EOF</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f6465daa">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-1-2.-Variables">1-1-2. Variables<a class="anchor-link" href="#1-1-2.-Variables">¶</a></h3><h4 id="variables.tf"><code>variables.tf</code><a class="anchor-link" href="#variables.tf">¶</a></h4><p>Defines configurable variables, such as project ID, region, and resource names.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e1665f2d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">variable</span> <span class="s2">"project_id"</span> <span class="p">{</span>
+  <span class="n">description</span> <span class="o">=</span> <span class="s2">"GCP Project ID"</span>
+  <span class="nb">type</span>        <span class="o">=</span> <span class="n">string</span>
+<span class="p">}</span>
+
+<span class="n">variable</span> <span class="s2">"region"</span> <span class="p">{</span>
+  <span class="n">description</span> <span class="o">=</span> <span class="s2">"GCP region"</span>
+  <span class="nb">type</span>        <span class="o">=</span> <span class="n">string</span>
+  <span class="n">default</span>     <span class="o">=</span> <span class="s2">"US"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3a8a8f9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="terraform.tfvars"><code>terraform.tfvars</code><a class="anchor-link" href="#terraform.tfvars">¶</a></h4><p>Provides concrete values for variables defined in <code>variables.tf</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3016414d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">project_id</span> <span class="o">=</span> <span class="s2">"tw-rd-data-angus-tu"</span>
+<span class="n">region</span>     <span class="o">=</span> <span class="s2">"asia-east1"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=64e834ff">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-1-3.-Output-(Optional)">1-1-3. Output (Optional)<a class="anchor-link" href="#1-1-3.-Output-(Optional)">¶</a></h3><h4 id="outputs.tf"><code>outputs.tf</code><a class="anchor-link" href="#outputs.tf">¶</a></h4><p>Defines outputs after Terraform execution, such as BigQuery dataset name or table name.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=da3bc622">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">output</span> <span class="s2">"dataset_id"</span> <span class="p">{</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">google_bigquery_dataset</span><span class="o">.</span><span class="n">demo_dataset</span><span class="o">.</span><span class="n">dataset_id</span>
+<span class="p">}</span>
+
+<span class="n">output</span> <span class="s2">"table_id"</span> <span class="p">{</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">google_bigquery_table</span><span class="o">.</span><span class="n">demo_table</span><span class="o">.</span><span class="n">table_id</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3d717251">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="1-2.-Run-Terraform">1-2. Run Terraform<a class="anchor-link" href="#1-2.-Run-Terraform">¶</a></h2><h3 id="1-2-1.-Initialize-Terraform">1-2-1. Initialize Terraform<a class="anchor-link" href="#1-2-1.-Initialize-Terraform">¶</a></h3><p>Run the following command to initialize Terraform and download the required providers.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7193f54b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">terraform</span> <span class="n">init</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e50b5e93">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-2-2.-Preview-Planned-Changes">1-2-2. Preview Planned Changes<a class="anchor-link" href="#1-2-2.-Preview-Planned-Changes">¶</a></h3><p>Check which resources Terraform will create or modify.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2dc71f08">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">terraform</span> <span class="n">plan</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=084c5868">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-2-3.-Apply-the-Configuration">1-2-3. Apply the Configuration<a class="anchor-link" href="#1-2-3.-Apply-the-Configuration">¶</a></h3><p>Create the resources defined in your Terraform configuration.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=443280d0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">terraform</span> <span class="n">apply</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55aba7a7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>When prompted, type <code>yes</code> to confirm. After this, the BigQuery dataset and table will be successfully created.</p>
+<hr/>
+<h1 id="2.-Integrate-with-GitHub-and-Cloud-Build">2. Integrate with GitHub and Cloud Build<a class="anchor-link" href="#2.-Integrate-with-GitHub-and-Cloud-Build">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eab71d50">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Flow">Flow<a class="anchor-link" href="#Flow">¶</a></h3><p><strong>GitHub Repo</strong> (push)→ <strong>Cloud Build Trigger</strong> → <strong>Terraform</strong> (terraform init / plan / apply) → <strong>BigQuery</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b90fdb48">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="2-1.-Local-File">2-1. Local File<a class="anchor-link" href="#2-1.-Local-File">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=220b4e04">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Add-cloudbuild.yaml">Add <code>cloudbuild.yaml</code><a class="anchor-link" href="#Add-cloudbuild.yaml">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e9df1093">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">steps</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">hashicorp</span><span class="o">/</span><span class="n">terraform</span><span class="p">:</span><span class="n">light</span>
+    <span class="n">entrypoint</span><span class="p">:</span> <span class="n">sh</span>
+    <span class="nb">dir</span><span class="p">:</span> <span class="s1">'terraform_demo'</span>
+    <span class="n">args</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">-</span><span class="n">c</span>
+      <span class="o">-</span> <span class="o">|</span>
+        <span class="n">echo</span> <span class="s2">"Initializing Terraform..."</span>
+        <span class="n">terraform</span> <span class="n">init</span>
+
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">hashicorp</span><span class="o">/</span><span class="n">terraform</span><span class="p">:</span><span class="n">light</span>
+    <span class="n">entrypoint</span><span class="p">:</span> <span class="n">sh</span>
+    <span class="nb">dir</span><span class="p">:</span> <span class="s1">'terraform_demo'</span>
+    <span class="n">args</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">-</span><span class="n">c</span>
+      <span class="o">-</span> <span class="o">|</span>
+        <span class="n">echo</span> <span class="s2">"Planning Terraform changes..."</span>
+        <span class="n">terraform</span> <span class="n">plan</span> <span class="o">-</span><span class="n">var</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="s2">"terraform.tfvars"</span>
+
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">hashicorp</span><span class="o">/</span><span class="n">terraform</span><span class="p">:</span><span class="n">light</span>
+    <span class="n">entrypoint</span><span class="p">:</span> <span class="n">sh</span>
+    <span class="nb">dir</span><span class="p">:</span> <span class="s1">'terraform_demo'</span>
+    <span class="n">args</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">-</span><span class="n">c</span>
+      <span class="o">-</span> <span class="o">|</span>
+        <span class="n">echo</span> <span class="s2">"Applying Terraform changes..."</span>
+        <span class="n">terraform</span> <span class="n">apply</span> <span class="o">-</span><span class="n">var</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="s2">"terraform.tfvars"</span> <span class="o">-</span><span class="n">auto</span><span class="o">-</span><span class="n">approve</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">:</span> <span class="n">CLOUD_LOGGING_ONLY</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ca0af8d7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="2-2.-GitHub-Repo-and-Cloud-Build">2-2. GitHub Repo and Cloud Build<a class="anchor-link" href="#2-2.-GitHub-Repo-and-Cloud-Build">¶</a></h2><h3 id="2-2-1.-Push-to-GitHub-Repo">2-2-1. Push to GitHub Repo<a class="anchor-link" href="#2-2-1.-Push-to-GitHub-Repo">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=775a389d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"add: terraform ci/cd"</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ecdbcff">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="2-2-2.-Cloud-Build:-Connect-GitHub-repository">2-2-2. Cloud Build: Connect GitHub repository<a class="anchor-link" href="#2-2-2.-Cloud-Build:-Connect-GitHub-repository">¶</a></h3><ol>
+<li>Cloud Build &gt; Triggers &gt; Connect Repository</li>
+<li>Select GitHub (Cloud Build GitHub App)</li>
+<li>Authenticate and select repository &gt; Connect</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9c963046">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="2-2-3.-Cloud-Build:-Create-a-Trigger">2-2-3. Cloud Build: Create a Trigger<a class="anchor-link" href="#2-2-3.-Cloud-Build:-Create-a-Trigger">¶</a></h3><ol>
+<li>Event: Push to a branch</li>
+<li>Source: Select Repository and Branch<ul>
+<li>Branch: <code>^main$</code></li>
+<li>Included files filter (glob): <code>terraform_demo/**</code></li>
 </ul>
 </li>
-<li>Google Cloud Storage bucket: <code>gs://angus-cloudmile</code></li>
+<li>Configuration: Cloud Build configuration file (yaml or json)<ul>
+<li>Cloud Build configuration file location: /<code>terraform_demo/cloudbuild.yaml</code></li>
 </ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=88790bc1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gsutil</span> <span class="n">iam</span> <span class="n">ch</span> <span class="n">serviceAccount</span><span class="p">:</span><span class="n">p992669508000</span><span class="o">-</span><span class="n">rlna2g</span><span class="nd">@gcp</span><span class="o">-</span><span class="n">sa</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">sql</span><span class="o">.</span><span class="n">iam</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">roles</span><span class="o">/</span><span class="n">storage</span><span class="o">.</span><span class="n">objectAdmin</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">angus</span><span class="o">-</span><span class="n">cloudmile</span>
-</pre></div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ca5ebc9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=24ee14fd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-1-2.-Export-Cloud-SQL-Data">2-1-2. Export Cloud SQL Data<a class="anchor-link" href="#2-1-2.-Export-Cloud-SQL-Data">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=66ed55d8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">export</span> <span class="n">csv</span> <span class="n">mysql</span><span class="o">-</span><span class="n">demo</span> \
-    <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">angus</span><span class="o">-</span><span class="n">cloudmile</span><span class="o">/</span><span class="n">demo_table</span><span class="o">.</span><span class="n">csv</span> \
-    <span class="o">--</span><span class="n">database</span><span class="o">=</span><span class="n">demo_db</span> \
-    <span class="o">--</span><span class="n">query</span><span class="o">=</span><span class="s2">"SELECT * FROM demo_table"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c97dff61">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-1-3.-Load-to-BigQuery">2-1-3. Load to BigQuery<a class="anchor-link" href="#2-1-3.-Load-to-BigQuery">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b02b7084">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">bq</span> <span class="n">load</span> <span class="o">--</span><span class="n">source_format</span><span class="o">=</span><span class="n">CSV</span> \
-    <span class="n">test</span><span class="o">.</span><span class="n">demo_table</span> \
-    <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">angus</span><span class="o">-</span><span class="n">cloudmile</span><span class="o">/</span><span class="n">demo_table</span><span class="o">.</span><span class="n">csv</span> \
-    <span class="nb">id</span><span class="p">:</span><span class="n">INT64</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="n">STRING</span><span class="p">,</span><span class="n">created_at</span><span class="p">:</span><span class="n">TIMESTAMP</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=05319a51">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2-2.-Streaming-ETL">2-2. Streaming ETL<a class="anchor-link" href="#2-2.-Streaming-ETL">¶</a></h2><p>Using Dataflow or Datastream for Streaming ETL from Cloud SQL to BigQuery</p>
-<h3 id="2-2-1.-Dataflow">2-2-1. Dataflow<a class="anchor-link" href="#2-2-1.-Dataflow">¶</a></h3><p>Google provides Dataflow SQL or Apache Beam pipelines to read data from Cloud SQL and write it to BigQuery.</p>
-<ul>
-<li>Suitable for cases where you need continuous synchronization, data transformation, or custom processing logic.</li>
-<li>Offers more flexibility in controlling the ETL/ELT process.</li>
-<li>Can operate in batch or streaming mode, depending on your requirements.</li>
-<li>For true CDC (Change Data Capture) from Cloud SQL, Dataflow needs to be used together with Datastream to capture database changes.</li>
-</ul>
-<h3 id="2-2-2.-Datastream">2-2-2. Datastream<a class="anchor-link" href="#2-2-2.-Datastream">¶</a></h3><p><em>The detailed demo can be found in the <a href="">DataStream</a> document.</em></p>
-<p>Datastream performs Change Data Capture (CDC) on Cloud SQLand synchronizes changes to Cloud Storage or BigQuery.</p>
-<ul>
-<li>Advantage: Near real-time data updates with no need for manual export/import.</li>
-<li>Ideal for production environments or BI data pipelines where low latency replication is important.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67fa0560">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h1 id="3.-Cloud-SQL-Studio">3. Cloud SQL Studio<a class="anchor-link" href="#3.-Cloud-SQL-Studio">¶</a></h1><p>You can use Cloud SQL Studio within the Cloud SQL interface to connect to the database and perform queries and other operations.</p>
-<p><img alt="" src="https://angus-tu-data.github.io/personal/cloudsql_img1.png"/></p>
+<blockquote>
+<p><strong>After pushing to GitHub, Cloud Build will automatically run Terraform to create or update the BigQuery dataset and table.</strong></p>
+</blockquote>
 </div>
 </div>
 </div>

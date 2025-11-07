@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OB8_dbtCloud</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>06_Kafka</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7517,56 +7517,195 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Data Engineer OnBoard - Week 8</p>
-<h1 id="dbtCloud">dbtCloud<a class="anchor-link" href="#dbtCloud">¶</a></h1><p>Angus Tu
-2025.10.29</p>
+<p>Data Engineer OnBoard - Week 4</p>
+<h1 id="Pub/Sub-and-Kafka">Pub/Sub and Kafka<a class="anchor-link" href="#Pub/Sub-and-Kafka">¶</a></h1><p>Angus Tu
+2025.10.01</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b967889c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c9a60ef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Apache Kafka is a <strong>high-throughput distributed streaming platform</strong>, often described as a <strong>supercharged message queue</strong>, designed to handle <strong>large volumes of continuously flowing data</strong>.
+In Kafka’s architecture, a <strong>Producer</strong> is responsible for sending messages into the system, while a <strong>Consumer</strong> retrieves and processes those messages, enabling scalable and reliable real-time data pipelines.</p>
+<p>The objective of this demo is to implement a minimal viable demonstration of the <strong>Kafka → Pub/Sub</strong> workflow.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5113f97c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Requirement: How to redirect a message from Kafka to Pub/Sub</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=965de75c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="1.-Set-up-a-new-project">1. Set up a new project<a class="anchor-link" href="#1.-Set-up-a-new-project">¶</a></h1><h3 id="1-1.-Name-your-project">1-1. Name your project<a class="anchor-link" href="#1-1.-Name-your-project">¶</a></h3><h3 id="1-2.-Configure-your-development-environment">1-2. Configure your development environment<a class="anchor-link" href="#1-2.-Configure-your-development-environment">¶</a></h3><ul>
-<li>Connection: BigQuery</li>
-<li>Development credentials:<ul>
-<li>Authentication Method: Service Account JSON</li>
-<li>Dataset: dbt_cloud</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3.-Set-up-a-repository">1-3. Set up a repository<a class="anchor-link" href="#1-3.-Set-up-a-repository">¶</a></h3><p>Choose a repository to store your dbt code. <br/></p>
+<h1 id="Kafka">Kafka<a class="anchor-link" href="#Kafka">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a71b2db">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="1.-Create-docker-compose.yml">1. Create docker-compose.yml<a class="anchor-link" href="#1.-Create-docker-compose.yml">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=85a6b8dd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">kafka</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span>
+<span class="err">└──</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2f8a38e4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>docker-compose.yml</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2c6abf2d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">version</span><span class="p">:</span> <span class="s1">'3'</span>
+<span class="n">services</span><span class="p">:</span>
+  <span class="n">zookeeper</span><span class="p">:</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">confluentinc</span><span class="o">/</span><span class="n">cp</span><span class="o">-</span><span class="n">zookeeper</span><span class="p">:</span><span class="n">latest</span>
+    <span class="n">environment</span><span class="p">:</span>
+      <span class="n">ZOOKEEPER_CLIENT_PORT</span><span class="p">:</span> <span class="mi">2181</span>
+    <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="s2">"2181:2181"</span>
+
+  <span class="n">kafka</span><span class="p">:</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">confluentinc</span><span class="o">/</span><span class="n">cp</span><span class="o">-</span><span class="n">kafka</span><span class="p">:</span><span class="n">latest</span>
+    <span class="n">depends_on</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">zookeeper</span>
+    <span class="n">environment</span><span class="p">:</span>
+      <span class="n">KAFKA_BROKER_ID</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="n">KAFKA_ZOOKEEPER_CONNECT</span><span class="p">:</span> <span class="n">zookeeper</span><span class="p">:</span><span class="mi">2181</span>
+      <span class="n">KAFKA_ADVERTISED_LISTENERS</span><span class="p">:</span> <span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9092</span>
+      <span class="n">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="s2">"9092:9092"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=22ea4a72">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="2.-Launch-the-Kafka-service">2. Launch the Kafka service<a class="anchor-link" href="#2.-Launch-the-Kafka-service">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0f0ca184">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6fd8f8e6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="3.-Create-a-Kafka-topic">3. Create a Kafka topic<a class="anchor-link" href="#3.-Create-a-Kafka-topic">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5cac1060">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">kafka</span> <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="n">topic</span> <span class="n">test</span><span class="o">-</span><span class="n">topic</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5ab0c5b8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="4.-Test-Kafka">4. Test Kafka<a class="anchor-link" href="#4.-Test-Kafka">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0eaa6285">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
-<p><strong>GitHub / GitLab / Managed / Git clone</strong></p>
+<p>Publish a message to a Kafka topic</p>
 </blockquote>
-<h3 id="%5BSupplement%5D-Edit-Connection-Settings">[Supplement] Edit Connection Settings<a class="anchor-link" href="#%5BSupplement%5D-Edit-Connection-Settings">¶</a></h3><ul>
-<li>Upload a Service Account JSON file</li>
-<li>Optional settings<ul>
-<li>Location: asia-east1</li>
-</ul>
-</li>
-</ul>
-<hr/>
-<h1 id="2.-dbt-Studio">2. dbt Studio<a class="anchor-link" href="#2.-dbt-Studio">¶</a></h1><p>Run in Command Line</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ecb4fe4c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Run-models-only">Run models only<a class="anchor-link" href="#Run-models-only">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3effa8e9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a48b65a5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7574,31 +7713,39 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Run all models</span>
-<span class="n">dbt</span> <span class="n">run</span>                  
-<span class="c1"># Run a single model called 'member_G1'</span>
-<span class="n">dbt</span> <span class="n">run</span> <span class="o">--</span><span class="n">models</span> <span class="n">member_G1</span>   
-<span class="c1"># Run 'member_G1' model along with all its upstream and downstream dependencies</span>
-<span class="n">dbt</span> <span class="n">run</span> <span class="o">-</span><span class="n">m</span> <span class="o">+</span><span class="n">member_G1</span><span class="o">+</span>       
-<span class="c1"># Run all models that are tagged with 'staging'</span>
-<span class="n">dbt</span> <span class="n">run</span> <span class="o">-</span><span class="n">m</span> <span class="n">tag</span><span class="p">:</span><span class="n">staging</span>       
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">kafka</span> <span class="n">kafka</span><span class="o">-</span><span class="n">console</span><span class="o">-</span><span class="n">producer</span> <span class="o">--</span><span class="n">topic</span> <span class="n">test</span><span class="o">-</span><span class="n">topic</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">9092</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07d01714">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c445c7f7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Run-model,-test-&amp;-snapshot">Run model, test &amp; snapshot<a class="anchor-link" href="#Run-model,-test-&amp;-snapshot">¶</a></h3>
+<pre><code>&gt; Hello Kafka!
+&gt; Greetings from AT
+</code></pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d349d0c1">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35a3c333">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Consume a message from a Kafka topic</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=01d6e512">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7606,33 +7753,169 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">dbt</span> <span class="n">build</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">kafka</span> <span class="n">kafka</span><span class="o">-</span><span class="n">console</span><span class="o">-</span><span class="n">consumer</span> <span class="o">--</span><span class="n">topic</span> <span class="n">test</span><span class="o">-</span><span class="n">topic</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">beginning</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fcb3ed88">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5e3e3ce6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="3.-Scheduling-&amp;-Automation">3. Scheduling &amp; Automation<a class="anchor-link" href="#3.-Scheduling-&amp;-Automation">¶</a></h1><h2 id="3-1.-Create-Scheduled-Jobs">3-1. Create Scheduled Jobs<a class="anchor-link" href="#3-1.-Create-Scheduled-Jobs">¶</a></h2><p>Orchestration &gt; Jobs &gt; Create Job &gt; Deploy job</p>
-<h2 id="3-2.-CI/CD">3-2. CI/CD<a class="anchor-link" href="#3-2.-CI/CD">¶</a></h2><p>Orchestration &gt; Jobs &gt; Create Job &gt; Continuous integration job <br/>
-Execution settings: dbt build --select state:modified+</p>
+<h1 id="Kafka-to-Pub/Sub">Kafka to Pub/Sub<a class="anchor-link" href="#Kafka-to-Pub/Sub">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7018bf65">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=359f69a8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Create a Topic and Subscription in Pub/Sub</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4e9796db">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">topic</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">kafka</span>
+<span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">create</span> <span class="n">demo</span><span class="o">-</span><span class="n">sub</span> <span class="o">--</span><span class="n">topic</span> <span class="n">topic</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">kafka</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dcf0c6e1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>When Kafka consumes a message, publish it to a Pub/Sub Topic</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9c245b71">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">confluent_kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">Consumer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">pubsub_v1</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Kafka Consumer</span>
+<span class="n">kafka_consumer</span> <span class="o">=</span> <span class="n">Consumer</span><span class="p">({</span>
+    <span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span>
+    <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'kafka-to-pubsub-new'</span><span class="p">,</span>
+    <span class="s1">'auto.offset.reset'</span><span class="p">:</span> <span class="s1">'latest'</span> <span class="c1">#earliest</span>
+<span class="p">})</span>
+<span class="n">kafka_consumer</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s1">'test-topic'</span><span class="p">])</span>
+
+<span class="c1"># Pub/Sub Publisher</span>
+<span class="n">publisher</span> <span class="o">=</span> <span class="n">pubsub_v1</span><span class="o">.</span><span class="n">PublisherClient</span><span class="p">()</span>
+<span class="n">topic_path</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">.</span><span class="n">topic_path</span><span class="p">(</span><span class="s2">"tw-rd-data-angus-tu"</span><span class="p">,</span> <span class="s2">"topic-test-kafka"</span><span class="p">)</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+        <span class="k">break</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">kafka_consumer</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">continue</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">error</span><span class="p">():</span> <span class="k">continue</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="n">future</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic_path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>b'Hello Kafka!'
+b'Greetings from AT'
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c4fff63d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Verify that the Pub/Sub subscriber has received the message</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fdc939e1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [52]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">pubsub_v1</span>
+
+<span class="n">subscriber</span> <span class="o">=</span> <span class="n">pubsub_v1</span><span class="o">.</span><span class="n">SubscriberClient</span><span class="p">()</span>
+<span class="n">sub_path</span> <span class="o">=</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">subscription_path</span><span class="p">(</span><span class="s2">"tw-rd-data-angus-tu"</span><span class="p">,</span> <span class="s2">"demo-sub"</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">subscription</span><span class="o">=</span><span class="n">sub_path</span><span class="p">,</span> <span class="n">max_messages</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">received_messages</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Subscriber received:"</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
+    <span class="n">subscriber</span><span class="o">.</span><span class="n">acknowledge</span><span class="p">(</span><span class="n">subscription</span><span class="o">=</span><span class="n">sub_path</span><span class="p">,</span> <span class="n">ack_ids</span><span class="o">=</span><span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">ack_id</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Subscriber received: Hello Kafka!
+Subscriber received: Greetings from AT
+</pre>
+</div>
 </div>
 </div>
 </div>

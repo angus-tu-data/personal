@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OB7_Dataform</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>13_CloudComposer</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7517,9 +7517,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Data Engineer OnBoard - Week 7</p>
-<h1 id="Dataform-&amp;-dbt">Dataform &amp; dbt<a class="anchor-link" href="#Dataform-&amp;-dbt">¶</a></h1><p>Angus Tu
-2025.10.22</p>
+<p>Data Engineer OnBoard - Week 8</p>
+<h1 id="Cloud-Composer">Cloud Composer<a class="anchor-link" href="#Cloud-Composer">¶</a></h1><p>Angus Tu
+2025.10.29</p>
 </div>
 </div>
 </div>
@@ -7531,22 +7531,16 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Requirement">Requirement<a class="anchor-link" href="#Requirement">¶</a></h3><blockquote>
-<p><strong>Dataform</strong></p>
+<p><strong>Cloud Composer (Airflow)</strong></p>
 </blockquote>
 <ol>
-<li><p>Understand the basic functions and structure of the base repo</p>
+<li><p>Composer base repo study</p>
 </li>
-<li><p>Transform the data in BigQuery</p>
+<li><p>DAG basic design</p>
 </li>
-</ol>
-<p><br/></p>
-<blockquote>
-<p><strong>dbt</strong></p>
-</blockquote>
-<ol>
-<li><p>Understand the basic functions and structure</p>
+<li><p>Custom Operator - GCS</p>
 </li>
-<li><p>Integrate with BigQuery</p>
+<li><p>Performance optimization</p>
 </li>
 </ol>
 </div>
@@ -7560,36 +7554,22 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="Dataform">Dataform<a class="anchor-link" href="#Dataform">¶</a></h1><p>Dataform is a cloud-based platform designed for <strong>managing and transforming data in BigQuery</strong>. It allows users to build, schedule, and maintain data pipelines, including full and incremental tables, while automatically handling dependencies and supporting data quality checks.</p>
+<h1 id="Cloud-Composer">Cloud Composer<a class="anchor-link" href="#Cloud-Composer">¶</a></h1><p><strong>Cloud Composer is a fully managed workflow orchestration service</strong> on Google Cloud, built on Apache Airflow. It automates data pipelines, ETL processes, machine learning tasks, and cross-cloud workflows. Users simply define workflows as <strong>DAGs</strong> (Directed Acyclic Graphs) to schedule, monitor, and manage complex processes.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8c3c5e28">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bb20fd64">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Workflow-Action">Workflow Action<a class="anchor-link" href="#Workflow-Action">¶</a></h2><p>Set action via <code>*.sqlx</code></p>
-<h3 id="1.-Declare-a-data-source">1. Declare a data source<a class="anchor-link" href="#1.-Declare-a-data-source">¶</a></h3>
+<h4 id="Enable-API-(and-VPC-Network-Setup)">Enable API (and VPC Network Setup)<a class="anchor-link" href="#Enable-API-(and-VPC-Network-Setup)">¶</a></h4>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f3395640">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><code>declarations.js</code></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7adb25ee">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c2a5fa48">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7597,30 +7577,13 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">declare</span><span class="p">({</span>
-    <span class="n">database</span><span class="p">:</span> <span class="s2">"tw-rd-data-angus-tu"</span><span class="p">,</span>
-    <span class="n">schema</span><span class="p">:</span> <span class="s2">"dataform"</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-  <span class="p">});</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">services</span> <span class="n">enable</span> <span class="n">composer</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=82b3a994">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><strong>type: "declaration"</strong></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb6dafa9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=310c9f02">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7628,55 +7591,26 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"declaration"</span><span class="p">,</span>
-    <span class="n">database</span><span class="p">:</span> <span class="s2">"tw-rd-data-angus-tu"</span><span class="p">,</span>
-    <span class="n">schema</span><span class="p">:</span> <span class="s2">"dataform"</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-<span class="p">}</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">projects</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
+  <span class="o">--</span><span class="n">member</span> <span class="s2">"serviceAccount:tw-rd-data-angus-tu@appspot.gserviceaccount.com"</span> \
+  <span class="o">--</span><span class="n">role</span> <span class="s2">"roles/composer.admin"</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5753a9ca">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92112d9f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>If there are two tables with the same name in different datasets, you can access them using the following approach: <code>ref('dataset1', 'table_name')</code></li>
-</ul>
+<h4 id="Create-Environment">Create Environment<a class="anchor-link" href="#Create-Environment">¶</a></h4>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c1624c60">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.-Create-tables">2. Create tables<a class="anchor-link" href="#2.-Create-tables">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ce586e5a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><strong>type: "view"</strong></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=46180f76">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=afe87411">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7684,629 +7618,66 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"view"</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">create</span> <span class="n">composer</span><span class="o">-</span><span class="n">demo</span> \
+  <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+  <span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="n">version</span> <span class="n">composer</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="n">airflow</span><span class="o">-</span><span class="mf">2.10.5</span><span class="o">-</span><span class="n">build</span><span class="mf">.16</span> \
+  <span class="o">--</span><span class="n">service</span><span class="o">-</span><span class="n">account</span> <span class="s2">"tw-rd-data-angus-tu@appspot.gserviceaccount.com"</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a4fd5a9b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><strong>type: "table"</strong></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=741364f7">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"table"</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a45fa6e5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>-- Create table partitions and clusters</p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bc2c1540">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"table"</span><span class="p">,</span>
-  <span class="n">bigquery</span><span class="p">:</span> <span class="p">{</span>
-    <span class="n">partitionBy</span><span class="p">:</span> <span class="s2">"date"</span><span class="p">,</span>
-    <span class="n">clusterBy</span><span class="p">:</span> <span class="p">[</span><span class="s2">"MID"</span><span class="p">,</span> <span class="s2">"phone"</span><span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d6df1134">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><strong>type: "increment"</strong></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e61f0af">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"incremental"</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span>
-<span class="err">$</span><span class="p">{</span><span class="n">when</span><span class="p">(</span><span class="n">incremental</span><span class="p">(),</span> <span class="err">`</span><span class="n">WHERE</span> <span class="n">date</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">SELECT</span> <span class="n">MAX</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="n">FROM</span> <span class="err">$</span><span class="p">{</span><span class="bp">self</span><span class="p">()})</span><span class="err">`</span><span class="p">)}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5e237ae4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="3.-Create-operations">3. Create operations<a class="anchor-link" href="#3.-Create-operations">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1c314c2d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><strong>type: "operations"</strong></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=efe74ab4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"operations"</span>
-<span class="p">}</span>
-
-<span class="n">DELETE</span> <span class="n">FROM</span> <span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span> <span class="n">WHERE</span> <span class="n">date</span> <span class="o">&lt;=</span> <span class="s1">'2025-1-1'</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=636e0889">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>-- <strong>LOAD DATA (OVERWRITE) or CREATE (OR REPLACE) EXTERNAL TABLE</strong><br/>
--- Export data to BQ: set <code>hasOutput: true</code></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6e8b7b89">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"operations"</span><span class="p">,</span>
-    <span class="n">schema</span><span class="p">:</span> <span class="s2">"product"</span><span class="p">,</span>
-    <span class="n">hasOutput</span><span class="p">:</span> <span class="n">true</span>
-<span class="p">}</span>
-
-<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">OVERWRITE</span>
-    <span class="err">$</span><span class="p">{</span><span class="bp">self</span><span class="p">()}</span> <span class="p">(</span>
-        <span class="n">PID</span> <span class="n">STRING</span><span class="p">,</span>
-        <span class="n">amount</span> <span class="n">INT64</span>
-    <span class="p">)</span>
-<span class="n">FROM</span> <span class="n">FILES</span> <span class="p">(</span>
-    <span class="nb">format</span> <span class="o">=</span> <span class="s1">'CSV'</span><span class="p">,</span>
-    <span class="n">uris</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'gs://tw-rd-data-angus-tu-travel-demo1/test/prod.csv'</span><span class="p">],</span>
-    <span class="n">skip_leading_rows</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b3751c9a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>-- If any data preparation is required, use <code>pre_operations</code>.</p>
-</blockquote>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1d440f34">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pre_operations</span> <span class="p">{</span>
-    <span class="o">--</span> <span class="c1">###</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=11a487b1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f22594c7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h2 id="Workflow-Demo">Workflow Demo<a class="anchor-link" href="#Workflow-Demo">¶</a></h2>
+<h1 id="1.-Basic-Airflow-/-Composer-Repo">1. Basic Airflow / Composer Repo<a class="anchor-link" href="#1.-Basic-Airflow-/-Composer-Repo">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=74a3f1d2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf805903">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Data-Source">Data Source<a class="anchor-link" href="#Data-Source">¶</a></h3><ul>
-<li>BigQuery has a main member table <code>dataform.member</code>.</li>
-<li>Every day, new members from the previous day are updated in GCS at <code>gs://angus-cloudmile/dataform/member.csv</code>.</li>
-</ul>
-<h3 id="Steps">Steps<a class="anchor-link" href="#Steps">¶</a></h3><ol>
-<li><p>Read Data Sources</p>
-<ul>
-<li>Existing members in BigQuery: <code>dataform.member</code>.</li>
-<li>New members in GCS: <code>gs://angus-cloudmile/dataform/member.csv</code>. LOAD DATA to BigQuery <code>dataform.member_new</code>.</li>
-</ul>
-</li>
-<li><p>Merge existing members with new members into a temporary table <code>dataform.member_temp</code>.</p>
-</li>
-<li><p>Generate the incremental daily statistics table <code>dataform.member_stats</code>.</p>
-</li>
-<li><p>Refresh Table</p>
-<ul>
-<li>Write data from <code>dataform.member_temp</code> into the master table <code>dataform.member</code>.</li>
-<li>Delete the temporary table <code>dataform.member_temp</code>.</li>
-</ul>
-</li>
-<li><p>Create a view <code>dataform.member_stats_recent</code> for daily member statistics in the past week.</p>
-</li>
-</ol>
+<h2 id="1-1.-Local-File">1-1. Local File<a class="anchor-link" href="#1-1.-Local-File">¶</a></h2>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dbca5656">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cf29abff">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Compiled-Graph">Compiled Graph<a class="anchor-link" href="#Compiled-Graph">¶</a></h3><p><img alt="" src="https://angus-tu-data.github.io/personal/dataform_image.png"/></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=20a7eee2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Structure">Structure<a class="anchor-link" href="#Structure">¶</a></h3><pre><code>├── definitions/
-│    ├── member_new.sqlx
-│    ├── member_stats_recent.sqlx
-│    ├── member_stats.sqlx
-│    ├── member_temp.sqlx
-│    ├── member_update.sqlx
-│    └── source.js
-├── includes/
-├── .gitignore
-└── workflow_settings.yaml
-</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6d4bd2d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Files">Files<a class="anchor-link" href="#Files">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f2ec266e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>workflow_settings.yaml</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a903c6d8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">defaultProject</span><span class="p">:</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span>
-<span class="n">defaultAssertionDataset</span><span class="p">:</span> <span class="n">dataform_assertions</span>
-<span class="n">dataformCoreVersion</span><span class="p">:</span> <span class="mf">3.0.26</span>
-<span class="n">defaultDataset</span><span class="p">:</span> <span class="n">dataform</span>
-<span class="n">defaultLocation</span><span class="p">:</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d10ab037">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>source.js</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=84e843e2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">declare</span><span class="p">({</span>
-    <span class="n">schema</span><span class="p">:</span> <span class="s2">"dataform"</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-<span class="p">});</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4ddf1a2e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>member_new.sqlx</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cd5dc975">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"operations"</span><span class="p">,</span>
-    <span class="n">hasOutput</span><span class="p">:</span> <span class="n">true</span>
-<span class="p">}</span>
-
-<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">OVERWRITE</span> <span class="err">$</span><span class="p">{</span><span class="bp">self</span><span class="p">()}</span> <span class="p">(</span><span class="n">MID</span> <span class="n">STRING</span><span class="p">,</span> <span class="n">phones</span> <span class="n">STRING</span><span class="p">,</span> <span class="n">date</span> <span class="n">DATE</span><span class="p">)</span>
-<span class="n">FROM</span> <span class="n">FILES</span> <span class="p">(</span>
-  <span class="nb">format</span> <span class="o">=</span> <span class="s1">'CSV'</span><span class="p">,</span>
-  <span class="n">uris</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'gs://angus-cloudmile/dataform/member.csv'</span><span class="p">],</span>
-  <span class="n">skip_leading_rows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=552ffcff">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>member_temp</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e0a13388">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"table"</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="n">distinct</span> 
-    <span class="n">MID</span><span class="p">,</span>
-    <span class="n">first_value</span><span class="p">(</span><span class="n">phones</span><span class="p">)</span> <span class="n">over</span> <span class="p">(</span><span class="n">partition</span> <span class="n">by</span> <span class="n">MID</span> <span class="n">order</span> <span class="n">by</span> <span class="n">date</span> <span class="n">desc</span><span class="p">)</span> <span class="k">as</span> <span class="n">phones</span><span class="p">,</span>
-    <span class="n">first_value</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="n">over</span> <span class="p">(</span><span class="n">partition</span> <span class="n">by</span> <span class="n">MID</span> <span class="n">order</span> <span class="n">by</span> <span class="n">date</span> <span class="n">desc</span><span class="p">)</span> <span class="k">as</span> <span class="n">date</span>
-<span class="kn">from</span>
-<span class="p">(</span>
-    <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span>
-    <span class="n">union</span> <span class="nb">all</span>
-    <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member_new"</span><span class="p">)}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=990b41b3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>member_stats.sqlx</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4247db98">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"incremental"</span><span class="p">,</span>
-    <span class="n">bigquery</span><span class="p">:</span> <span class="p">{</span>
-        <span class="n">partitionBy</span><span class="p">:</span> <span class="s2">"date"</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="n">date</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="n">MID</span><span class="p">)</span> <span class="n">users</span>
-<span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member_temp"</span><span class="p">)}</span>
-<span class="err">$</span><span class="p">{</span><span class="n">when</span><span class="p">(</span><span class="n">incremental</span><span class="p">(),</span> <span class="err">`</span><span class="n">WHERE</span> <span class="n">date</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">SELECT</span> <span class="n">MAX</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="n">FROM</span> <span class="err">$</span><span class="p">{</span><span class="bp">self</span><span class="p">()})</span><span class="err">`</span><span class="p">)}</span>
-<span class="n">group</span> <span class="n">by</span> <span class="n">date</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dd7f2166">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>member_stats_recent.sqlx</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ab650b75">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-  <span class="nb">type</span><span class="p">:</span> <span class="s2">"view"</span>
-<span class="p">}</span>
-
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member_stats"</span><span class="p">)}</span>
-<span class="n">where</span> <span class="n">date</span> <span class="o">&gt;=</span> <span class="n">date_sub</span><span class="p">(</span><span class="n">current_date</span><span class="p">(),</span> <span class="n">interval</span> <span class="mi">1</span> <span class="n">week</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8eca0af0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>member_update.sqlx</code></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ccc9cfbf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="p">{</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="s2">"operations"</span>
-<span class="p">}</span>
-
-<span class="n">truncate</span> <span class="n">table</span> <span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)};</span>
-<span class="n">insert</span> <span class="n">into</span> <span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)}</span> <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member_temp"</span><span class="p">)};</span>
-<span class="n">drop</span> <span class="n">table</span> <span class="err">$</span><span class="p">{</span><span class="n">ref</span><span class="p">(</span><span class="s2">"member_temp"</span><span class="p">)};</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=85233d80">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Results-After-Execution">Results After Execution<a class="anchor-link" href="#Results-After-Execution">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9b928626">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>Before execution<ul>
-<li>BQ dataset originally contained only the table <code>member</code> (up to <code>2025-10-16</code>).</li>
-<li>GCS data contained 6 members for <code>2025-10-17</code>.</li>
-</ul>
-</li>
-<li>After execution<ul>
-<li>New tables and views was added.</li>
-<li>There's no <code>member_temp</code> table because the final step (<code>member_update.sqlx</code>) was deleted.</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d5a20ab2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
-
-<span class="n">BQ</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-<span class="n">folder_df</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"""</span>
-<span class="s2">    select </span>
-<span class="s2">    table_schema, table_name, table_type, </span>
-<span class="s2">    datetime_trunc(datetime(creation_time,"Asia/Taipei"), second) as creation_time,</span>
-<span class="s2">    from `tw-rd-data-angus-tu.dataform.INFORMATION_SCHEMA.TABLES`</span>
-<span class="s2">    order by creation_time</span>
-<span class="s2">"""</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">folder_df</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+----------------+---------------------+--------------+---------------------+
-| table_schema   | table_name          | table_type   | creation_time       |
-+================+=====================+==============+=====================+
-| dataform       | member              | BASE TABLE   | 2025-10-15 17:16:10 |
-+----------------+---------------------+--------------+---------------------+
-| dataform       | member_new          | BASE TABLE   | 2025-10-17 10:49:26 |
-+----------------+---------------------+--------------+---------------------+
-| dataform       | member_stats        | BASE TABLE   | 2025-10-17 10:49:39 |
-+----------------+---------------------+--------------+---------------------+
-| dataform       | member_stats_recent | VIEW         | 2025-10-17 10:49:43 |
-+----------------+---------------------+--------------+---------------------+
+<pre>
+~/airflow/dags/  (Default)
+├── dags/
+│    └── demo_dag.py
+└── requirements.txt
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cf7342d5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=452d2285">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>requirements.txt</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e2d6dee6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8314,67 +7685,151 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">view_1017</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select * from `tw-rd-data-angus-tu.dataform.member_stats_recent` order by date desc"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">view_1017</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">apache</span><span class="o">-</span><span class="n">airflow</span><span class="p">[</span><span class="n">gcp</span><span class="p">]</span><span class="o">==</span><span class="mf">2.10.5</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+------------+---------+
-| date       |   users |
-+============+=========+
-| 2025-10-17 |       6 |
-+------------+---------+
-| 2025-10-16 |      10 |
-+------------+---------+
-| 2025-10-15 |      13 |
-+------------+---------+
-| 2025-10-14 |      13 |
-+------------+---------+
-| 2025-10-13 |      11 |
-+------------+---------+
-| 2025-10-12 |      11 |
-+------------+---------+
-| 2025-10-11 |       7 |
-+------------+---------+
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=01353d07">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7ea6846b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><em>Even if the same data is executed repeatedly, there will be no issues.</em></p>
+<p><code>demo_dag.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b011e39c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello, Composer!"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span><span class="o">=</span><span class="s2">"demo_dag"</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+    <span class="n">schedule_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+
+    <span class="n">hello_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">"hello_task"</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">hello_world</span>
+    <span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0d8572b6">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=46cc1824">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="1-2.-Local-Run-Test">1-2. Local Run Test<a class="anchor-link" href="#1-2.-Local-Run-Test">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f63d1a60">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">airflow</span> <span class="n">dags</span> <span class="n">test</span> <span class="n">demo_dag</span>
+<span class="c1">#airflow dags test demo_dag 2025-10-27</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81b95de3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="1-3.-Local-Run-and-Web-UI">1-3. Local Run and Web UI<a class="anchor-link" href="#1-3.-Local-Run-and-Web-UI">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=07c82340">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Initialize the Airflow metadata database</span>
+<span class="n">airflow</span> <span class="n">db</span> <span class="n">init</span>
+
+<span class="c1"># Create an admin user for the Airflow Web UI</span>
+<span class="n">airflow</span> <span class="n">users</span> <span class="n">create</span> \
+    <span class="o">--</span><span class="n">username</span> <span class="n">admin</span> \
+    <span class="o">--</span><span class="n">firstname</span> <span class="n">Angus</span> \
+    <span class="o">--</span><span class="n">lastname</span> <span class="n">Tu</span> \
+    <span class="o">--</span><span class="n">role</span> <span class="n">Admin</span> \
+    <span class="o">--</span><span class="n">email</span> <span class="n">angus</span><span class="o">.</span><span class="n">tu</span><span class="nd">@mile</span><span class="o">.</span><span class="n">cloud</span>
+<span class="c1"># Password: 123</span>
+
+<span class="c1"># Start the Airflow scheduler to manage task execution</span>
+<span class="n">airflow</span> <span class="n">scheduler</span>       
+
+<span class="c1"># List all available DAGs in the environment</span>
+<span class="n">airflow</span> <span class="n">dags</span> <span class="nb">list</span>
+
+<span class="c1"># Manually trigger the demo DAG</span>
+<span class="n">airflow</span> <span class="n">dags</span> <span class="n">trigger</span> <span class="n">demo_dag</span>
+
+<span class="c1"># Start the Airflow Web Server (UI available on port 8083)</span>
+<span class="n">airflow</span> <span class="n">webserver</span> <span class="o">--</span><span class="n">port</span> <span class="mi">8083</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2cb1eff8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>P.S. In a local Airflow setup, the Scheduler and Web Server can be run in two separate terminal windows, allowing you to trigger DAGs from the Web UI while the Scheduler automatically picks up and executes the tasks.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=19ae7089">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
-<p>Assume that after one day, the new day's member data (<code>2025-10-18</code>) has already been written. There's the result below after execution.</p>
+<p>In local Airflow, to enable the “Trigger DAG with config” feature, you can modify the <code>airflow.cfg</code> file.</p>
 </blockquote>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9210f8fe">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=28b58533">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8382,70 +7837,592 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">view_1018</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"select * from `tw-rd-data-angus-tu.dataform.member_stats_recent` order by date desc"</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">view_1018</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">show_trigger_form_if_no_params</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+------------+---------+
-| date       |   users |
-+============+=========+
-| 2025-10-18 |       5 |
-+------------+---------+
-| 2025-10-17 |       6 |
-+------------+---------+
-| 2025-10-16 |      10 |
-+------------+---------+
-| 2025-10-15 |      13 |
-+------------+---------+
-| 2025-10-14 |      13 |
-+------------+---------+
-| 2025-10-13 |      11 |
-+------------+---------+
-| 2025-10-12 |      11 |
-+------------+---------+
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55b7e3b2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8253045a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Schedule">Schedule<a class="anchor-link" href="#Schedule">¶</a></h3>
+<h3 id="Open-localhost:8083/">Open <a href="localhost:8083/">localhost:8083/</a><a class="anchor-link" href="#Open-localhost:8083/">¶</a></h3><p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img1.png" width="800"/></p>
+<h3 id="DAG-Task">DAG Task<a class="anchor-link" href="#DAG-Task">¶</a></h3><p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img2.png" width="800"/></p>
+<h3 id="DAG-Graph">DAG Graph<a class="anchor-link" href="#DAG-Graph">¶</a></h3><p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img3.png" width="800"/></p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b3ae71e3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=15c3a400">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><code>Releases &amp; scheduling</code></p>
-<p><strong>Step 1. Create Release Configuration</strong></p>
-<ul>
-<li>Define which version of your code (Git branch) to run.</li>
+<h2 id="1-4.-Push-to-Cloud-Composer">1-4. Push to Cloud Composer<a class="anchor-link" href="#1-4.-Push-to-Cloud-Composer">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ca90efb1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">storage</span> <span class="n">dags</span> <span class="kn">import</span><span class="w"> \</span>
+<span class="w">    </span><span class="o">--</span><span class="n">environment</span> <span class="n">composer</span><span class="o">-</span><span class="n">demo</span> \
+    <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+    <span class="o">--</span><span class="n">source</span> <span class="o">~/</span><span class="n">airflow</span><span class="o">/</span><span class="n">dags</span><span class="o">/</span><span class="n">demo_dag</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=23f235ae">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Or, click on the DAGs folder in Composer to navigate to GCS, and upload the DAGs python files to GCS.</p>
+<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img4.png" width="800"/></p>
+<p>P.S. Clicking the "Airflow webserver" button will take you to the Airflow Web UI.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b470527f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>In Composer, to enable the "Trigger DAG with config" feature, you can edit "Airflow configuation overrides" and add "webserver/show_trigger_form_if_no_params/True" to override configuration, or use gcloud below.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b982cb1f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">update</span> <span class="n">composer</span><span class="o">-</span><span class="n">demo</span> \
+    <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+    <span class="o">--</span><span class="n">update</span><span class="o">-</span><span class="n">airflow</span><span class="o">-</span><span class="n">configs</span><span class="o">=</span><span class="n">webserver</span><span class="o">-</span><span class="n">show_trigger_form_if_no_params</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d7ad55f9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img5.png" width="800"/></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=54a1aece">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h1 id="2.-DAG-design">2. DAG design<a class="anchor-link" href="#2.-DAG-design">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5a0761d6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Procedure">Procedure<a class="anchor-link" href="#Procedure">¶</a></h3><ul>
+<li>Check BigQuery: Verify whether today’s data already exists</li>
+<li>If data exists: Write a record with status 'none' to the <code>record table</code></li>
+<li>If no data exists:<ul>
+<li>Count the number of CSV files in the <code>GCS bucket</code></li>
+<li>Write the file count to the <code>main BigQuery table</code></li>
+<li>Write a record with status 'success' to the <code>record table</code></li>
 </ul>
-<p><strong>Step 2. Create a Workflow Configuration</strong></p>
-<ul>
-<li>Actually set the schedule and define the execution details.</li>
-<li>Schedule frequency: Repeat / On-demand</li>
+</li>
 </ul>
+<h3 id="File">File<a class="anchor-link" href="#File">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5cdad4c2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>bq_gcs_count.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8c06f90b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span><span class="p">,</span> <span class="n">BranchPythonOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.utils.dates</span><span class="w"> </span><span class="kn">import</span> <span class="n">days_ago</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span><span class="p">,</span> <span class="n">storage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_bq</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]</span>
+    <span class="n">bq_table</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">'bq_table'</span><span class="p">]</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"select ifnull(sum(file_count),0) as cnt from `</span><span class="si">{</span><span class="n">bq_table</span><span class="si">}</span><span class="s2">` where date = current_date('Asia/Taipei')"</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cnt</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">'ti'</span><span class="p">]</span><span class="o">.</span><span class="n">xcom_push</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'bq_count'</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"write_nothing_record"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"count_gcs_files"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_nothing_record</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">ti</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"ti"</span><span class="p">]</span>
+    <span class="n">bq_count</span> <span class="o">=</span> <span class="n">ti</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'bq_count'</span><span class="p">,</span> <span class="n">task_ids</span><span class="o">=</span><span class="s1">'check_bq'</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]</span>
+    <span class="n">record_table</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">'record_table'</span><span class="p">]</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"date"</span><span class="p">:</span> <span class="n">today</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"none"</span><span class="p">,</span> <span class="s2">"code"</span><span class="p">:</span> <span class="n">bq_count</span><span class="p">}]</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">insert_rows_json</span><span class="p">(</span><span class="n">record_table</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"End record 'none' written."</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">count_gcs_files</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]</span>
+    <span class="n">gcs_bucket_name</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">'gcs_bucket'</span><span class="p">]</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">gcs_bucket_name</span><span class="p">)</span>
+    <span class="n">blobs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bucket</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">())</span>
+    <span class="n">csv_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blobs</span> <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".csv"</span><span class="p">))</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">'ti'</span><span class="p">]</span><span class="o">.</span><span class="n">xcom_push</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'csv_count'</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">csv_count</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_bq_main</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]</span>
+    <span class="n">bq_table</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">'bq_table'</span><span class="p">]</span>
+    <span class="n">ti</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'ti'</span><span class="p">]</span>
+    <span class="n">csv_count</span> <span class="o">=</span> <span class="n">ti</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'csv_count'</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"date"</span><span class="p">:</span> <span class="n">today</span><span class="p">,</span> <span class="s2">"file_count"</span><span class="p">:</span> <span class="n">csv_count</span><span class="p">}]</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">insert_rows_json</span><span class="p">(</span><span class="n">bq_table</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Write </span><span class="si">{</span><span class="n">csv_count</span><span class="si">}</span><span class="s2"> files count to </span><span class="si">{</span><span class="n">bq_table</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_success_record</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]</span>
+    <span class="n">record_table</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">'record_table'</span><span class="p">]</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"date"</span><span class="p">:</span> <span class="n">today</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">}]</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">insert_rows_json</span><span class="p">(</span><span class="n">record_table</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"End record 'success' written."</span><span class="p">)</span>
+
+<span class="c1"># ----------------------</span>
+<span class="c1"># DAG</span>
+<span class="c1"># ----------------------</span>
+<span class="n">default_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"depends_on_past"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"retries"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"retry_delay"</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">default_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"bq_table"</span><span class="p">:</span> <span class="s2">"composer_demo.data"</span><span class="p">,</span>
+    <span class="s2">"record_table"</span><span class="p">:</span> <span class="s2">"composer_demo.composer_record"</span><span class="p">,</span>
+    <span class="s2">"gcs_bucket"</span><span class="p">:</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span> <span class="o">=</span> <span class="s2">"demo_bq_gcs_pipeline"</span><span class="p">,</span>
+    <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">,</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">days_ago</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">schedule_interval</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">catchup</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"demo"</span><span class="p">],</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">default_params</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+
+    <span class="n">t0_check_bq</span> <span class="o">=</span> <span class="n">BranchPythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">"check_bq"</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">check_bq</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">t1_write_nothing</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">"write_nothing_record"</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">write_nothing_record</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">t2_count_gcs</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">"count_gcs_files"</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">count_gcs_files</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">t3_write_bq_main</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">"write_bq_main"</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">write_bq_main</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">t4_write_success</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">"write_success_record"</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">write_success_record</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+<span class="c1"># ----------------------</span>
+<span class="c1"># DAG Task flow</span>
+<span class="c1"># ----------------------</span>
+<span class="n">t0_check_bq</span> <span class="o">&gt;&gt;</span> <span class="n">t1_write_nothing</span>
+<span class="n">t0_check_bq</span> <span class="o">&gt;&gt;</span> <span class="n">t2_count_gcs</span> <span class="o">&gt;&gt;</span> <span class="n">t3_write_bq_main</span> <span class="o">&gt;&gt;</span> <span class="n">t4_write_success</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bfc6c408">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Notes">Notes<a class="anchor-link" href="#Notes">¶</a></h3><h4 id="Input-Parameters">Input Parameters<a class="anchor-link" href="#Input-Parameters">¶</a></h4><ul>
+<li>"bq_table": "composer_demo.data"</li>
+<li>"record_table": "composer_demo.composer_record"</li>
+<li>"gcs_bucket": "tw-rd-data-angus-tu-travel-demo1"</li>
+</ul>
+<p>These parameters are defined in the DAG under params. They can be accessed in each task via <code>kwargs['params']</code>.<br/>
+Users can also override these values when triggering the DAG through <strong>Trigger w/ config</strong> in the Airflow Web UI.</p>
+<h4 id="Passing-Data-Between-Tasks">Passing Data Between Tasks<a class="anchor-link" href="#Passing-Data-Between-Tasks">¶</a></h4><p>To pass data between different tasks, use xcom:</p>
+<ul>
+<li>Push a value in one task:<ul>
+<li><code>kwargs['ti'].xcom_push(key='my_key', value=my_value)</code></li>
+</ul>
+</li>
+<li>Pull a value in another task:<ul>
+<li><code>my_value = kwargs['ti'].xcom_pull(key='my_key', task_ids='source_task_id')</code></li>
+</ul>
+</li>
+</ul>
+<p>This allows tasks to share dynamic data without hardcoding values.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c6d767de">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="DAG-Graph">DAG Graph<a class="anchor-link" href="#DAG-Graph">¶</a></h3><p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img6.png" width="800"/></p>
+<h3 id="Trigger-w/-config">Trigger w/ config<a class="anchor-link" href="#Trigger-w/-config">¶</a></h3><p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img7.png" width="800"/></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b6379bf2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h1 id="3.-Custom-Operator">3. Custom Operator<a class="anchor-link" href="#3.-Custom-Operator">¶</a></h1><p>Custom Operators can encapsulate repetitive logic, making DAGs cleaner and easier to maintain and reuse.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92658712">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="3-1.-File">3-1. File<a class="anchor-link" href="#3-1.-File">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a4b7d9f1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>gcs_custom_operator.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6a21f23d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.utils.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_defaults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">storage</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GCSCountFilesOperator</span><span class="p">(</span><span class="n">BaseOperator</span><span class="p">):</span>
+    <span class="nd">@apply_defaults</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bucket_name</span> <span class="o">=</span> <span class="n">bucket_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+        <span class="n">bucket</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">)</span>
+        <span class="n">blobs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bucket</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">))</span>
+        <span class="n">csv_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blobs</span> <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".csv"</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bucket </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">csv_count</span><span class="si">}</span><span class="s2"> CSV files with prefix '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">csv_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=803a03cd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>gcs_dag.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=54c14ce4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.utils.dates</span><span class="w"> </span><span class="kn">import</span> <span class="n">days_ago</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gcs_custom_operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCSCountFilesOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+
+<span class="n">default_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"bq_table"</span><span class="p">:</span> <span class="s2">"composer_demo.data"</span><span class="p">,</span>
+    <span class="s2">"gcs_bucket"</span><span class="p">:</span> <span class="s2">"tw-rd-data-angus-tu-travel-demo1"</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_bq_count</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">ti</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'ti'</span><span class="p">]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">ti</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">task_ids</span><span class="o">=</span><span class="s1">'count_gcs_files'</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]</span>
+    <span class="n">bq_table</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">'bq_table'</span><span class="p">]</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"date"</span><span class="p">:</span> <span class="n">today</span><span class="p">,</span> <span class="s2">"file_count"</span><span class="p">:</span> <span class="n">count</span><span class="p">}]</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">insert_rows_json</span><span class="p">(</span><span class="n">bq_table</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span><span class="o">=</span><span class="s2">"demo_gcs_custom_operator"</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">days_ago</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">schedule_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">default_params</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+
+    <span class="n">t1_count_gcs</span> <span class="o">=</span> <span class="n">GCSCountFilesOperator</span><span class="p">(</span> <span class="c1">#####################################</span>
+        <span class="n">task_id</span> <span class="o">=</span> <span class="s2">"count_gcs_files"</span><span class="p">,</span>
+        <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">default_params</span><span class="p">[</span><span class="s1">'gcs_bucket'</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">t2_write_bq</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span> <span class="o">=</span> <span class="s2">"write_bq_count"</span><span class="p">,</span>
+        <span class="n">python_callable</span> <span class="o">=</span> <span class="n">write_bq_count</span><span class="p">,</span>
+        <span class="n">provide_context</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span>
+
+<span class="n">t1_count_gcs</span> <span class="o">&gt;&gt;</span> <span class="n">t2_write_bq</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=32fd5fb2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="3-2.-Push-to-Cloud-Composer">3-2. Push to Cloud Composer<a class="anchor-link" href="#3-2.-Push-to-Cloud-Composer">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bb6e61c3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">storage</span> <span class="n">dags</span> <span class="kn">import</span><span class="w"> \</span>
+<span class="w">    </span><span class="o">--</span><span class="n">environment</span> <span class="n">composer</span><span class="o">-</span><span class="n">demo</span> \
+    <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+    <span class="o">--</span><span class="n">source</span> <span class="o">~/</span><span class="n">airflow</span><span class="o">/</span><span class="n">dags</span><span class="o">/</span><span class="n">gcs_dag</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">storage</span> <span class="n">plugins</span> <span class="kn">import</span><span class="w"> \</span>
+<span class="w">  </span><span class="o">--</span><span class="n">environment</span> <span class="n">composer</span><span class="o">-</span><span class="n">demo</span> \
+  <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+  <span class="o">--</span><span class="n">source</span> <span class="o">~/</span><span class="n">airflow</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">operators</span><span class="o">/</span><span class="n">gcs_custom_operator</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f91522eb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h1 id="4.-Performance-Optimization">4. Performance Optimization<a class="anchor-link" href="#4.-Performance-Optimization">¶</a></h1><h2 id="Optimization-Methods">Optimization Methods<a class="anchor-link" href="#Optimization-Methods">¶</a></h2><h3 id="1.-Split-Tasks">1. Split Tasks<a class="anchor-link" href="#1.-Split-Tasks">¶</a></h3><ul>
+<li>Break large tasks into <strong>smaller tasks</strong>, each performing a <strong>single operation</strong> (read file, write table, transform data)</li>
+<li>Benefit: Tasks can run in parallel, retry only the failed task without affecting others</li>
+</ul>
+<h3 id="2.-Split-DAGs">2. Split DAGs<a class="anchor-link" href="#2.-Split-DAGs">¶</a></h3><ul>
+<li>Divide long workflows into multiple smaller DAGs, and connect them with <code>TriggerDagRunOperator</code> or Sensors</li>
+<li>Benefit: <strong>Faster parsing</strong>, faster Web UI rendering, easier maintenance</li>
+</ul>
+<h3 id="3.-Use-Custom-Operators-/-Reusable-Functions">3. Use Custom Operators / Reusable Functions<a class="anchor-link" href="#3.-Use-Custom-Operators-/-Reusable-Functions">¶</a></h3><ul>
+<li>Extract repeated logic into operators; DAGs only define the workflow</li>
+<li>Benefit: Reduces code in DAG, <strong>faster parsing</strong></li>
+</ul>
+<h3 id="4.-DAG-Serialization">4. DAG Serialization<a class="anchor-link" href="#4.-DAG-Serialization">¶</a></h3><ul>
+<li>Enable DAG serialization so the Webserver doesn’t need to parse DAGs every time</li>
+<li>Benefit: Faster Web UI, lower Scheduler load</li>
+</ul>
+<h3 id="5.-Avoid-Heavy-Computation-in-DAG-Definition">5. Avoid Heavy Computation in DAG Definition<a class="anchor-link" href="#5.-Avoid-Heavy-Computation-in-DAG-Definition">¶</a></h3><ul>
+<li>DAG files should only define DAG/tasks, not perform API calls or heavy computation</li>
+<li>Benefit: Reduces parsing time, improves scheduler loop efficiency</li>
+</ul>
+<h3 id="6.-Executor-/-Scheduler-Configuration">6. Executor / Scheduler Configuration<a class="anchor-link" href="#6.-Executor-/-Scheduler-Configuration">¶</a></h3><ul>
+<li>Adjust DAG parallelism:<ul>
+<li><code>max_active_runs</code>: number of DAGRuns that can run concurrently for the same DAG</li>
+<li><code>concurrency</code>: number of tasks that can run concurrently in a DAG</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span><span class="o">=</span><span class="s2">"demo_optimized"</span><span class="p">,</span>
+    <span class="n">max_active_runs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+</pre></div>
+<ul>
+<li>Choose the right Executor:<ul>
+<li>LocalExecutor → multiple processes on a single VM</li>
+<li>CeleryExecutor → multiple worker VMs, tasks distributed, supports scaling</li>
+<li>KubernetesExecutor → tasks run in separate Pods, cluster auto-scaling</li>
+</ul>
+</li>
+</ul>
+<h3 id="7.-Optimize-XCom-and-Logs">7. Optimize XCom and Logs<a class="anchor-link" href="#7.-Optimize-XCom-and-Logs">¶</a></h3><ul>
+<li>Avoid sending large data via XCom; only pass small parameters or short strings</li>
+<li>Store large datasets in GCS / BigQuery / Database, and pass only reference paths or IDs</li>
+<li>Limit logging to essential information; excessive logs slow down Scheduler / Webserver / UI loading</li>
+<li>Benefit: Improves performance, reduces storage usage, and speeds up Airflow UI</li>
+</ul>
+<h2 id="Efficiency-Improvement-Tips">Efficiency Improvement Tips<a class="anchor-link" href="#Efficiency-Improvement-Tips">¶</a></h2><ul>
+<li><strong>Increase Executor parallelism</strong>: e.g., CeleryExecutor or KubernetesExecutor</li>
+<li><strong>Use Branch / Short-Circuit Operators</strong>: skip unnecessary tasks</li>
+<li><strong>Keep DAG files small</strong>: ideally under a few hundred lines</li>
+<li><strong>Non-blocking external dependencies</strong>: e.g., BigQuery / GCS reads and writes in small batches or asynchronously</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c444db40">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h1 id="Supplementary-Notes">Supplementary Notes<a class="anchor-link" href="#Supplementary-Notes">¶</a></h1><h3 id="1.-%E6%8B%86%E5%88%86%E4%BB%BB%E5%8B%99%EF%BC%88Split-Tasks%EF%BC%89">1. 拆分任務（Split Tasks）<a class="anchor-link" href="#1.-%E6%8B%86%E5%88%86%E4%BB%BB%E5%8B%99%EF%BC%88Split-Tasks%EF%BC%89">¶</a></h3><p>將大型任務拆成多個小任務，每個任務只執行單一操作（例如：讀取檔案、轉換資料、寫入表格）。<br/>
+<strong>好處：</strong> 可以平行執行任務，失敗時只需重試該任務，不影響其他任務。</p>
+<h3 id="2.-%E6%8B%86%E5%88%86-DAG%EF%BC%88Split-DAGs%EF%BC%89">2. 拆分 DAG（Split DAGs）<a class="anchor-link" href="#2.-%E6%8B%86%E5%88%86-DAG%EF%BC%88Split-DAGs%EF%BC%89">¶</a></h3><p>將冗長的工作流程分成多個小 DAG，再透過 <code>TriggerDagRunOperator</code> 或 Sensor 串接。<br/>
+<strong>好處：</strong> 加快 DAG 解析速度、Web UI 載入更快、維護更容易。</p>
+<h3 id="3.-%E4%BD%BF%E7%94%A8-Custom-Operators-/-%E5%8F%AF%E9%87%8D%E8%A4%87%E5%87%BD%E5%BC%8F">3. 使用 Custom Operators / 可重複函式<a class="anchor-link" href="#3.-%E4%BD%BF%E7%94%A8-Custom-Operators-/-%E5%8F%AF%E9%87%8D%E8%A4%87%E5%87%BD%E5%BC%8F">¶</a></h3><p>將重複邏輯抽出成 Custom Operator，DAG 僅保留工作流程定義。<br/>
+<strong>好處：</strong> 減少 DAG 內程式碼量、加快解析速度。</p>
+<h3 id="4.-%E5%95%9F%E7%94%A8-DAG-%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88DAG-Serialization%EF%BC%89">4. 啟用 DAG 序列化（DAG Serialization）<a class="anchor-link" href="#4.-%E5%95%9F%E7%94%A8-DAG-%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88DAG-Serialization%EF%BC%89">¶</a></h3><p>開啟 DAG serialization 功能，讓 Webserver 不需每次解析 Python DAG 檔案。<br/>
+<strong>好處：</strong> 加快 Web UI 載入速度，減輕 Scheduler 負擔。</p>
+<h3 id="5.-%E9%81%BF%E5%85%8D%E5%9C%A8-DAG-%E5%AE%9A%E7%BE%A9%E4%B8%AD%E5%81%9A%E9%87%8D%E8%A8%88%E7%AE%97">5. 避免在 DAG 定義中做重計算<a class="anchor-link" href="#5.-%E9%81%BF%E5%85%8D%E5%9C%A8-DAG-%E5%AE%9A%E7%BE%A9%E4%B8%AD%E5%81%9A%E9%87%8D%E8%A8%88%E7%AE%97">¶</a></h3><p>DAG 檔案只用來定義 DAG 結構，避免在 DAG 中執行 API 呼叫、迴圈或大量計算。<br/>
+<strong>好處：</strong> 減少解析時間，提升 Scheduler 迴圈效率。</p>
+<h3 id="6.-Executor-/-Scheduler-%E8%A8%AD%E5%AE%9A">6. Executor / Scheduler 設定<a class="anchor-link" href="#6.-Executor-/-Scheduler-%E8%A8%AD%E5%AE%9A">¶</a></h3><p><strong>調整 DAG 併行數量：</strong></p>
+<ul>
+<li><code>max_active_runs</code>：同一 DAG 可同時運行的 DAGRun 數量</li>
+<li><code>concurrency</code>：同一 DAG 可同時運行的 Task 數量</li>
+</ul>
+<p><strong>選擇合適 Executor：</strong></p>
+<ul>
+<li><code>LocalExecutor</code> → 單台 VM 多進程執行</li>
+<li><code>CeleryExecutor</code> → 多台 Worker VM，支援任務分散及水平擴展</li>
+<li><code>KubernetesExecutor</code> → 每個 Task 在 Pod 執行，自動擴展 Cluster<br/></li>
+</ul>
+<p><strong>好處</strong>： 提升併行處理能力與任務吞吐量。</p>
+<h3 id="7.-%E5%84%AA%E5%8C%96-XCom-/-Log">7. 優化 XCom / Log<a class="anchor-link" href="#7.-%E5%84%AA%E5%8C%96-XCom-/-Log">¶</a></h3><p>避免透過 XCom 傳遞大量資料，只傳小型參數或狀態字串<br/>
+大資料透過 GCS / BigQuery / 資料庫 儲存，只傳路徑或 ID<br/>
+Log 只紀錄必要訊息，避免過大 log 拖慢 Scheduler / Webserver / UI<br/>
+<strong>好處</strong>： 提升效能、降低儲存需求，加快 Airflow UI 反應速度</p>
+<h3 id="%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7">效率提升技巧<a class="anchor-link" href="#%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7">¶</a></h3><p>增加 Executor 併行能力（如 CeleryExecutor 或 KubernetesExecutor）<br/>
+使用 Branch / Short-Circuit Operator，跳過不必要任務<br/>
+保持 DAG 檔案精簡（最好幾百行以內）<br/>
+非阻塞的外部依賴，例如 BigQuery / GCS 讀寫可分批或非同步處理</p>
+<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/compose_img8.png" width="800"/></p>
 </div>
 </div>
 </div>

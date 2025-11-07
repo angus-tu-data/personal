@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OB7_dbt</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>14_CloudBuild</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7517,9 +7517,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Data Engineer OnBoard - Week 7</p>
-<h1 id="Dataform-&amp;-dbt">Dataform &amp; dbt<a class="anchor-link" href="#Dataform-&amp;-dbt">¶</a></h1><p>Angus Tu
-2025.10.22</p>
+<p>Data Engineer OnBoard - Week 9</p>
+<h1 id="Cloud-Build">Cloud Build<a class="anchor-link" href="#Cloud-Build">¶</a></h1><p>Angus Tu
+2025.11.5</p>
 </div>
 </div>
 </div>
@@ -7531,22 +7531,23 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Requirement">Requirement<a class="anchor-link" href="#Requirement">¶</a></h3><blockquote>
-<p><strong>Dataform</strong></p>
+<p><strong>Cloud Build(CI/CD)</strong></p>
 </blockquote>
 <ol>
-<li><p>Understand the basic functions and structure of the base repo</p>
+<li><p>Cloud Build Trigger</p>
 </li>
-<li><p>Transform the data in BigQuery</p>
+<li><p>Composer CI/CD best practice</p>
+</li>
+<li><p>Cloud Functions CI/CD best practice</p>
 </li>
 </ol>
-<p><br/></p>
 <blockquote>
-<p><strong>dbt</strong></p>
+<p><strong>Terraform</strong></p>
 </blockquote>
 <ol>
-<li><p>Understand the basic functions and structure</p>
+<li><p>Use Terraform to create a BigQuery dataset and table</p>
 </li>
-<li><p>Integrate with BigQuery</p>
+<li><p>Integrate with GitHub and Cloud Build</p>
 </li>
 </ol>
 </div>
@@ -7559,23 +7560,37 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h1 id="dbt">dbt<a class="anchor-link" href="#dbt">¶</a></h1><p><strong>dbt (Data Build Tool)</strong> enables data teams to transform, test, and document data directly within their data warehouse environment. It provides a modular approach to SQL modeling, allowing developers to build reusable and maintainable data transformations. When integrated with Google BigQuery, dbt leverages BigQuery’s scalable processing power, making complex data workflows faster, more reliable, and easier to manage over time. In addition, dbt automatically tracks dependencies between models, ensuring that downstream tables are updated correctly whenever source data changes.</p>
+<hr style="border: none; height: 3px; background-color: black; "/>
+<h1 id="Cloud-Build">Cloud Build<a class="anchor-link" href="#Cloud-Build">¶</a></h1><p><strong>Cloud Build</strong> is a fully managed CI/CD platform provided by Google Cloud that automates the process from code building and testing to deployment. Developers only need to define build steps (such as compile, test, package, and deploy), and Cloud Build securely executes them in the cloud. It integrates seamlessly with other GCP services like <strong>Cloud Run</strong>, <strong>Cloud Functions</strong>, <strong>Composer</strong>, and <strong>Artifact Registry</strong>. With Cloud Build, teams can easily create automated software release pipelines, reduce manual errors, and accelerate development and deployment efficiency.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6aa0ad6e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f22594c7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1.-Initialization-and-Connection">1. Initialization and Connection<a class="anchor-link" href="#1.-Initialization-and-Connection">¶</a></h2>
+<hr style="border: none; height: 3px; background-color: black; "/>
+<h1 id="1.-Cloud-Build-Trigger">1. Cloud Build Trigger<a class="anchor-link" href="#1.-Cloud-Build-Trigger">¶</a></h1>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3da47144">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf805903">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="1-1.-GitHub-Environment-Setup">1-1. GitHub Environment Setup<a class="anchor-link" href="#1-1.-GitHub-Environment-Setup">¶</a></h2><h3 id="1-1-1.-Create-GitHub-Repository-&amp;-Initialize">1-1-1. Create GitHub Repository &amp; Initialize<a class="anchor-link" href="#1-1-1.-Create-GitHub-Repository-&amp;-Initialize">¶</a></h3><p>After creating a GitHub repository and setting up the SSH key, initialize the local folder.<br/>
+<code>GitHub repository: cloudbuild_demo</code></p>
+<h4 id="Initialize-a-new-repository-locally">Initialize a new repository locally<a class="anchor-link" href="#Initialize-a-new-repository-locally">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ddc4a399">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7583,27 +7598,30 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">dbt</span> <span class="n">init</span> <span class="n">dbt_demo</span> 
-<span class="n">cd</span> <span class="n">dbt_demo</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"# cloudbuild_demo"</span> <span class="o">&gt;&gt;</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">init</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"first commit"</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">M</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">cloudbuild_demo</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6f00fa99">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=289075fe">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="~/.dbt/profiles.yml"><code>~/.dbt/profiles.yml</code><a class="anchor-link" href="#~/.dbt/profiles.yml">¶</a></h4><p>During initialization, the connection is configured via <code>profiles.yml</code>. The file defines how dbt connects to your data warehouse, including credentials, project, dataset, and environment settings. <br/>
-You can modify the connection details by editing the file located at <code>~/.dbt/profiles.yml</code>. <br/>
-In this setup, the project is configured with two environments: <code>dev</code> and <code>prod</code>, <code>dev</code> using <strong>OAuth for authentication</strong>, <code>prod</code> using <strong>service account</strong></p>
+<h4 id="Or,-if-you've-already-cloned:">Or, if you've already cloned:<a class="anchor-link" href="#Or,-if-you've-already-cloned:">¶</a></h4>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=00c0d651">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52d250ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7611,83 +7629,271 @@ In this setup, the project is configured with two environments: <code>dev</code>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">dbt_demo</span><span class="p">:</span>
-  <span class="n">outputs</span><span class="p">:</span>
-    <span class="n">dev</span><span class="p">:</span>
-      <span class="n">dataset</span><span class="p">:</span> <span class="n">dbt_dev</span>
-      <span class="n">job_execution_timeout_seconds</span><span class="p">:</span> <span class="mi">300</span>
-      <span class="n">job_retries</span><span class="p">:</span> <span class="mi">1</span>
-      <span class="n">location</span><span class="p">:</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span>
-      <span class="n">method</span><span class="p">:</span> <span class="n">oauth</span>
-      <span class="n">priority</span><span class="p">:</span> <span class="n">interactive</span>
-      <span class="n">project</span><span class="p">:</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span>
-      <span class="n">threads</span><span class="p">:</span> <span class="mi">1</span>
-      <span class="nb">type</span><span class="p">:</span> <span class="n">bigquery</span>
-    <span class="n">prod</span><span class="p">:</span>
-      <span class="n">dataset</span><span class="p">:</span> <span class="n">dbt_prod</span>
-      <span class="n">job_execution_timeout_seconds</span><span class="p">:</span> <span class="mi">300</span>
-      <span class="n">job_retries</span><span class="p">:</span> <span class="mi">1</span>
-      <span class="n">location</span><span class="p">:</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span>
-      <span class="n">method</span><span class="p">:</span> <span class="n">service</span><span class="o">-</span><span class="n">account</span>
-      <span class="n">priority</span><span class="p">:</span> <span class="n">interactive</span>
-      <span class="n">project</span><span class="p">:</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span>
-      <span class="n">threads</span><span class="p">:</span> <span class="mi">1</span>
-      <span class="nb">type</span><span class="p">:</span> <span class="n">bigquery</span>
-      <span class="n">keyfile</span><span class="p">:</span> <span class="s2">"{{ env_var('DBT_KEYFILE') }}"</span>
-  <span class="n">target</span><span class="p">:</span> <span class="n">dev</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">cloudbuild_demo</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">cloudbuild_demo</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=16fe566a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=223770b9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-Building-dbt-Structure">2. Building dbt Structure<a class="anchor-link" href="#2.-Building-dbt-Structure">¶</a></h2>
+<h3 id="1-1-2.-Create-Branches">1-1-2. Create Branches<a class="anchor-link" href="#1-1-2.-Create-Branches">¶</a></h3><p>Branches are like parallel workspaces. Each developer can modify files independently without affecting <code>main</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aeef56d8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Check current branch</span>
+<span class="n">git</span> <span class="n">branch</span>
+
+<span class="c1"># Create new branches</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">user1</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">user2</span>
+
+<span class="c1"># Switch branches</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">user1</span>
+
+<span class="c1"># Push branches to remote</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">user1</span>
+</pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=395bcb40">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69a87bc3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<pre><code>dbt_demo
-├── models/
-│    ├── stagging/
-│    │    ├── member_G1.sql
-│    │    ├── member_P221.sql
-│    │    └── schema.yml
-│    ├── marts/
-│    │    ├── stats_G1.sql
-│    │    └── schema.yml
-│    └── view/
-│         ├── stats_G1_24M11.sql
-│         └── schema.yml
-├── .gitignore
-└── dbt_project.yml
+<h3 id="1-1-3.-Edit-Files-in-Separate-Environments">1-1-3. Edit Files in Separate Environments<a class="anchor-link" href="#1-1-3.-Edit-Files-in-Separate-Environments">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=82d648ac">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># user1 branch</span>
+<span class="n">echo</span> <span class="s2">"feature A"</span> <span class="o">&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">user1</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"add feature A"</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">user1</span>
+
+<span class="c1"># user2 branch</span>
+<span class="n">echo</span> <span class="s2">"feature B"</span> <span class="o">&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">user2</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"add feature B"</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">user2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2feaa304">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-1-4.-Merge">1-1-4. Merge<a class="anchor-link" href="#1-1-4.-Merge">¶</a></h3><p>Merge: Combine changes from one branch into another</p>
+<h4 id="Merge-feature-branch-into-main">Merge feature branch into main<a class="anchor-link" href="#Merge-feature-branch-into-main">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b04bbeee">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol>
+<li>Make sure <code>main</code> is up-to-date:</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e430d802">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b4b39c11">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="2">
+<li>Merge feature branch:</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=39feb99d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">merge</span> <span class="n">user1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=03f7081c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="3">
+<li>If there’s a conflict:</li>
+</ol>
+<ul>
+<li>Git will indicate which files have conflicts</li>
+<li>Open the files and manually resolve the conflicts</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9d6ad7f3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">&lt;</span><span class="n">conflicted</span><span class="o">-</span><span class="n">files</span><span class="o">&gt;</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"resolve merge conflict"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b4dfd41">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="4">
+<li>Push merged result</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5171163b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5ebf1e36">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Conflict-Example">Conflict Example<a class="anchor-link" href="#Conflict-Example">¶</a></h4><p>Scenario:</p>
+<ul>
+<li>user1 branch modifies app.py and merges into main</li>
+<li>user2 branch modifies the same line in app.py and pushes</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=adc67e35">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">user2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d75c06cd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Git will show a conflict:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Feature A from user1
+=======
+Feature B from user2
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; user2
 </code></pre>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6eb0b566">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a54daa37">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="dbt_project.yml-"><code>dbt_project.yml</code> <br/><a class="anchor-link" href="#dbt_project.yml-">¶</a></h4><p>The file defines your dbt project’s structure, model paths, materializations, and other project-level configurations.</p>
+<p>After editing manually, mark as resolved:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d1953cda">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a05050fe">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7695,63 +7901,108 @@ In this setup, the project is configured with two environments: <code>dev</code>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="s1">'dbt_demo'</span>
-<span class="n">version</span><span class="p">:</span> <span class="s1">'1.0.0'</span>
-<span class="n">profile</span><span class="p">:</span> <span class="s1">'dbt_demo'</span> <span class="c1"># configures "profile.yml" </span>
-
-<span class="c1"># These configurations specify where dbt should look for different types of files.</span>
-<span class="n">model</span><span class="o">-</span><span class="n">paths</span><span class="p">:</span> <span class="p">[</span><span class="s2">"models"</span><span class="p">]</span>
-<span class="c1"># analysis-paths: ["analyses"]</span>
-<span class="c1"># test-paths: ["tests"]</span>
-<span class="c1"># seed-paths: ["seeds"]</span>
-<span class="c1"># macro-paths: ["macros"]</span>
-<span class="c1"># snapshot-paths: ["snapshots"]</span>
-
-<span class="n">clean</span><span class="o">-</span><span class="n">targets</span><span class="p">:</span>         <span class="c1"># directories to be removed by `dbt clean`</span>
-  <span class="o">-</span> <span class="s2">"target"</span>
-  <span class="o">-</span> <span class="s2">"dbt_packages"</span>
-
-
-<span class="c1"># Configuring models</span>
-<span class="n">models</span><span class="p">:</span>
-  <span class="n">dbt_demo</span><span class="p">:</span>
-    <span class="n">staging</span><span class="p">:</span>
-      <span class="o">+</span><span class="n">materialized</span><span class="p">:</span> <span class="n">table</span>
-      <span class="c1">#+tags: ['staging']</span>
-    <span class="n">marts</span><span class="p">:</span>
-      <span class="o">+</span><span class="n">materialized</span><span class="p">:</span> <span class="n">table</span>
-      <span class="c1">#+tags: ['marts']</span>
-    <span class="n">view</span><span class="p">:</span>
-      <span class="o">+</span><span class="n">materialized</span><span class="p">:</span> <span class="n">view</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"resolve merge conflict between main and user2"</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e218d6c6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4bae2f33">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-1.-stagging-table">2-1. stagging table<a class="anchor-link" href="#2-1.-stagging-table">¶</a></h3>
+<h3 id="1-1-5.-Pull-Request-(PR)-on-GitHub">1-1-5. Pull Request (PR) on GitHub<a class="anchor-link" href="#1-1-5.-Pull-Request-(PR)-on-GitHub">¶</a></h3>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ebfc50f9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9bd3dda4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="schema.yml"><code>schema.yml</code><a class="anchor-link" href="#schema.yml">¶</a></h4><p>It is used to define the <strong>structure</strong> and <strong>tests</strong> for models. It allows you to describe the purpose and data types of model columns and add various tests, such as <code>not_null</code>, <code>unique</code>, or <code>relationships</code>, to ensure data integrity.<br/>
-Additionally, it can be used to <strong>define source tables</strong>, marking existing tables as sources to facilitate model references and establish data dependencies.</p>
+<p>You can also use PRs to merge branches via GitHub UI:</p>
+<ol>
+<li>Push feature branch to remote: <code>git push origin user1</code></li>
+<li>Open a Pull Request on GitHub:</li>
+</ol>
+<ul>
+<li>Base branch → main</li>
+<li>Compare branch → user1</li>
+</ul>
+<ol start="3">
+<li>Review and merge the PR into main</li>
+<li>(Optional) Delete the feature branch</li>
+</ol>
+<pre><code>git branch -d user1             # Delete locally
+git push origin --delete user1  # Delete remotely
+</code></pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=869caf50">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fdd96ea2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr>
+<h2 id="1-2.-Create-Cloud-Build-Trigger">1-2. Create Cloud Build Trigger<a class="anchor-link" href="#1-2.-Create-Cloud-Build-Trigger">¶</a></h2>
+</hr></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8f6ce250">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-2-1.-Connect-GitHub-repository">1-2-1. Connect GitHub repository<a class="anchor-link" href="#1-2-1.-Connect-GitHub-repository">¶</a></h3><ol>
+<li><p>Cloud Build &gt; Triggers &gt; Connect Repository</p>
+</li>
+<li><p>Select <strong>GitHub (Cloud Build GitHub App)</strong></p>
+</li>
+<li><p>Authenticate and select repository &gt; Connect</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e680ad64">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-2-2-Create-trigger">1-2-2 Create trigger<a class="anchor-link" href="#1-2-2-Create-trigger">¶</a></h3><ul>
+<li>Event: Push to a branch</li>
+<li>Source: Select Repository and Branch</li>
+<li>Configuration: Cloud Build configuration file (yaml or json) / Dockerfile</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9d671df4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1-2-3.-Create-cloudbuild.yaml">1-2-3. Create <code>cloudbuild.yaml</code><a class="anchor-link" href="#1-2-3.-Create-cloudbuild.yaml">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=750e4d75">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7759,524 +8010,81 @@ Additionally, it can be used to <strong>define source tables</strong>, marking e
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># cloudbuild.yaml</span>
+<span class="n">steps</span><span class="p">:</span>
+<span class="c1"># Step 1: Install dependencies</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'python:3.11'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">echo</span> <span class="s2">"Installing dependencies..."</span>
+      <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span> <span class="o">||</span> <span class="n">echo</span> <span class="s2">"No requirements.txt, skipping"</span>
 
-<span class="n">sources</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">dataform</span>
-    <span class="n">tables</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">member</span>
-      
-<span class="n">models</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">member_G1</span>
-    <span class="n">description</span><span class="p">:</span> <span class="s2">"Member with phone suffix = 1"</span>
-    <span class="n">columns</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">MID</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-          <span class="o">-</span> <span class="n">unique</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">phones</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">date</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">member_P221</span>
-    <span class="n">description</span><span class="p">:</span> <span class="s2">"Member with phone suffix = 221"</span>
-    <span class="n">columns</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">MID</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-          <span class="o">-</span> <span class="n">unique</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">phones</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">date</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f7538894">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="member_G1.sql"><code>member_G1.sql</code><a class="anchor-link" href="#member_G1.sql">¶</a></h4><p>Create a partitioned table</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=123bce9b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># -- {{ config(materialized='table') }} -- can omit (same as dbt_project.yml)</span>
+<span class="c1"># Step 2: Run tests</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'python:3.11'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">echo</span> <span class="s2">"Running tests..."</span>
+      <span class="k">if</span> <span class="p">[</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"tests"</span> <span class="p">];</span> <span class="n">then</span>
+        <span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span> <span class="o">||</span> <span class="n">echo</span> <span class="s2">"Tests failed"</span>
+      <span class="k">else</span>
+        <span class="n">echo</span> <span class="s2">"No tests folder, skipping"</span>
+      <span class="n">fi</span>
 
-<span class="p">{{</span> <span class="n">config</span><span class="p">(</span>
-    <span class="n">materialized</span><span class="o">=</span><span class="s1">'table'</span><span class="p">,</span> 
-    <span class="n">partition_by</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"date"</span><span class="p">,</span>
-        <span class="s2">"data_type"</span><span class="p">:</span> <span class="s2">"date"</span>
-    <span class="p">},</span>
-    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s1">'G1'</span><span class="p">]</span>
-    <span class="p">)</span>
-<span class="p">}}</span> 
+<span class="c1"># Step 3: Optional deploy example</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'gcr.io/cloud-builders/gcloud'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">echo</span> <span class="s2">"Deploy step (example)"</span>
+      <span class="c1"># gcloud app deploy --quiet</span>
 
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="p">{{</span><span class="n">source</span><span class="p">(</span><span class="s1">'dataform'</span><span class="p">,</span> <span class="s1">'member'</span><span class="p">)}}</span> 
-<span class="n">where</span> <span class="n">phones</span> <span class="n">like</span> <span class="s1">'%1'</span>
+<span class="n">options</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">:</span> <span class="n">CLOUD_LOGGING_ONLY</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0f81581b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=826da500">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="member_P221.sql"><code>member_P221.sql</code><a class="anchor-link" href="#member_P221.sql">¶</a></h4><p>Force materialization as a view: Although <code>dbt_project.yml</code> may configure <code>materialized: table</code>, you can override it at the beginning of the SQL file using <code>config()</code>.<br/>
-The configuration at the SQL level will take precedence over the higher-level project settings.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=08913f9a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="p">{{</span> <span class="n">config</span><span class="p">(</span><span class="n">materialized</span><span class="o">=</span><span class="s1">'view'</span><span class="p">)</span> <span class="p">}}</span> 
-
-<span class="n">select</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="p">{{</span><span class="n">source</span><span class="p">(</span><span class="s1">'dataform'</span><span class="p">,</span> <span class="s1">'member'</span><span class="p">)}}</span>
-<span class="n">where</span> <span class="n">phones</span> <span class="n">like</span> <span class="s1">'%221'</span>
-</pre></div>
+<p>P.S. Because a service account is configured, it is necessary to add the following: <code>option: logging: CLOUD_LOGGING_ONLY</code>.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1706bcc4">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d55c09e0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-2.-mart-table">2-2. mart table<a class="anchor-link" href="#2-2.-mart-table">¶</a></h3>
+<hr style="border: none; height: 3px; background-color: black; "/>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=417f0132">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=949b98a1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="schema.yml"><code>schema.yml</code><a class="anchor-link" href="#schema.yml">¶</a></h4>
+<h1 id="2.-Deploy-dbt-Build-via-Cloud-Build">2. Deploy dbt Build via Cloud Build<a class="anchor-link" href="#2.-Deploy-dbt-Build-via-Cloud-Build">¶</a></h1>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2d771696">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
-
-<span class="n">models</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">stats_G1</span>
-    <span class="n">description</span><span class="p">:</span> <span class="s2">"Stats of member with phone suffix = 1"</span>
-    <span class="n">columns</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">month_date</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">second_last_digit</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">counts</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a83d5253">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="stats_G1.sql"><code>stats_G1.sql</code><a class="anchor-link" href="#stats_G1.sql">¶</a></h4><p>(default: table)</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=89f827f3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="p">{{</span> <span class="n">config</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s1">'G1'</span><span class="p">])}}</span> 
-
-<span class="n">select</span> <span class="n">date_trunc</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span> <span class="n">month_date</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="n">phones</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="n">second_last_digit</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="n">distinct</span> <span class="n">MID</span><span class="p">)</span> <span class="n">counts</span>
-<span class="kn">from</span><span class="w"> </span><span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">'member_G1'</span><span class="p">)</span> <span class="p">}}</span> 
-<span class="n">group</span> <span class="n">by</span> <span class="n">month_date</span><span class="p">,</span> <span class="n">second_last_digit</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2b8093c8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2-3.-view">2-3. view<a class="anchor-link" href="#2-3.-view">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=133afc5c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="schema.yml"><code>schema.yml</code><a class="anchor-link" href="#schema.yml">¶</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=45bcff26">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
-
-<span class="n">models</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">stats_G1_24M11</span>
-    <span class="n">description</span><span class="p">:</span> <span class="s2">"Stats of member with phone suffix = 1 in Nov, 2024"</span>
-    <span class="n">columns</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">second_last_digit</span>
-        <span class="n">tests</span><span class="p">:</span>
-          <span class="o">-</span> <span class="n">not_null</span>
-          <span class="o">-</span> <span class="n">unique</span>
-      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">counts</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bda7a618">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="stats_G1_24M11.sql"><code>stats_G1_24M11.sql</code><a class="anchor-link" href="#stats_G1_24M11.sql">¶</a></h4><p>(default: view)</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=13fe1caf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="p">{{</span> <span class="n">config</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s1">'G1'</span><span class="p">])}}</span> 
-
-<span class="n">select</span> <span class="n">second_last_digit</span><span class="p">,</span> <span class="n">counts</span>
-<span class="kn">from</span><span class="w"> </span><span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">'stats_G1'</span><span class="p">)</span> <span class="p">}}</span> 
-<span class="n">where</span> <span class="n">month_date</span> <span class="o">=</span> <span class="s2">"2024-11-1"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=79d221ab">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-Single-run,-Test-and-Doc-generation">3. Single-run, Test and Doc generation<a class="anchor-link" href="#3.-Single-run,-Test-and-Doc-generation">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=903b165b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Runs the models, creating tables or views</span>
-<span class="n">dbt</span> <span class="n">run</span>
-<span class="c1"># Runs model tests to validate data integrity</span>
-<span class="n">dbt</span> <span class="n">test</span>
-
-<span class="c1"># Generates project documentation and DAG information. </span>
-<span class="n">dbt</span> <span class="n">docs</span> <span class="n">generate</span>
-<span class="c1">#Starts a documentation server to view the DAG in a browser. </span>
-<span class="c1">#The default port is 8080, but since it is occupied by another service, it has been manually changed to 8088.</span>
-<span class="n">dbt</span> <span class="n">docs</span> <span class="n">serve</span> <span class="o">--</span><span class="n">port</span> <span class="mi">8088</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae82d960">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Open-localhost:8088/">Open <a href="localhost:8088/">localhost:8088/</a><a class="anchor-link" href="#Open-localhost:8088/">¶</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8c38aeac">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/dbt_image1.png" width="800"/></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=93b0066d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Lineage-Graph">Lineage Graph<a class="anchor-link" href="#Lineage-Graph">¶</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=38dce6bf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/dbt_image2.png" width="800"/></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ce3e6493">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="BigQuery-Table-Check">BigQuery Table Check<a class="anchor-link" href="#BigQuery-Table-Check">¶</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ef2b877b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
-
-<span class="n">BQ</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-<span class="n">df_1</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"""select * from `dbt_dev.member_G1`"""</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df_1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+-----------+------------+------------+
-| MID       |     phones | date       |
-+===========+============+============+
-| M35319011 | 0949430461 | 2025-01-28 |
-+-----------+------------+------------+
-| M84280842 | 0917322711 | 2025-01-28 |
-+-----------+------------+------------+
-| M38793786 | 0942097021 | 2023-05-05 |
-+-----------+------------+------------+
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87a48958">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4.-Push-to-Production-Environment-and-Single-Run">4. Push to Production Environment and Single-Run<a class="anchor-link" href="#4.-Push-to-Production-Environment-and-Single-Run">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bab3b676">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">export</span> <span class="n">DBT_KEYFILE</span><span class="o">=../../</span><span class="n">key</span><span class="o">/</span><span class="n">angus</span><span class="o">-</span><span class="n">personal</span><span class="o">.</span><span class="n">json</span>
-<span class="n">dbt</span> <span class="n">run</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
-<span class="n">dbt</span> <span class="n">test</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
-<span class="n">dbt</span> <span class="n">docs</span> <span class="n">generate</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
-<span class="n">dbt</span> <span class="n">docs</span> <span class="n">serve</span> <span class="o">--</span><span class="n">port</span> <span class="mi">8088</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=02935a56">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_221</span> <span class="o">=</span> <span class="n">BQ</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"""select * from `dbt_prod.member_P221`"""</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">df_221</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="s1">'keys'</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s1">'grid'</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+-----------+------------+------------+
-| MID       |     phones | date       |
-+===========+============+============+
-| M28752647 | 0992027221 | 2025-05-28 |
-+-----------+------------+------------+
-| M49156721 | 0931434221 | 2024-03-23 |
-+-----------+------------+------------+
-| M53897053 | 0959619221 | 2023-05-04 |
-+-----------+------------+------------+
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21ee406a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5.-Local-Execution-of-dbt-build">5. Local Execution of dbt build<a class="anchor-link" href="#5.-Local-Execution-of-dbt-build">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=87d04e31">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">dbt</span> <span class="n">debug</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
-<span class="n">dbt</span> <span class="n">build</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
-<span class="c1"># dbt docs generate --target prod</span>
-<span class="c1"># dbt docs serve --port 8088</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d31d96c4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h1 id="Topics-for-future-learning">Topics for future learning<a class="anchor-link" href="#Topics-for-future-learning">¶</a></h1><h2 id="1.-dbt-Cloud">1. dbt Cloud<a class="anchor-link" href="#1.-dbt-Cloud">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a7cb822">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="No description has been provided for this image" src="https://angus-tu-data.github.io/personal/dbt_image3.png" width="800"/></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ca9e194d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-Deploy-dbt-Build-via-Cloud-Build">2. Deploy dbt Build via Cloud Build<a class="anchor-link" href="#2.-Deploy-dbt-Build-via-Cloud-Build">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d32ce269">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f4b3787e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8286,7 +8094,7 @@ The configuration at the SQL level will take precedence over the higher-level pr
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1ad6b7f6">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ba2b4aac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8295,12 +8103,37 @@ The configuration at the SQL level will take precedence over the higher-level pr
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">secrets</span> <span class="n">create</span> <span class="n">DBT_PROD_KEY</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="n">file</span><span class="o">=../</span><span class="n">key</span><span class="o">/</span><span class="n">angus</span><span class="o">-</span><span class="n">personal</span><span class="o">.</span><span class="n">json</span>
+<span class="n">gcloud</span> <span class="n">secrets</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">DBT_PROD_KEY</span> \
+  <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="n">serviceAccount</span><span class="p">:</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="nd">@appspot</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span> \
+  <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="n">roles</span><span class="o">/</span><span class="n">secretmanager</span><span class="o">.</span><span class="n">secretAccessor</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8ce7ac5c">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=545a57d8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="2-1.-Local-Files-and-GitHub-Repo-Setup">2-1. Local Files and GitHub Repo Setup<a class="anchor-link" href="#2-1.-Local-Files-and-GitHub-Repo-Setup">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b46fdde7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Since the <a href="https://angus-tu-data.github.io/personal/OB7b_dbt.html">dbt project</a> was already implemented and pushed to GitHub previously, we simply cloned it to the local.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dcc8a817">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8308,11 +8141,854 @@ The configuration at the SQL level will take precedence over the higher-level pr
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">secrets</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">DBT_PROD_KEY</span> \
-  <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="n">serviceAccount</span><span class="p">:</span><span class="n">angus</span><span class="o">-</span><span class="n">personal</span><span class="nd">@tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">.</span><span class="n">iam</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span> \
-  <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="n">roles</span><span class="o">/</span><span class="n">secretmanager</span><span class="o">.</span><span class="n">secretAccessor</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">dbt</span><span class="o">-</span><span class="n">cloudbuild</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">dbt</span><span class="o">-</span><span class="n">cloudbuild</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0654dc94">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr>
+<h2 id="2-2.-Local-Changes">2-2. Local Changes<a class="anchor-link" href="#2-2.-Local-Changes">¶</a></h2>
+</hr></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a7ff0e13">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Most of the files are the same; only a few need to be modified.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5b288f63">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<pre><code>dbt-cloudbuild
+├── dbt_demo
+│    ├── models/
+│    │    └── ... (same as dbt)
+│    │── dbt_project.yml
+│    └── profiles.yml
+└──  cloudbuild.yaml
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07e2ca37">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="2-2-1.-profiles.yml">2-2-1. <code>profiles.yml</code><a class="anchor-link" href="#2-2-1.-profiles.yml">¶</a></h3><p>Add <code>profiles.yml</code> inside the <code>dbt_demo</code> folder and modify the service account keyfile parameter.<br/>
+<code>keyfile: '{{ env_var(''_DBT_KEYFILE'') }}'</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a9ba5c62">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="2-2-2.-cloudbuild.yaml">2-2-2. <code>cloudbuild.yaml</code><a class="anchor-link" href="#2-2-2.-cloudbuild.yaml">¶</a></h3><p>The <code>cloudbuild.yaml</code> is added to define the Cloud Build automation workflow, including installing dbt, run and test, so that dbt jobs are automatically triggered whenever changes are pushed to GitHub.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=81f4c9a8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">steps</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'gcr.io/cloud-builders/gcloud'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">gcloud</span> <span class="n">secrets</span> <span class="n">versions</span> <span class="n">access</span> <span class="n">latest</span> \
+        <span class="o">--</span><span class="n">secret</span><span class="o">=</span><span class="s2">"DBT_PROD_KEY"</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">dbt_key</span><span class="o">.</span><span class="n">json</span>
+
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'python:3.11'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">export</span> <span class="n">_DBT_KEYFILE</span><span class="o">=/</span><span class="n">workspace</span><span class="o">/</span><span class="n">dbt_key</span><span class="o">.</span><span class="n">json</span>
+      <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="nb">dir</span> <span class="n">dbt</span><span class="o">-</span><span class="n">bigquery</span>
+      <span class="n">dbt</span> <span class="o">--</span><span class="n">version</span>
+      <span class="n">dbt</span> <span class="n">run</span> <span class="o">--</span><span class="n">project</span><span class="o">-</span><span class="nb">dir</span><span class="o">=</span><span class="n">demo_dbt</span> <span class="o">--</span><span class="n">profiles</span><span class="o">-</span><span class="nb">dir</span><span class="o">=</span><span class="n">demo_dbt</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
+      <span class="n">dbt</span> <span class="n">test</span> <span class="o">--</span><span class="n">project</span><span class="o">-</span><span class="nb">dir</span><span class="o">=</span><span class="n">demo_dbt</span> <span class="o">--</span><span class="n">profiles</span><span class="o">-</span><span class="nb">dir</span><span class="o">=</span><span class="n">demo_dbt</span> <span class="o">--</span><span class="n">target</span> <span class="n">prod</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">:</span> <span class="n">CLOUD_LOGGING_ONLY</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c931fe67">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr>
+<h2 id="2-3.-Cloud-Build-Setup">2-3. Cloud Build Setup<a class="anchor-link" href="#2-3.-Cloud-Build-Setup">¶</a></h2><h3 id="2-3-1.-Configure-GCP-connection:-Connect-GitHub-repository">2-3-1. Configure GCP connection: Connect GitHub repository<a class="anchor-link" href="#2-3-1.-Configure-GCP-connection:-Connect-GitHub-repository">¶</a></h3><p>As shown in step 1-2-1</p>
+</hr></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=72af5a92">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="2-3-2.-Create-a-Trigger">2-3-2. Create a Trigger<a class="anchor-link" href="#2-3-2.-Create-a-Trigger">¶</a></h3><p>As shown in step 1-2-2</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8b340c7b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="2-4.-CI/CD-Setup-Completed">2-4. CI/CD Setup Completed<a class="anchor-link" href="#2-4.-CI/CD-Setup-Completed">¶</a></h2><p><strong>When a push event occurs on the main branch, Cloud Build executes <code>cloudbuild.yaml</code> to automatically run dbt run and other defined steps.</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c2a51e2e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr style="border: none; height: 3px; background-color: black; "/>
+<h1 id="3.-Cloud-Functions-CI/CD-best-practice">3. Cloud Functions CI/CD best practice<a class="anchor-link" href="#3.-Cloud-Functions-CI/CD-best-practice">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69984c99">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="3-1.-Create-Artifact-Registry-Repository-and-Setup-Permission">3-1. Create Artifact Registry Repository and Setup Permission<a class="anchor-link" href="#3-1.-Create-Artifact-Registry-Repository-and-Setup-Permission">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=103ba04c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Artifact Registry Repository: <code>cloudrun-repo</code></li>
+<li>Cloud Run Service: <code>cloudrun-app</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=719fb542">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">artifacts</span> <span class="n">repositories</span> <span class="n">create</span> <span class="n">cloudrun</span><span class="o">-</span><span class="n">repo</span> \
+  <span class="o">--</span><span class="n">repository</span><span class="o">-</span><span class="nb">format</span><span class="o">=</span><span class="n">docker</span> \
+  <span class="o">--</span><span class="n">location</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+  <span class="o">--</span><span class="n">description</span><span class="o">=</span><span class="s2">"Docker repository for Cloud Run builds"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=25fe7f13">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">beta</span> <span class="n">run</span> <span class="n">services</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">cloudrun</span><span class="o">-</span><span class="n">app</span> \
+  <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+  <span class="o">--</span><span class="n">member</span><span class="o">=</span><span class="n">serviceAccount</span><span class="p">:</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="nd">@appspot</span><span class="o">.</span><span class="n">gserviceaccount</span><span class="o">.</span><span class="n">com</span> \
+  <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="n">roles</span><span class="o">/</span><span class="n">run</span><span class="o">.</span><span class="n">invoker</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae1e16ad">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">projects</span> <span class="n">add</span><span class="o">-</span><span class="n">iam</span><span class="o">-</span><span class="n">policy</span><span class="o">-</span><span class="n">binding</span> <span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span> \
+  <span class="o">--</span><span class="n">member</span> <span class="s2">"serviceAccount:tw-rd-data-angus-tu@appspot.gserviceaccount.com"</span> \
+  <span class="o">--</span><span class="n">role</span> <span class="s2">"roles/run.admin"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c19cc580">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr>
+<h2 id="3-2.-Create-Local-Files">3-2. Create Local Files<a class="anchor-link" href="#3-2.-Create-Local-Files">¶</a></h2><h3 id="3-2-1.-Structure">3-2-1. Structure<a class="anchor-link" href="#3-2-1.-Structure">¶</a></h3>
+</hr></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9d028451">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<pre><code>cloudrun_demo
+├── app/
+│    ├── main.py
+│    └── __init__.py
+├── tests/
+│    ├── test_main.py
+│    └── __init__.py
+├── requirements.txt
+├── Dockerfile
+└── cloudbuild.yaml
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=76f9ae4f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="3-2-2.-Files">3-2-2. Files<a class="anchor-link" href="#3-2-2.-Files">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=43a8a5f0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>requirements.txt</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b64f4645">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">Flask</span><span class="o">==</span><span class="mf">2.3.3</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=261d1b15">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>app/main.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=89dde1e0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Hello, Cloud Run!"</span><span class="p">}</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PORT"</span><span class="p">,</span> <span class="mi">8080</span><span class="p">))</span>  
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">"0.0.0.0"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>        
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9da92f14">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>tests/test_main.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bab9b1f4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">():</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">testing</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">client</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_root_route</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""test 200"""</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s2">"message"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Hello, Cloud Run!"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dc93a8cb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>Dockerfile</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7ec35ea0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">FROM</span> <span class="n">python</span><span class="p">:</span><span class="mf">3.10</span><span class="o">-</span><span class="n">slim</span>
+
+<span class="n">WORKDIR</span> <span class="o">/</span><span class="n">app</span>
+
+<span class="n">COPY</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span> <span class="o">.</span>
+
+<span class="n">RUN</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="nb">dir</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="n">COPY</span> <span class="n">app</span><span class="o">/</span> <span class="o">./</span><span class="n">app</span>
+
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">"python"</span><span class="p">,</span> <span class="s2">"app/main.py"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7cf78c74">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>cloudbuild.yaml</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=78dc5a28">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">steps</span><span class="p">:</span>
+<span class="c1"># 1. Install test dependencies &amp; run unit tests</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'python:3.10'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'cloudrun_demo'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+      <span class="n">pip</span> <span class="n">install</span> <span class="n">pytest</span>
+      <span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span>
+
+<span class="c1"># 2. Build the Docker image and push it to Artifact Registry</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'gcr.io/cloud-builders/docker'</span>
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'cloudrun_demo'</span>
+  <span class="n">args</span><span class="p">:</span> <span class="p">[</span><span class="s1">'build'</span><span class="p">,</span> <span class="s1">'-t'</span><span class="p">,</span> <span class="s1">'asia-east1-docker.pkg.dev/tw-rd-data-angus-tu/cloudrun-repo/cloudrun-app:$SHORT_SHA'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">]</span>
+
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'gcr.io/cloud-builders/docker'</span>
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'cloudrun_demo'</span>
+  <span class="n">args</span><span class="p">:</span> <span class="p">[</span><span class="s1">'push'</span><span class="p">,</span> <span class="s1">'asia-east1-docker.pkg.dev/tw-rd-data-angus-tu/cloudrun-repo/cloudrun-app:$SHORT_SHA'</span><span class="p">]</span>
+
+<span class="c1"># 3. Deploy to Cloud Run</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'gcr.io/google.com/cloudsdktool/cloud-sdk'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'cloudrun_demo'</span>
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">gcloud</span> <span class="n">run</span> <span class="n">deploy</span> <span class="n">cloudrun</span><span class="o">-</span><span class="n">app</span> \
+        <span class="o">--</span><span class="n">image</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">pkg</span><span class="o">.</span><span class="n">dev</span><span class="o">/</span><span class="n">tw</span><span class="o">-</span><span class="n">rd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">angus</span><span class="o">-</span><span class="n">tu</span><span class="o">/</span><span class="n">cloudrun</span><span class="o">-</span><span class="n">repo</span><span class="o">/</span><span class="n">cloudrun</span><span class="o">-</span><span class="n">app</span><span class="p">:</span><span class="err">$</span><span class="n">SHORT_SHA</span> \
+        <span class="o">--</span><span class="n">region</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+        <span class="o">--</span><span class="n">platform</span> <span class="n">managed</span> \
+        <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">unauthenticated</span> \
+        <span class="o">--</span><span class="n">timeout</span> <span class="mi">300</span><span class="n">s</span>
+
+<span class="n">images</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s1">'asia-east1-docker.pkg.dev/tw-rd-data-angus-tu/cloudrun-repo/cloudrun-app:$SHORT_SHA'</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">:</span> <span class="n">CLOUD_LOGGING_ONLY</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7a4f507c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="3-3.-GitHub-Setup">3-3. GitHub Setup<a class="anchor-link" href="#3-3.-GitHub-Setup">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1d0f564f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="3-3-1.-GitHub-Connection">3-3-1. GitHub Connection<a class="anchor-link" href="#3-3-1.-GitHub-Connection">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1596854f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>As shown in step 2-1</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ddc4865d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="3-3-2.-Push-to-GitHub">3-3-2. Push to GitHub<a class="anchor-link" href="#3-3-2.-Push-to-GitHub">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4899f641">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"add: cloud run app"</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7dac70da">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="3-4.-Cloud-Build-Setup">3-4. Cloud Build Setup<a class="anchor-link" href="#3-4.-Cloud-Build-Setup">¶</a></h2><h3 id="3-4-1.-Configure-GCP-connection:-Connect-GitHub-repository">3-4-1. Configure GCP connection: Connect GitHub repository<a class="anchor-link" href="#3-4-1.-Configure-GCP-connection:-Connect-GitHub-repository">¶</a></h3><p>As shown in step 1-2-1</p>
+<h3 id="3-4-2.-Create-a-Trigger">3-4-2. Create a Trigger<a class="anchor-link" href="#3-4-2.-Create-a-Trigger">¶</a></h3><p>As shown in step 1-2-2</p>
+<ul>
+<li>Branch: <code>^main$</code></li>
+<li>Included files filter (glob): <code>cloudrun_demo/**</code></li>
+<li>Cloud Build configuration file location: /<code>cloudrun_demo/cloudbuild.yaml</code></li>
+</ul>
+<blockquote>
+<p>When there is a push to the main branch on GitHub, and it involves changes under the <code>cloudrun_demo/</code> folder,<br/>
+Cloud Build executes the <code>cloudbuild.yaml</code> located in the <code>cloudrun_demo/</code> folder to update the Cloud Run service.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ea4c353d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="3-5.-CI/CD-Best-Practice">3-5. CI/CD Best Practice<a class="anchor-link" href="#3-5.-CI/CD-Best-Practice">¶</a></h2><h3 id="Process">Process<a class="anchor-link" href="#Process">¶</a></h3><p><strong>Git push
+→ Cloud Build automatically builds the Docker image → runs unit tests → deploys to Cloud Run → health check → switches traffic if successful</strong></p>
+<h3 id="Recommendation">Recommendation<a class="anchor-link" href="#Recommendation">¶</a></h3><ul>
+<li>Maintain a separate <code>Dockerfile</code> and <code>cloudbuild.yaml</code> for each service</li>
+<li>Listen on the <code>$PORT</code> provided by Cloud Run to ensure the container starts correctly and passes health checks</li>
+<li>Apply the principle of least privilege for Service Accounts</li>
+<li>Use version control tags for Docker images during deployment</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0ab7386d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr style="border: none; height: 3px; background-color: black; "/>
+<h1 id="4.-Composer-CI/CD-best-practice">4. Composer CI/CD best practice<a class="anchor-link" href="#4.-Composer-CI/CD-best-practice">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=46de86e2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="4-1.-Create-Cloud-Composer-Environment">4-1. Create Cloud Composer Environment<a class="anchor-link" href="#4-1.-Create-Cloud-Composer-Environment">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f1d7f110">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">create</span> <span class="n">composer</span><span class="o">-</span><span class="n">cicd</span><span class="o">-</span><span class="n">demo</span> \
+  <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> \
+  <span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="n">version</span> <span class="n">composer</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="n">airflow</span><span class="o">-</span><span class="mf">2.10.5</span><span class="o">-</span><span class="n">build</span><span class="mf">.16</span> \
+  <span class="o">--</span><span class="n">service</span><span class="o">-</span><span class="n">account</span> <span class="s2">"tw-rd-data-angus-tu@appspot.gserviceaccount.com"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eeed1616">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr>
+<h2 id="4-2.-Create-Local-Files">4-2. Create Local Files<a class="anchor-link" href="#4-2.-Create-Local-Files">¶</a></h2><h3 id="4-2-1.-Structure">4-2-1. Structure<a class="anchor-link" href="#4-2-1.-Structure">¶</a></h3>
+</hr></div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b1b24cb6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<pre><code>composer_demo
+├── dags/
+│    └── example_dag.py
+├── requirements.txt
+└── cloudbuild.yaml
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e1e2ae85">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="4-2-2.-File">4-2-2. File<a class="anchor-link" href="#4-2-2.-File">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a72cc791">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>dags/example_dag.py</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a460cb55">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">airflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">airflow.operators.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello Composer CI/CD Demo!"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span><span class="o">=</span><span class="s1">'example_hello_world'</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="n">schedule_interval</span><span class="o">=</span><span class="s1">'@daily'</span><span class="p">,</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+    <span class="n">task1</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">'print_hello'</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">hello_world</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dd394db7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><code>cloudbuild.yaml</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=abfbdd27">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">steps</span><span class="p">:</span>
+
+<span class="c1"># Step 0: Install test dependencies</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'python:3.10'</span> 
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span> 
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'composer_demo'</span> 
+  <span class="n">args</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="s1">'-c'</span> 
+    <span class="o">-</span> <span class="o">|</span> 
+      <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="c1"># Step 1: Upload DAG to Composer bucket</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'gcr.io/cloud-builders/gsutil'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'composer_demo'</span> 
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">echo</span> <span class="s2">"Deploying DAGs to Composer..."</span>
+      <span class="n">gsutil</span> <span class="o">-</span><span class="n">m</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">dags</span><span class="o">/*</span> <span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="err">$</span><span class="p">{</span><span class="n">_COMPOSER_BUCKET</span><span class="p">}</span><span class="o">/</span><span class="n">dags</span><span class="o">/</span>
+
+<span class="c1"># Step 2: Check DAG Python code</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'python:3.10'</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="s1">'bash'</span>
+  <span class="nb">dir</span><span class="p">:</span> <span class="s1">'composer_demo'</span> 
+  <span class="n">args</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">'-c'</span>
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">echo</span> <span class="s2">"Checking DAG syntax..."</span>
+      <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dags</span><span class="o">/*.</span><span class="n">py</span><span class="p">;</span> <span class="n">do</span>
+        <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">py_compile</span> <span class="err">$</span><span class="n">f</span>
+      <span class="n">done</span>
+
+<span class="n">substitutions</span><span class="p">:</span>
+  <span class="n">_COMPOSER_BUCKET</span><span class="p">:</span> <span class="s1">'asia-east1-composer-cicd-de-91d1c939-bucket'</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">:</span> <span class="n">CLOUD_LOGGING_ONLY</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70221590">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="4-3.-GitHub-Setup">4-3. GitHub Setup<a class="anchor-link" href="#4-3.-GitHub-Setup">¶</a></h2><h3 id="4-3-1.-GitHub-Connection">4-3-1. GitHub Connection<a class="anchor-link" href="#4-3-1.-GitHub-Connection">¶</a></h3><p>As shown in step 2-1</p>
+<h3 id="4-3-2.-Push-to-GitHub">4-3-2. Push to GitHub<a class="anchor-link" href="#4-3-2.-Push-to-GitHub">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f747f4f3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">"add: cloud composer ci/cd"</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=39590b7e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="4-4.-Cloud-Build-Setup">4-4. Cloud Build Setup<a class="anchor-link" href="#4-4.-Cloud-Build-Setup">¶</a></h2><h3 id="4-4-1.-Configure-GCP-connection:-Connect-GitHub-repository">4-4-1. Configure GCP connection: Connect GitHub repository<a class="anchor-link" href="#4-4-1.-Configure-GCP-connection:-Connect-GitHub-repository">¶</a></h3><p>As shown in step 1-2-1</p>
+<h3 id="4-4-2.-Create-a-Trigger">4-4-2. Create a Trigger<a class="anchor-link" href="#4-4-2.-Create-a-Trigger">¶</a></h3><p>As shown in step 1-2-2</p>
+<ul>
+<li>Branch: <code>^main$</code></li>
+<li>Included files filter (glob): <code>composer_demo/**</code></li>
+<li>Cloud Build configuration file location: /<code>composer_demo/cloudbuild.yaml</code></li>
+</ul>
+<blockquote>
+<p>When there is a push to the main branch on GitHub, and it involves changes under the <code>composer_demo/</code> folder,<br/>
+Cloud Build executes the <code>cloudbuild.yaml</code> located in the <code>composer_demo/</code> folder to update the Composer DAG.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e182939">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="4-4-3.-Test-Composer-DAG-Trigger-After-Deployment">4-4-3. Test Composer DAG Trigger After Deployment<a class="anchor-link" href="#4-4-3.-Test-Composer-DAG-Trigger-After-Deployment">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e88dad72">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gcloud</span> <span class="n">composer</span> <span class="n">environments</span> <span class="n">run</span> <span class="n">composer</span><span class="o">-</span><span class="n">cicd</span><span class="o">-</span><span class="n">demo</span> \
+  <span class="o">--</span><span class="n">location</span> <span class="n">asia</span><span class="o">-</span><span class="n">east1</span> <span class="n">dags</span> <span class="n">trigger</span> <span class="o">--</span> <span class="n">example_hello_world</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=16303d87">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<hr/>
+<h2 id="4-5.-CI/CD-Best-Practice">4-5. CI/CD Best Practice<a class="anchor-link" href="#4-5.-CI/CD-Best-Practice">¶</a></h2><h3 id="Process">Process<a class="anchor-link" href="#Process">¶</a></h3><p><strong>Git push → Cloud Build triggers → lints/tests DAGs → uploads DAGs to Composer bucket → Composer syncs DAGs → Airflow UI reflects changes</strong></p>
+<h3 id="Recommendation">Recommendation<a class="anchor-link" href="#Recommendation">¶</a></h3><ul>
+<li>Maintain a separate cloudbuild.yaml for Composer deployments</li>
+<li>Keep DAGs in a dedicated dags/ folder and structure them clearly</li>
+<li>Apply the principle of least privilege for Service Accounts (e.g., only allow access to the Composer bucket)</li>
+<li>Use version control tags for DAG versions to track deployments</li>
+<li>Optionally include automated DAG syntax checks or unit tests before uploading</li>
+<li>Consider separate environments (Dev/Prod) to safely test DAG changes before production deployment</li>
+</ul>
 </div>
 </div>
 </div>
